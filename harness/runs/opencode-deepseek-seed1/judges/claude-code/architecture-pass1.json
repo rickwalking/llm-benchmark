@@ -1,0 +1,23 @@
+{
+  "criterion": "architecture",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "architecture",
+    "score": 3,
+    "anchor_match": "Clean enough",
+    "evidence_quotes": [
+      "src/\n\u251c\u2500\u2500 policy/\n\u2502   \u251c\u2500\u2500 index.test.ts\n\u2502   \u2514\u2500\u2500 index.ts\n\u251c\u2500\u2500 routes/\n\u2502   \u251c\u2500\u2500 books.ts\n\u2502   \u251c\u2500\u2500 fines.ts\n\u2502   \u251c\u2500\u2500 loans.ts\n\u2502   \u251c\u2500\u2500 members.ts\n\u2502   \u2514\u2500\u2500 reservations.ts\n\u251c\u2500\u2500 services/\n\u2502   \u251c\u2500\u2500 bookService.ts\n\u2502   \u251c\u2500\u2500 fineService.ts\n\u2502   \u251c\u2500\u2500 index.test.ts\n\u2502   \u251c\u2500\u2500 loanService.ts\n\u2502   \u251c\u2500\u2500 memberService.ts\n\u2502   \u2514\u2500\u2500 reservationService.ts\n\u251c\u2500\u2500 db.ts\n\u251c\u2500\u2500 errors.ts\n\u251c\u2500\u2500 index.ts\n\u251c\u2500\u2500 types.ts\n\u2514\u2500\u2500 validators.ts",
+      "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+      "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50;\nexport const LATE_FINE_CAP_CENTS = 1000;\nexport const RESERVATION_NOTIFICATION_HOURS = 48;\nexport const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500;",
+      "import { ConflictError, ForbiddenError, NotFoundError, PaymentRequiredError } from '../errors.js';\nimport { canBorrow, computeFineCents, nextReservationToNotify, RESERVATION_NOTIFICATION_HOURS } from '../policy/index.js';",
+      "backend/src/services/index.test.ts,493\nfrontend/src/pages/MemberProfilePage.tsx,251\nfrontend/src/pages/CheckoutPage.tsx,237\nbackend/src/policy/index.test.ts,185\nfrontend/src/pages/BookDetailPage.tsx,167\nfrontend/src/api.ts,153\nbackend/src/services/loanService.ts,153",
+      "src/\n\u251c\u2500\u2500 components/\n\u2502   \u251c\u2500\u2500 CreateBookModal.tsx\n\u2502   \u251c\u2500\u2500 CreateMemberModal.tsx\n\u2502   \u251c\u2500\u2500 Layout.tsx\n\u2502   \u2514\u2500\u2500 Modal.tsx\n\u251c\u2500\u2500 pages/\n\u2502   \u251c\u2500\u2500 BookDetailPage.tsx\n\u2502   \u251c\u2500\u2500 BooksPage.tsx\n\u2502   \u251c\u2500\u2500 CheckoutPage.tsx\n\u2502   \u251c\u2500\u2500 MemberProfilePage.tsx\n\u2502   \u2514\u2500\u2500 MembersPage.tsx\n\u251c\u2500\u2500 api.ts",
+      "const member = db.prepare('SELECT id, status FROM members WHERE id = ?').get(input.memberId) as { id: string; status: string } | undefined;"
+    ],
+    "anchor_rejected_above": "Level 4 requires (a) services depending on a thin DB-access abstraction rather than raw db.prepare \u2014 but loanService.ts is full of inline raw SQL like `db.prepare('SELECT id, status FROM members WHERE id = ?').get(...)`; (b) frontend organized by feature \u2014 but frontend uses technical-role folders (`components/`, `pages/`, single `api.ts`) with no `checkout/`, `members/`, `books/` feature directories; (c) shared types in a single source \u2014 backend has its own `types.ts` and frontend has its own types in `api.ts` with no shared package or generated client. Multiple level-4 conditions fail.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

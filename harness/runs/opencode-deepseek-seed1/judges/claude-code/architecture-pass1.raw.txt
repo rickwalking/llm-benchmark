@@ -1,0 +1,16 @@
+{
+  "criterion": "architecture",
+  "score": 3,
+  "anchor_match": "Clean enough",
+  "evidence_quotes": [
+    "src/\n├── policy/\n│   ├── index.test.ts\n│   └── index.ts\n├── routes/\n│   ├── books.ts\n│   ├── fines.ts\n│   ├── loans.ts\n│   ├── members.ts\n│   └── reservations.ts\n├── services/\n│   ├── bookService.ts\n│   ├── fineService.ts\n│   ├── index.test.ts\n│   ├── loanService.ts\n│   ├── memberService.ts\n│   └── reservationService.ts\n├── db.ts\n├── errors.ts\n├── index.ts\n├── types.ts\n└── validators.ts",
+    "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+    "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50;\nexport const LATE_FINE_CAP_CENTS = 1000;\nexport const RESERVATION_NOTIFICATION_HOURS = 48;\nexport const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500;",
+    "import { ConflictError, ForbiddenError, NotFoundError, PaymentRequiredError } from '../errors.js';\nimport { canBorrow, computeFineCents, nextReservationToNotify, RESERVATION_NOTIFICATION_HOURS } from '../policy/index.js';",
+    "backend/src/services/index.test.ts,493\nfrontend/src/pages/MemberProfilePage.tsx,251\nfrontend/src/pages/CheckoutPage.tsx,237\nbackend/src/policy/index.test.ts,185\nfrontend/src/pages/BookDetailPage.tsx,167\nfrontend/src/api.ts,153\nbackend/src/services/loanService.ts,153",
+    "src/\n├── components/\n│   ├── CreateBookModal.tsx\n│   ├── CreateMemberModal.tsx\n│   ├── Layout.tsx\n│   └── Modal.tsx\n├── pages/\n│   ├── BookDetailPage.tsx\n│   ├── BooksPage.tsx\n│   ├── CheckoutPage.tsx\n│   ├── MemberProfilePage.tsx\n│   └── MembersPage.tsx\n├── api.ts",
+    "const member = db.prepare('SELECT id, status FROM members WHERE id = ?').get(input.memberId) as { id: string; status: string } | undefined;"
+  ],
+  "anchor_rejected_above": "Level 4 requires (a) services depending on a thin DB-access abstraction rather than raw db.prepare — but loanService.ts is full of inline raw SQL like `db.prepare('SELECT id, status FROM members WHERE id = ?').get(...)`; (b) frontend organized by feature — but frontend uses technical-role folders (`components/`, `pages/`, single `api.ts`) with no `checkout/`, `members/`, `books/` feature directories; (c) shared types in a single source — backend has its own `types.ts` and frontend has its own types in `api.ts` with no shared package or generated client. Multiple level-4 conditions fail.",
+  "confidence": "high"
+}

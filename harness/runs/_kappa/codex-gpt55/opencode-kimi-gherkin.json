@@ -1,0 +1,43 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-kimi",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 2,\n    \"alignment\": 4,\n    \"declarative\": 3,\n    \"atomic\": 3\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"ac-ids.txt lists 29 AC IDs: AC-1.1, AC-1.2, AC-1.3, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-3.6, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-4.5, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-5.6, AC-6.1, AC-6.2, AC-6.3, AC-6.4\",\n      \"Feature tags found cover 24/29 unique AC IDs: AC-1.1, AC-1.2, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-6.1, AC-6.2, AC-6.3; missing: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4\",\n      \"features/lending.feature: \\\"When the librarian lends the book to the member\\\" has no matching step definition in features/step_definitions/steps.ts; many lending, returns, reservations, and fines steps are unwired, capping completeness at 2.\"\n    ],\n    \"alignment\": [\n      \"features/lending.feature: \\\"@AC-3.2\\\" followed by \\\"Scenario: Reject loan when member has reached loan limit\\\"\",\n      \"features/returns.feature: \\\"@AC-4.2\\\" followed by \\\"Scenario: Return a book late and create a fine\\\" and another \\\"@AC-4.2\\\" followed by \\\"Scenario: Return a book very late with fine cap\\\"\",\n      \"All 26 scenarios carry an @AC tag, and each scenario uses a single AC tag.\"\n    ],\n    \"declarative\": [\n      \"Good example from features/returns.feature: \\\"When the librarian records the return before the due date\\\"\",\n      \"Good example from features/reservations.feature: \\\"Then the oldest waiting reservation becomes notified\\\"\",\n      \"Bad example from multiple files: \\\"Then the system returns a 409 error\\\"\",\n      \"Bad example from features/fines.feature: \\\"Then the unpaid fines total is included in the response\\\"\"\n    ],\n    \"atomic\": [\n      \"Mostly atomic example from features/returns.feature: \\\"Then the loan is marked as returned\\\" followed by \\\"And the available copies increases by 1\\\"\",\n      \"Compound assertion from features/catalog.feature: \\\"And each book shows title, author, ISBN, total copies, and available copies\\\"\",\n      \"Compound data/action step from features/add_entities.feature: \\\"When the librarian adds a book with title \\\\\\\"Dune\\\\\\\", author \\\\\\\"Frank Herbert\\\\\\\", ISBN \\\\\\\"978-0441013593\\\\\\\", and 3 copies\\\"\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 2,
+      "alignment": 4,
+      "declarative": 3,
+      "atomic": 3
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "ac-ids.txt lists 29 AC IDs: AC-1.1, AC-1.2, AC-1.3, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-3.6, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-4.5, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-5.6, AC-6.1, AC-6.2, AC-6.3, AC-6.4",
+        "Feature tags found cover 24/29 unique AC IDs: AC-1.1, AC-1.2, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-6.1, AC-6.2, AC-6.3; missing: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4",
+        "features/lending.feature: \"When the librarian lends the book to the member\" has no matching step definition in features/step_definitions/steps.ts; many lending, returns, reservations, and fines steps are unwired, capping completeness at 2."
+      ],
+      "alignment": [
+        "features/lending.feature: \"@AC-3.2\" followed by \"Scenario: Reject loan when member has reached loan limit\"",
+        "features/returns.feature: \"@AC-4.2\" followed by \"Scenario: Return a book late and create a fine\" and another \"@AC-4.2\" followed by \"Scenario: Return a book very late with fine cap\"",
+        "All 26 scenarios carry an @AC tag, and each scenario uses a single AC tag."
+      ],
+      "declarative": [
+        "Good example from features/returns.feature: \"When the librarian records the return before the due date\"",
+        "Good example from features/reservations.feature: \"Then the oldest waiting reservation becomes notified\"",
+        "Bad example from multiple files: \"Then the system returns a 409 error\"",
+        "Bad example from features/fines.feature: \"Then the unpaid fines total is included in the response\""
+      ],
+      "atomic": [
+        "Mostly atomic example from features/returns.feature: \"Then the loan is marked as returned\" followed by \"And the available copies increases by 1\"",
+        "Compound assertion from features/catalog.feature: \"And each book shows title, author, ISBN, total copies, and available copies\"",
+        "Compound data/action step from features/add_entities.feature: \"When the librarian adds a book with title \\\"Dune\\\", author \\\"Frank Herbert\\\", ISBN \\\"978-0441013593\\\", and 3 copies\""
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

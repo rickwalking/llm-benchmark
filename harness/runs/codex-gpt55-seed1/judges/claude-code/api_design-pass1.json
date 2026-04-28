@@ -1,0 +1,28 @@
+{
+  "criterion": "api_design",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "api_design",
+    "score": 3,
+    "anchor_match": "Reasonable \u2014 valid OpenAPI, correct status codes, single error shape, REST URLs, zod validation",
+    "evidence_quotes": [
+      "/runs/codex-gpt55-seed1/candidate/backend/openapi.yaml is valid",
+      "Error:\n      type: object\n      required: [error]\n      properties:\n        error:\n          type: string",
+      "export class ConflictError extends DomainError {\n  constructor(message: string) {\n    super(message, 409);\n  }\n}\n\nexport class NotFoundError extends DomainError {\n  constructor(message: string) {\n    super(message, 404);\n  }\n}\n\nexport class ForbiddenError extends DomainError {\n  constructor(message: string) {\n    super(message, 403);\n  }\n}\n\nexport class PaymentRequiredError extends DomainError {\n  constructor(message: string) {\n    super(message, 402);\n  }\n}",
+      "if (decision.reason === \"suspended\") {\n        throw new ForbiddenError(\"Member is suspended\");\n      }\n      if (decision.reason === \"fine-limit\") {\n        throw new PaymentRequiredError(\"Outstanding fines exceed limit\");\n      }\n      throw new ConflictError(\"Loan limit reached\");",
+      "app.use((err: unknown, _req: Request, res: Response, _next: (error?: unknown) => void) => {\n    if (err instanceof DomainError) {\n      res.status(err.statusCode).json({ error: err.message });\n      return;\n    }\n    console.error(err);\n    res.status(500).json({ error: \"Internal server error\" });\n  });",
+      "{\"method\":\"POST\",\"path\":\"/api/books\",\"status\":400,\"body\":\"{\\\"error\\\":\\\"Invalid request\\\"}\"}",
+      "live probe: POST /api/books duplicate ISBN \u2192 409 {\"error\":\"ISBN already exists\"}; POST /api/loans 6th attempt \u2192 409 {\"error\":\"Loan limit reached\"}; POST /api/loans no copies \u2192 409 {\"error\":\"No copies available \u2014 reserve instead\"}",
+      "/api/loans/{id}/return:\n    post:\n      parameters:\n        - $ref: \"#/components/parameters/Id\"\n      responses:\n        \"200\":\n          description: Returned loan and optional fine\n        \"409\":\n          $ref: \"#/components/responses/Error\"",
+      "/api/reservations/expire:\n    post:\n      responses:\n        \"200\":\n          description: Expiry summary",
+      "function parseBody<T>(schema: z.ZodType<T>, body: unknown): T {\n  const result = schema.safeParse(body);\n  if (!result.success) {\n    throw new BadRequestError(\"Invalid request\");\n  }\n  return result.data;\n}",
+      "live probe: malformed JSON body \u2192 500 {\"error\":\"Internal server error\"}; unknown route \u2192 400 {\"error\":\"Route not found\"}",
+      "/api/reservations:\n    post:\n      requestBody:\n        required: true\n        content:\n          application/json:\n            schema:\n              $ref: \"#/components/schemas/LoanCreate\""
+    ],
+    "anchor_rejected_above": "Anchor 4 ('Well-designed') is rejected because: (a) error responses contain only a human 'error' string with no stable programmatic 'code' field (DomainError carries only message+statusCode), (b) OpenAPI provides no examples for any negative AC, (c) 200 responses for /api/loans/{id}/return and /api/reservations/expire have no schema at all (description-only), and (d) zod validation collapses to a generic 'Invalid request' rather than predictable, field-level error envelopes. Faithfulness gaps remain: 400 responses are not documented for any input-validating endpoint, 404 is not documented for /api/loans/{id}/return and /api/fines/{id}/pay, malformed JSON yields 500 (not 400), and POST /api/reservations reuses LoanCreate as its request schema.",
+    "confidence": "medium"
+  },
+  "parse_failed": false
+}

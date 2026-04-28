@@ -1,0 +1,9 @@
+
+> library-lending@1.0.0 test:bdd
+> cucumber-js "features/**/*.feature" --require-module tsx/cjs --require "features/**/*.ts" --format json:/runs/codex-gpt55-seed1/objective/bdd.json
+
+......................................................................................................................................................................................................
+
+29 scenarios (29 passed)
+169 steps (169 passed)
+0m00.404s (executing steps: 0m00.315s)

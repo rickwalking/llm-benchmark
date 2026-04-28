@@ -1,0 +1,28 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "claude-opus47",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "{\"criterion\":\"api_design\",\"score\":3,\"rationale\":\"The API contract is valid, mostly complete, and uses consistent resource-oriented URLs, status codes, and error bodies for the probed endpoints. It reaches the rubric's 'Reasonable' level, but not 'Well-designed': error responses lack a stable machine-readable code, OpenAPI has no negative examples, the error details schema is loose, and the evidence suggests at least one possible response-shape mismatch for loan creation.\",\"evidence\":[\"openapi-validation.log:1 reports `/runs/claude-opus47-seed1/candidate/backend/openapi.yaml is valid`, so there is no validation cap.\",\"openapi.yaml:109-145 documents `/api/loans` with 201/400/402/403/404/409; loan-handler.ts:52-60 throws ForbiddenError, PaymentRequiredError, and ConflictError for suspended, fines_exceeded, and loan_limit; error-middleware.ts:45-50 maps those to 403, 402, and 409.\",\"api-probe.json:2-11 shows probed implementation responses aligned with the spec shape and statuses: list endpoints return 200 arrays, member create returns 201 resource JSON, missing resources return 404 with `{\\\"error\\\":\\\"...\\\"}`, validation returns 400 with `error` plus field-level `details`, and `/api/reservations/expire` returns 200 with `expired_count`.\",\"openapi.yaml:242-247 defines the shared Error schema as `error` plus optional `details`, matching the probed error bodies in api-probe.json:3-10.\",\"routes.ts:22-28 mounts `/api/health`, `/api`, notFound, and errorHandler consistently, while openapi.yaml:23-239 uses mostly plural noun resources such as `/api/books`, `/api/members`, `/api/loans`, `/api/reservations`, and `/api/fines`.\",\"openapi.yaml:242-247 has no stable `code` field for programmatic errors, which prevents a score of 4.\",\"openapi.yaml contains no `example` or `examples` entries, so it does not meet the rubric's requirement for meaningful examples for negative acceptance criteria.\",\"openapi.yaml:303-311 defines `LoanWithWarnings` as a flattened Loan plus `warnings`, but loan-handler.ts:31-34 and loan-handler.ts:110-118 return `{ loan, warnings }`; unless an unseen adapter reshapes this, the documented 201 payload for `POST /api/loans` is not faithful.\"],\"notable_limits\":[\"The evidence route file only shows app mounting (`buildRouter(db)`) rather than individual endpoint registrations, so full implementation-to-OpenAPI completeness cannot be proven from the provided route excerpt.\",\"The contract is not disciplined enough for 5: schemas are not especially tight for errors (`details: {}`), examples are absent, and OpenAPI is not shown to be the source of truth.\"]}\n",
+  "parsed": {
+    "criterion": "api_design",
+    "score": 3,
+    "rationale": "The API contract is valid, mostly complete, and uses consistent resource-oriented URLs, status codes, and error bodies for the probed endpoints. It reaches the rubric's 'Reasonable' level, but not 'Well-designed': error responses lack a stable machine-readable code, OpenAPI has no negative examples, the error details schema is loose, and the evidence suggests at least one possible response-shape mismatch for loan creation.",
+    "evidence": [
+      "openapi-validation.log:1 reports `/runs/claude-opus47-seed1/candidate/backend/openapi.yaml is valid`, so there is no validation cap.",
+      "openapi.yaml:109-145 documents `/api/loans` with 201/400/402/403/404/409; loan-handler.ts:52-60 throws ForbiddenError, PaymentRequiredError, and ConflictError for suspended, fines_exceeded, and loan_limit; error-middleware.ts:45-50 maps those to 403, 402, and 409.",
+      "api-probe.json:2-11 shows probed implementation responses aligned with the spec shape and statuses: list endpoints return 200 arrays, member create returns 201 resource JSON, missing resources return 404 with `{\"error\":\"...\"}`, validation returns 400 with `error` plus field-level `details`, and `/api/reservations/expire` returns 200 with `expired_count`.",
+      "openapi.yaml:242-247 defines the shared Error schema as `error` plus optional `details`, matching the probed error bodies in api-probe.json:3-10.",
+      "routes.ts:22-28 mounts `/api/health`, `/api`, notFound, and errorHandler consistently, while openapi.yaml:23-239 uses mostly plural noun resources such as `/api/books`, `/api/members`, `/api/loans`, `/api/reservations`, and `/api/fines`.",
+      "openapi.yaml:242-247 has no stable `code` field for programmatic errors, which prevents a score of 4.",
+      "openapi.yaml contains no `example` or `examples` entries, so it does not meet the rubric's requirement for meaningful examples for negative acceptance criteria.",
+      "openapi.yaml:303-311 defines `LoanWithWarnings` as a flattened Loan plus `warnings`, but loan-handler.ts:31-34 and loan-handler.ts:110-118 return `{ loan, warnings }`; unless an unseen adapter reshapes this, the documented 201 payload for `POST /api/loans` is not faithful."
+    ],
+    "notable_limits": [
+      "The evidence route file only shows app mounting (`buildRouter(db)`) rather than individual endpoint registrations, so full implementation-to-OpenAPI completeness cannot be proven from the provided route excerpt.",
+      "The contract is not disciplined enough for 5: schemas are not especially tight for errors (`details: {}`), examples are absent, and OpenAPI is not shown to be the source of truth."
+    ]
+  },
+  "parse_failed": false
+}

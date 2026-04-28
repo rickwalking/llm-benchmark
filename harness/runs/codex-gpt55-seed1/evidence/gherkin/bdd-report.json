@@ -1,0 +1,4497 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "us-1-catalog-visibility;the-catalog-is-sorted-case-insensitively",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "The catalog is sorted case-insensitively",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 229773
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "zeta",
+                      "Test Author",
+                      "1000000000001",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alpha",
+                      "Test Author",
+                      "1000000000002",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 43219449
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 7,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4821469
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "the librarian lists the catalog",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:146"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2495389
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "the catalog titles are \"Alpha, zeta\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:235"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 224687
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-1.1",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-1-catalog-visibility;a-book-detail-includes-queue-depth",
+        "keyword": "Scenario",
+        "line": 18,
+        "name": "A book detail includes queue depth",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 158000
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "zeta",
+                      "Test Author",
+                      "1000000000001",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alpha",
+                      "Test Author",
+                      "1000000000002",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4879603
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 7,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4781358
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 19,
+            "name": "Alice reserves \"Alpha\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3466627
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "Bob reserves \"Alpha\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2646922
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "the librarian views \"Alpha\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:150"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1939970
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "the queue depth is 2",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:239"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 160438
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-1.2",
+            "line": 17
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-1-catalog-visibility;catalog-availability-reflects-current-loans",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Catalog availability reflects current loans",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 136920
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "zeta",
+                      "Test Author",
+                      "1000000000001",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alpha",
+                      "Test Author",
+                      "1000000000002",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3628089
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 7,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2647284
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 26,
+            "name": "Alice has borrowed \"Alpha\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1992942
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 27,
+            "name": "the librarian lists the catalog",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:146"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1346379
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "\"Alpha\" shows 1 available copy",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:243"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1348239
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-1.3",
+            "line": 24
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-1-catalog-visibility;missing-books-return-a-clear-not-found-error",
+        "keyword": "Scenario",
+        "line": 31,
+        "name": "Missing books return a clear not found error",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 114309
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "zeta",
+                      "Test Author",
+                      "1000000000001",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alpha",
+                      "Test Author",
+                      "1000000000002",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2826182
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 7,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3577470
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 32,
+            "name": "the librarian views a missing book",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:162"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1437828
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "the response status is 404",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 117149
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "the error is \"Book not found\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 69070
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-1.4",
+            "line": 30
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "us-1-catalog-visibility",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "US-1 Catalog visibility",
+    "tags": [],
+    "uri": "features/us-1-catalog.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "us-2-adding-books-and-members;a-librarian-adds-a-book",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "A librarian adds a book",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 108087
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000101",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1603312
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1340788
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 12,
+            "name": "the librarian adds the book \"Kindred\" with ISBN \"1000000000102\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:166"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1585205
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 53424
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "the created book is \"Kindred\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:253"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 70215
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-2.1",
+            "line": 10
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-2-adding-books-and-members;duplicate-isbns-are-rejected",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Duplicate ISBNs are rejected",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 100487
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000101",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1485234
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1358613
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "the librarian adds the book \"Duplicate Dune\" with ISBN \"1000000000101\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:166"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1452514
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 39467
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the error is \"ISBN already exists\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 30062
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-2.2",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-2-adding-books-and-members;a-librarian-adds-a-member",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "A librarian adds a member",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 104866
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000101",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1408557
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1154036
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "the librarian adds member \"Ben\" with email \"ben@example.com\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:177"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1489989
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50683
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "the created member is \"Ben\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:257"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 76397
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-2.3",
+            "line": 22
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-2-adding-books-and-members;duplicate-member-emails-are-rejected",
+        "keyword": "Scenario",
+        "line": 29,
+        "name": "Duplicate member emails are rejected",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 126346
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000101",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1732697
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1310412
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "the librarian adds member \"Other Alice\" with email \"alice@example.com\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:177"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1191251
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 31,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37899
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "the error is \"Email already exists\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 28530
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-2.4",
+            "line": 28
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "us-2-adding-books-and-members",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "US-2 Adding books and members",
+    "tags": [],
+    "uri": "features/us-2-create-records.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "us-3-lending-books;a-valid-loan-decreases-availability",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "A valid loan decreases availability",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 242778
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000201",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare One",
+                      "Test Author",
+                      "1000000000202",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Two",
+                      "Test Author",
+                      "1000000000203",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Three",
+                      "Test Author",
+                      "1000000000204",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Four",
+                      "Test Author",
+                      "1000000000205",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Five",
+                      "Test Author",
+                      "1000000000206",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7422792
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2607919
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "the librarian lends \"Dune\" to Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1740100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48405
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "\"Dune\" shows 0 available copies",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:248"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1477075
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.1",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-3-lending-books;members-cannot-exceed-five-active-loans",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "Members cannot exceed five active loans",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 147900
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000201",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare One",
+                      "Test Author",
+                      "1000000000202",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Two",
+                      "Test Author",
+                      "1000000000203",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Three",
+                      "Test Author",
+                      "1000000000204",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Four",
+                      "Test Author",
+                      "1000000000205",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Five",
+                      "Test Author",
+                      "1000000000206",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 9074861
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2392234
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 24,
+            "name": "Alice has borrowed five books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:99"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6183331
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "the librarian lends \"Dune\" to Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1365022
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 43577
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "the error is \"Loan limit reached\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40332
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.2",
+            "line": 22
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-3-lending-books;suspended-members-cannot-borrow",
+        "keyword": "Scenario",
+        "line": 30,
+        "name": "Suspended members cannot borrow",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 129192
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000201",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare One",
+                      "Test Author",
+                      "1000000000202",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Two",
+                      "Test Author",
+                      "1000000000203",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Three",
+                      "Test Author",
+                      "1000000000204",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Four",
+                      "Test Author",
+                      "1000000000205",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Five",
+                      "Test Author",
+                      "1000000000206",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7075288
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2241200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 31,
+            "name": "Alice is suspended",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:91"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 133643
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 32,
+            "name": "the librarian lends \"Dune\" to Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1447597
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "the response status is 403",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 46527
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "the error is \"Member is suspended\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48577
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.3",
+            "line": 29
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-3-lending-books;members-with-excessive-unpaid-fines-cannot-borrow",
+        "keyword": "Scenario",
+        "line": 37,
+        "name": "Members with excessive unpaid fines cannot borrow",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 116242
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000201",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare One",
+                      "Test Author",
+                      "1000000000202",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Two",
+                      "Test Author",
+                      "1000000000203",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Three",
+                      "Test Author",
+                      "1000000000204",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Four",
+                      "Test Author",
+                      "1000000000205",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Five",
+                      "Test Author",
+                      "1000000000206",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7417786
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2263466
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 38,
+            "name": "Alice has unpaid fines of 501 cents",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:111"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1547691
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 39,
+            "name": "the librarian lends \"Dune\" to Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2756300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "the response status is 402",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 57021
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 41,
+            "name": "the error is \"Outstanding fines exceed limit\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40550
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.4",
+            "line": 36
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-3-lending-books;unavailable-books-must-be-reserved",
+        "keyword": "Scenario",
+        "line": 44,
+        "name": "Unavailable books must be reserved",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 122771
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000201",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare One",
+                      "Test Author",
+                      "1000000000202",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Two",
+                      "Test Author",
+                      "1000000000203",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Three",
+                      "Test Author",
+                      "1000000000204",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Four",
+                      "Test Author",
+                      "1000000000205",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Five",
+                      "Test Author",
+                      "1000000000206",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 7058277
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2204775
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 45,
+            "name": "Bob has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1420922
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 46,
+            "name": "the librarian lends \"Dune\" to Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1356952
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 47,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 43705
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 48,
+            "name": "the error is \"No copies available — reserve instead\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29555
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.5",
+            "line": 43
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-3-lending-books;checkout-can-identify-a-fifth-active-loan",
+        "keyword": "Scenario",
+        "line": 51,
+        "name": "Checkout can identify a fifth active loan",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 99648
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000201",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare One",
+                      "Test Author",
+                      "1000000000202",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Two",
+                      "Test Author",
+                      "1000000000203",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Three",
+                      "Test Author",
+                      "1000000000204",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Four",
+                      "Test Author",
+                      "1000000000205",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Spare Five",
+                      "Test Author",
+                      "1000000000206",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6752582
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2636363
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 52,
+            "name": "Alice has borrowed four books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:105"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5473166
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 53,
+            "name": "the librarian views member Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:212"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1341933
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 54,
+            "name": "Alice has 4 active loans",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:280"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 88729
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.6",
+            "line": 50
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "us-3-lending-books",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "US-3 Lending books",
+    "tags": [],
+    "uri": "features/us-3-lending.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "us-4-returns-and-fines;returning-a-loan-restores-availability",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Returning a loan restores availability",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 104071
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000301",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1316196
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2243963
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 13,
+            "name": "Alice has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1316614
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "the librarian returns Alice's loan for \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1807792
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "the response status is 200",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52811
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "\"Dune\" shows 1 available copy",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:243"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1341414
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.1",
+            "line": 11
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-4-returns-and-fines;returning-late-creates-a-fine",
+        "keyword": "Scenario",
+        "line": 19,
+        "name": "Returning late creates a fine",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 104974
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000301",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1393349
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3651279
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "Alice has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1367513
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "Alice's loan for \"Dune\" is 3 days overdue",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:128"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 204067
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 22,
+            "name": "the librarian returns Alice's loan for \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1278940
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 23,
+            "name": "Alice's unpaid fine total is 150 cents",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:284"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1176461
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.2",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-4-returns-and-fines;returned-loans-cannot-be-returned-again",
+        "keyword": "Scenario",
+        "line": 26,
+        "name": "Returned loans cannot be returned again",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 98953
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000301",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1324222
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2544364
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 27,
+            "name": "Alice has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1576952
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the librarian returns Alice's loan for \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1240805
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "the librarian returns Alice's loan for \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1090937
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40769
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 31,
+            "name": "the error is \"Loan already returned\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 28796
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.3",
+            "line": 25
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-4-returns-and-fines;returning-a-reserved-book-notifies-the-head-of-the-queue",
+        "keyword": "Scenario",
+        "line": 34,
+        "name": "Returning a reserved book notifies the head of the queue",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 99511
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000301",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1372541
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2447111
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 35,
+            "name": "Alice has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1365361
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "Bob reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1342214
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 37,
+            "name": "the librarian returns Alice's loan for \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1376666
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 38,
+            "name": "Bob's reservation for \"Dune\" is \"notified\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:261"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 168615
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "\"Dune\" shows 0 available copies",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:248"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1118199
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.4",
+            "line": 33
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-4-returns-and-fines;member-profiles-include-loans,-reservations,-and-fines",
+        "keyword": "Scenario",
+        "line": 42,
+        "name": "Member profiles include loans, reservations, and fines",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 102786
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000301",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1267324
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2154275
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 43,
+            "name": "Alice has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1374322
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 44,
+            "name": "the librarian views member Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:212"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1444426
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 45,
+            "name": "Alice has 1 active loan",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:276"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 114533
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.5",
+            "line": 41
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "us-4-returns-and-fines",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "US-4 Returns and fines",
+    "tags": [],
+    "uri": "features/us-4-returns.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "us-5-reservation-queue;a-member-reserves-a-book",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "A member reserves a book",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 113977
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000401",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1536415
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Chen",
+                      "chen@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3383295
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 14,
+            "name": "Alice reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1302812
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 15,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 44563
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 16,
+            "name": "Alice's reservation for \"Dune\" is \"waiting\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:261"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 136558
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.1",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-5-reservation-queue;members-cannot-reserve-books-they-already-have-on-loan",
+        "keyword": "Scenario",
+        "line": 19,
+        "name": "Members cannot reserve books they already have on loan",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 98371
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000401",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1402714
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Chen",
+                      "chen@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5097731
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "Alice has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1390210
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "Alice reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1286314
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37585
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "the error is \"Member already has this book on loan\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 32580
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.2",
+            "line": 18
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-5-reservation-queue;duplicate-active-reservations-are-rejected",
+        "keyword": "Scenario",
+        "line": 26,
+        "name": "Duplicate active reservations are rejected",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 101383
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000401",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1214717
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Chen",
+                      "chen@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3088392
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 27,
+            "name": "Alice reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1257573
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 28,
+            "name": "Alice reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1225553
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 29,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 36656
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "the error is \"Duplicate reservation\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 30505
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.3",
+            "line": 25
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-5-reservation-queue;a-notified-reservation-can-be-fulfilled-by-checkout",
+        "keyword": "Scenario",
+        "line": 33,
+        "name": "A notified reservation can be fulfilled by checkout",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 94110
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000401",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1300440
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Chen",
+                      "chen@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3653702
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 34,
+            "name": "Alice has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1374311
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "Bob reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1302557
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 36,
+            "name": "the librarian returns Alice's loan for \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1183458
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 37,
+            "name": "the librarian lends \"Dune\" to Bob",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:185"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1370264
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 38,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 38850
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "Bob's reservation for \"Dune\" is \"fulfilled\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:261"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 96635
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.4",
+            "line": 32
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-5-reservation-queue;stale-notifications-expire-and-the-next-member-is-notified",
+        "keyword": "Scenario",
+        "line": 42,
+        "name": "Stale notifications expire and the next member is notified",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 96832
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000401",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1216467
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Chen",
+                      "chen@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3280690
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 43,
+            "name": "Alice has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:95"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1348619
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 44,
+            "name": "Bob reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1411850
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 45,
+            "name": "Chen reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1325105
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 46,
+            "name": "the librarian returns Alice's loan for \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1207451
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 47,
+            "name": "Bob's notification for \"Dune\" is stale",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:139"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 173793
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 48,
+            "name": "stale reservations are expired",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:208"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1346405
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 49,
+            "name": "Bob's reservation for \"Dune\" is \"expired\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:261"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 110938
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "Chen's reservation for \"Dune\" is \"notified\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:261"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 78763
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.5",
+            "line": 41
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-5-reservation-queue;book-detail-shows-a-member-queue-position",
+        "keyword": "Scenario",
+        "line": 53,
+        "name": "Book detail shows a member queue position",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 96661
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000401",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1270810
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob",
+                      "bob@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Chen",
+                      "chen@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5020640
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 54,
+            "name": "Alice reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1671776
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 55,
+            "name": "Bob reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:201"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1610970
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 56,
+            "name": "the librarian views \"Dune\" for Bob",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:154"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1594209
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 57,
+            "name": "Bob's queue position is 2",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:270"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 87530
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.6",
+            "line": 52
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "us-5-reservation-queue",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "US-5 Reservation queue",
+    "tags": [],
+    "uri": "features/us-5-reservations.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "us-6-fine-collection;member-detail-sums-unpaid-fines",
+        "keyword": "Scenario",
+        "line": 11,
+        "name": "Member detail sums unpaid fines",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 116943
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000501",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1415016
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1232843
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 12,
+            "name": "Alice has unpaid fines of 250 cents",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:111"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1529954
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "the librarian views member Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:212"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1145785
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "Alice's unpaid fine total is 250 cents",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:284"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1320628
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-6.1",
+            "line": 10
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-6-fine-collection;a-librarian-pays-a-fine",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "A librarian pays a fine",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 131439
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000501",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1696784
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1341216
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "Alice has unpaid fines of 250 cents",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:111"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1532662
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "the librarian pays Alice's fine",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:216"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1276678
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "the response status is 200",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 42855
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "Alice's unpaid fine total is 0 cents",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:284"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1135518
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-6.2",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-6-fine-collection;already-paid-fines-cannot-be-paid-again",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Already paid fines cannot be paid again",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 104064
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000501",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1283996
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1141764
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 25,
+            "name": "Alice has unpaid fines of 250 cents",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:111"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1439375
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 26,
+            "name": "the librarian pays Alice's fine",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:216"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1392434
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 27,
+            "name": "the librarian pays Alice's fine",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:216"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1221258
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 28,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:227"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 47880
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "the error is \"Fine already paid\"",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:231"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29133
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-6.3",
+            "line": 23
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "us-6-fine-collection;member-profiles-expose-unpaid-fine-details",
+        "keyword": "Scenario",
+        "line": 32,
+        "name": "Member profiles expose unpaid fine details",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 116161
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Test Author",
+                      "1000000000501",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 3,
+            "name": "the catalog contains books",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1378253
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 6,
+            "name": "members exist",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:81"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1144588
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 33,
+            "name": "Alice has unpaid fines of 250 cents",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:111"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1352093
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 34,
+            "name": "the librarian views member Alice",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:212"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1062000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 35,
+            "name": "Alice has 1 unpaid fine",
+            "match": {
+              "location": "features/step_definitions/library.steps.ts:293"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 87484
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-6.4",
+            "line": 31
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "us-6-fine-collection",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "US-6 Fine collection",
+    "tags": [],
+    "uri": "features/us-6-fines.feature"
+  }
+]

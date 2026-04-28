@@ -1,0 +1,25 @@
+src/
+├── db/
+│   ├── index.ts
+│   └── seed.ts
+├── middleware/
+├── policy/
+│   ├── constants.ts
+│   ├── index.ts
+│   └── policy.test.ts
+├── routes/
+│   ├── books.ts
+│   ├── fines.ts
+│   ├── loans.ts
+│   ├── members.ts
+│   └── reservations.ts
+├── services/
+│   ├── api.test.ts
+│   ├── book.ts
+│   ├── fine.ts
+│   ├── loan.ts
+│   ├── member.ts
+│   └── reservation.ts
+├── app.ts
+├── errors.ts
+└── index.ts

@@ -1,0 +1,9 @@
+generator: opencode-deepseek
+run_id:    opencode-deepseek-seed1
+started:   2026-04-27T01:12:53-03:00
+cmd:       opencode run --dangerously-skip-permissions --dir /home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-deepseek-seed1/candidate -m opencode-go/deepseek-v4-pro
+prompt_input: arg
+timeout:   5400s
+exit_code: 0
+ended:     2026-04-27T01:46:36-03:00
+wall_seconds: 2023

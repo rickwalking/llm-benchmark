@@ -1,0 +1,38 @@
+{
+  "vendor": "claude-opus47",
+  "model": "claude-opus-4-7",
+  "gen": "opencode-deepseek",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 3,\n    \"alignment\": 4,\n    \"declarative\": 3,\n    \"atomic\": 4\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"Tags found across features: @AC-1.1, @AC-1.2, @AC-1.4, @AC-1.1-ready, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-6.1, @AC-6.2, @AC-6.3 (24/29 ACs \u2248 83%)\",\n      \"Missing from REQUIREMENTS list (ac-ids.txt): AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4. No Scenario Outline used for boundary cases (e.g., loan limit at 4 vs 5 vs 6, fine at 19 vs 20 days late). Negative ACs are well represented (3.2, 3.3, 3.4, 3.5, 4.3, 5.2, 5.3, 6.3, 2.2, 2.4, 1.4).\"\n    ],\n    \"alignment\": [\n      \"Every scenario carries exactly one @AC-x.y tag (catalog.feature:16,23,30,36; lending.feature:16,23,30,37,44; reservations.feature:16,22,29,36,44; etc.)\",\n      \"Scenario names restate the AC in human-readable form: 'Reject borrowing more than 5 books' (lending.feature:24), 'Cannot pay an already paid fine' (fines.feature:28), 'Reject duplicate ISBN' (manage.feature:13). Background present in 5 of 6 features to reduce duplication. Not fully bidirectional (5 ACs untraced); no Outline Examples tagged per row.\"\n    ],\n    \"declarative\": [\n      \"Good: 'When Alice Johnson borrows \\\"Dune\\\"' (lending.feature:18); 'When the librarian lends...' style; 'Then \\\"Dune\\\" has 0 available copies' (lending.feature:21); 'Then the fine is marked as paid' (fines.feature:25)\",\n      \"Bad: persistent leakage of HTTP/JSON vocabulary \u2014 'Then the response status is 200' (catalog.feature:19, returns.feature:20, etc.), 'Then the response includes unpaid_fines_cents of 350' (fines.feature:18 \u2014 JSON key), 'And the loan has a due_date' (lending.feature:20 \u2014 JSON key), 'Then the response status is 402' (lending.feature:41). Magic numbers used instead of named constants (e.g., '$1.50', '5 active loans', '$5.01' rather than '<loan limit>').\"\n    ],\n    \"atomic\": [\n      \"Atomic example: 'When Alice Johnson returns the loan' (returns.feature:19); 'And Bob Smith has reserved \\\"Dune\\\"' (returns.feature:42)\",\n      \"Compound exception: 'When the book is returned and Bob Smith is notified' (reservations.feature:40,49) \u2014 two actions in one step. 'When the librarian creates a book with title \\\"The Hobbit\\\", author \\\"J.R.R. Tolkien\\\", ISBN \\\"978-0547928227\\\", and 4 copies' (manage.feature:8) is parameter-rich but a single action.\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n```\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 3,
+      "alignment": 4,
+      "declarative": 3,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "Tags found across features: @AC-1.1, @AC-1.2, @AC-1.4, @AC-1.1-ready, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-6.1, @AC-6.2, @AC-6.3 (24/29 ACs \u2248 83%)",
+        "Missing from REQUIREMENTS list (ac-ids.txt): AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4. No Scenario Outline used for boundary cases (e.g., loan limit at 4 vs 5 vs 6, fine at 19 vs 20 days late). Negative ACs are well represented (3.2, 3.3, 3.4, 3.5, 4.3, 5.2, 5.3, 6.3, 2.2, 2.4, 1.4)."
+      ],
+      "alignment": [
+        "Every scenario carries exactly one @AC-x.y tag (catalog.feature:16,23,30,36; lending.feature:16,23,30,37,44; reservations.feature:16,22,29,36,44; etc.)",
+        "Scenario names restate the AC in human-readable form: 'Reject borrowing more than 5 books' (lending.feature:24), 'Cannot pay an already paid fine' (fines.feature:28), 'Reject duplicate ISBN' (manage.feature:13). Background present in 5 of 6 features to reduce duplication. Not fully bidirectional (5 ACs untraced); no Outline Examples tagged per row."
+      ],
+      "declarative": [
+        "Good: 'When Alice Johnson borrows \"Dune\"' (lending.feature:18); 'When the librarian lends...' style; 'Then \"Dune\" has 0 available copies' (lending.feature:21); 'Then the fine is marked as paid' (fines.feature:25)",
+        "Bad: persistent leakage of HTTP/JSON vocabulary \u2014 'Then the response status is 200' (catalog.feature:19, returns.feature:20, etc.), 'Then the response includes unpaid_fines_cents of 350' (fines.feature:18 \u2014 JSON key), 'And the loan has a due_date' (lending.feature:20 \u2014 JSON key), 'Then the response status is 402' (lending.feature:41). Magic numbers used instead of named constants (e.g., '$1.50', '5 active loans', '$5.01' rather than '<loan limit>')."
+      ],
+      "atomic": [
+        "Atomic example: 'When Alice Johnson returns the loan' (returns.feature:19); 'And Bob Smith has reserved \"Dune\"' (returns.feature:42)",
+        "Compound exception: 'When the book is returned and Bob Smith is notified' (reservations.feature:40,49) \u2014 two actions in one step. 'When the librarian creates a book with title \"The Hobbit\", author \"J.R.R. Tolkien\", ISBN \"978-0547928227\", and 4 copies' (manage.feature:8) is parameter-rich but a single action."
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

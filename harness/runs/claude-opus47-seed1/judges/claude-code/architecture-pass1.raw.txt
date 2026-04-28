@@ -1,0 +1,16 @@
+{
+  "criterion": "architecture",
+  "score": 3,
+  "anchor_match": "Clean enough",
+  "evidence_quotes": [
+    "src/\n├── db/\n│   ├── index.ts\n│   ├── migrate.ts\n│   └── seed.ts\n├── http/\n│   ├── middleware.ts\n│   ├── routes.ts\n│   └── schemas.ts\n├── policy/\n│   ├── index.ts\n│   └── policy.test.ts\n├── services/\n│   ├── bookService.ts\n│   ├── fineService.ts\n│   ├── loanService.ts\n│   ├── memberService.ts\n│   ├── reservationService.ts",
+    "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+    "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50;\nexport const LATE_FINE_CAP_CENTS = 1000;\nexport const RESERVATION_NOTIFICATION_HOURS = 48;\nexport const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500;",
+    "import {\n  canBorrow,\n  computeFineCents,\n  dueDateFromBorrow,\n} from '../policy/index.js';",
+    "export class DomainError extends Error { ... } export class NotFoundError extends DomainError { ... } export class ConflictError extends DomainError { ... } export class ForbiddenError extends DomainError { ... } export class PaymentRequiredError extends DomainError { ... }",
+    "frontend/src/pages/MemberDetailPage.tsx,272 ... backend/src/http/routes.ts,212 ... backend/src/services/loanService.ts,202 (largest non-test files all under 300 lines)",
+    "src/\n├── api/\n│   ├── client.ts\n│   └── types.ts\n├── components/\n│   ├── EmptyState.tsx ...\n├── pages/\n│   ├── BookDetailPage.tsx\n│   ├── BooksPage.tsx\n│   ├── CheckoutPage.tsx ..."
+  ],
+  "anchor_rejected_above": "Anchor 4 (Well-modularized) does not match for three reasons: (a) services call raw better-sqlite3 statements directly rather than going through a thin DB-access abstraction — e.g. loanService.ts repeatedly does `db.prepare('SELECT id, total_copies FROM books WHERE id = ?').get(...)` and `db.prepare('INSERT INTO loans ...')`, mixing SQL into business logic; (b) the frontend is organized by technical role (`pages/`, `components/`, `api/`, `utils/`) rather than by feature — there is no `checkout/`, `members/`, `books/` directory that owns its own components, hooks and API calls; (c) shared types are duplicated, not single-sourced — backend `src/types.ts` and frontend `src/api/types.ts` independently declare Book/Member/Loan/Reservation/Fine shapes with no shared package or generated client. Additionally the literal `5` in loanService.ts line 106 (`if (activeLoanCount + 1 === 5)`) duplicates the policy constant `MAX_ACTIVE_LOANS = 5` instead of importing it.",
+  "confidence": "high"
+}

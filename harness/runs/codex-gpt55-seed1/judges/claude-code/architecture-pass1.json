@@ -1,0 +1,23 @@
+{
+  "criterion": "architecture",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "architecture",
+    "score": 3,
+    "anchor_match": "Clean enough \u2014 clear layers, centralized policy, no cycles, files under 300 lines",
+    "evidence_quotes": [
+      "madge.json: \"circular\": [] , \"orphans\": []",
+      "backend/src/policy/index.ts:1-6: export const MAX_ACTIVE_LOANS = 5; export const LOAN_PERIOD_DAYS = 14; export const LATE_FINE_RATE_CENTS_PER_DAY = 50; export const LATE_FINE_CAP_CENTS = 1000; export const RESERVATION_NOTIFICATION_HOURS = 48; export const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500;",
+      "loan-service.ts:4: import { LOAN_PERIOD_DAYS, addDays, canBorrow, computeFineCents, nextReservationToNotify } from \"../policy\";",
+      "errors.ts referenced as small named hierarchy: import { ConflictError, ForbiddenError, NotFoundError, PaymentRequiredError } from \"../errors\";",
+      "file-sizes.csv largest: backend/src/app.ts,173 ; frontend/src/pages/MemberProfilePage.tsx,160 \u2014 no file >300 lines",
+      "backend tree: src/{policy/, routes/ (empty), services/, app.ts, db.ts, errors.ts, server.ts}",
+      "frontend tree: src/{components/, pages/, api.ts, App.tsx, main.tsx, styles.css, types.ts, utils.ts} \u2014 organized by technical role"
+    ],
+    "anchor_rejected_above": "Anchor 4 (Well-modularized) requires three things that the repo fails on: (1) services depending on a thin DB-access abstraction rather than raw db.prepare \u2014 loan-service.ts:41-46 calls `db.prepare(\"INSERT INTO loans (id, book_id, member_id, borrowed_at, due_at, returned_at) VALUES (?, ?, ?, ?, ?, NULL)\").run(...)` and serviceHelpers.ts is full of inline SQL via db.prepare; (2) frontend organized by feature (`checkout/`, `members/`, `books/`) \u2014 instead, the frontend tree shows technical-role folders `components/` and `pages/` with a single `api.ts` and `types.ts`; (3) shared types between FE and BE living in a single source \u2014 backend `services/types.ts` (65 lines) and frontend `src/types.ts` (58 lines) are separate parallel definitions with no shared workspace or generated client.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

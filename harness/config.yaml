@@ -1,0 +1,225 @@
+# Harness configuration. CLI-driven — no API SDKs.
+
+# ────────────────────────────────────────────────────────────────────────────
+# Container — sandboxes untrusted candidate code. The objective gauntlet
+# always runs inside this container; the judge phase boots the candidate
+# inside a container too and the host-side claude CLI hits localhost.
+# ────────────────────────────────────────────────────────────────────────────
+
+container:
+  enabled: true
+  image: llm-bench-runner:dev
+  # Host-side npm cache (created on first build) — speeds up gauntlets.
+  npm_cache_host: ~/.npm-docker
+
+# ────────────────────────────────────────────────────────────────────────────
+# Scoring weights (unchanged)
+# ────────────────────────────────────────────────────────────────────────────
+
+weights:
+  first_run_success: 0.15
+  functional_correctness: 0.20
+  mutation_score: 0.15
+  ui_ux: 0.15
+  api_design: 0.10
+  architecture: 0.10
+  gherkin: 0.10
+  security: 0.05
+
+hybrid_split:
+  ui_ux:        { objective: 0.5, judge: 0.5 }
+  api_design:   { objective: 0.5, judge: 0.5 }
+  architecture: { objective: 0.5, judge: 0.5 }
+
+thresholds:
+  mutation_score_floor: 0.50
+  mutation_score_ceiling: 0.90
+  npm_audit_high_max: 0
+  npm_audit_critical_max: 0
+  axe_violations_max: { serious: 0, critical: 0 }
+  lighthouse_perf_floor: 80
+  file_size_p95_max_lines: 300
+  cyclic_imports_max: 0
+
+# ────────────────────────────────────────────────────────────────────────────
+# Candidate generators — one entry per CLI/model combo. Each is run in a fresh
+# worktree under runs/<name>-seed<n>/candidate/ in YOLO mode.
+#
+# The harness substitutes:
+#   ${CANDIDATE_DIR}   absolute path to the empty candidate worktree
+#   ${FIXTURE_DIR}     absolute path to fixture/ (read-only inputs)
+#   ${PROMPT_FILE}     absolute path to a temp file holding the concat fixture
+#
+# Pipe the prompt to the CLI according to `prompt_input`:
+#   stdin    — the harness pipes ${PROMPT_FILE} contents into the CLI's stdin
+#   arg      — the harness appends ${PROMPT_FILE} contents as the last cmd arg
+#   filearg  — the harness appends "@${PROMPT_FILE}" or similar (CLI-specific)
+#
+# Pin model IDs explicitly. Do NOT use "latest" — kills reproducibility.
+# ────────────────────────────────────────────────────────────────────────────
+
+candidate_generators:
+  # Codex CLI 0.124.0 — verified flags. Reads prompt from stdin natively.
+  # YOLO via --dangerously-bypass-approvals-and-sandbox (no sandbox; only safe
+  # in a container). Use --full-auto instead for sandboxed YOLO.
+  - name: codex-gpt55
+    cmd:
+      - codex
+      - exec
+      - --dangerously-bypass-approvals-and-sandbox
+      - --skip-git-repo-check
+      - --cd
+      - '${CANDIDATE_DIR}'
+      - -m
+      - gpt-5.5
+    prompt_input: stdin
+    timeout_seconds: 5400
+    seeds: 3
+
+  # Opencode 1.14.26 — verified flags. Prompt passed as positional argument
+  # (opencode run [message..]). Models addressed as provider/model.
+  - name: opencode-deepseek
+    cmd:
+      - opencode
+      - run
+      - --dangerously-skip-permissions
+      - --dir
+      - '${CANDIDATE_DIR}'
+      - -m
+      - opencode-go/deepseek-v4-pro
+    prompt_input: arg
+    timeout_seconds: 5400
+    seeds: 3
+
+  # NOTE: Both Kimi and GLM moved from `opencode/` to `opencode-go/` namespace
+  # for parity with DeepSeek's funded provider, after the original `opencode/`
+  # workspace ran out of credits mid-benchmark. The two namespaces appear to
+  # route through different inference backends, so mid-run namespace switches
+  # produced contaminated "spliced" candidates (preserved as <gen>-seed1-spliced).
+  - name: opencode-glm
+    cmd:
+      - opencode
+      - run
+      - --dangerously-skip-permissions
+      - --dir
+      - '${CANDIDATE_DIR}'
+      - -m
+      - opencode-go/glm-5.1
+    prompt_input: arg
+    timeout_seconds: 5400
+    seeds: 3
+
+  - name: opencode-kimi
+    cmd:
+      - opencode
+      - run
+      - --dangerously-skip-permissions
+      - --dir
+      - '${CANDIDATE_DIR}'
+      - -m
+      - opencode-go/kimi-k2.5
+    prompt_input: arg
+    timeout_seconds: 5400
+    seeds: 3
+
+  # Cursor Agent — uses --yolo --trust --sandbox disabled for non-interactive
+  # YOLO mode. Model name follows Cursor's short-name convention.
+  - name: cursor-gemini
+    cmd:
+      - cursor-agent
+      - --print
+      - --yolo
+      - --trust
+      - --sandbox
+      - disabled
+      - --model
+      - gemini-3.1-pro
+      - --workspace
+      - '${CANDIDATE_DIR}'
+    prompt_input: arg
+    timeout_seconds: 5400
+    seeds: 3
+
+  # Claude Code — non-interactive --print with full YOLO. claude lacks a
+  # --cwd flag, so we wrap in bash -c to set the working directory.
+  # Note: this candidate is judged by the same vendor's model — flag as a
+  # threat to validity in the article.
+  - name: claude-opus47
+    cmd:
+      - bash
+      - -c
+      - 'cd "${CANDIDATE_DIR}" && exec claude --print --dangerously-skip-permissions --model claude-opus-4-7 --add-dir "${CANDIDATE_DIR}"'
+    prompt_input: stdin
+    timeout_seconds: 5400
+    seeds: 3
+
+# ────────────────────────────────────────────────────────────────────────────
+# Judge — Claude Code in --print mode with Playwright MCP and skipped
+# permission prompts. Substitutions available in cmd:
+#   ${CANDIDATE_DIR}   the candidate's repo root
+#   ${HARNESS_DIR}     the harness/ directory (for mcp-judge.json)
+#   ${PROMPT_FILE}     the per-criterion prompt
+#   ${PERSONA}         the system-prompt persona (resolved from `judge.persona`)
+# ────────────────────────────────────────────────────────────────────────────
+
+judge:
+  name: claude-code
+  cli: claude
+  cmd:
+    - claude
+    - '--print'
+    - '--dangerously-skip-permissions'
+    - '--allowedTools'
+    - 'Read,Bash,Glob,Grep,mcp__playwright__*'
+    - '--mcp-config'
+    - '${HARNESS_DIR}/mcp-judge.json'
+    - '--append-system-prompt'
+    - '${PERSONA}'
+  prompt_input: stdin
+  cwd: '${CANDIDATE_DIR}'
+  timeout_seconds: 1200
+
+  # The judge runs against a live candidate stack. The harness boots it
+  # before the judge phase and tears it down after.
+  boot_app: true
+  app_url: 'http://localhost:5173'
+  api_url: 'http://localhost:3001'
+
+  persona: |
+    You are a senior staff engineer acting as an evaluator for a software
+    benchmark. Your job is to score ONE rubric criterion of a candidate
+    project on an anchored 1–5 scale.
+
+    Rules of engagement:
+    - Anchor every score to specific evidence quoted verbatim from the
+      codebase or tool outputs. No vibes.
+    - You may use Bash, Read, Glob, Grep, and Playwright MCP tools. For UI/UX
+      criteria, navigate the running app at ${APP_URL} via Playwright MCP and
+      take whatever screenshots you need. For API criteria, you may curl
+      ${API_URL} directly.
+    - Do not modify any files. Do not write code. Do not coach the author.
+      Do not suggest improvements. Score only.
+    - Do not speculate about future improvements or "what the model
+      probably meant". Score what is in the repo.
+    - Output ONLY the JSON specified by the rubric. No prose before or after.
+    - If the JSON would be empty or malformed, output {"error": "..."} explaining why.
+
+# ────────────────────────────────────────────────────────────────────────────
+# Cohen's κ requires ≥2 judges. With a single Claude Code judge, the harness
+# instead reports within-judge variance: each criterion is judged k times
+# with independent invocations. Higher k = better variance estimate, more cost.
+# ────────────────────────────────────────────────────────────────────────────
+
+judge_passes_per_criterion: 1   # Set to 3 to measure within-judge variance
+
+judge_criteria:
+  - ui_ux
+  - api_design
+  - architecture
+  - gherkin
+
+# Pairwise comparison is run as a separate phase (article-data step).
+pairwise:
+  enabled: true
+  swap_positions: true
+  models_to_compare: []   # empty = all pairs

@@ -1,0 +1,34 @@
+
+> library-lending@1.0.0 test:unit
+> npm --workspace backend run test && npm --workspace frontend run test --reporter=json
+
+
+> backend@1.0.0 test
+> vitest run --config vitest.config.ts
+
+
+ RUN  v2.1.9 /runs/claude-opus47-seed1/candidate/backend
+
+ ✓ src/policy/policy.test.ts (28 tests) 15ms
+ ✓ src/services/services.unit.test.ts (44 tests) 73ms
+ ✓ src/services/services.test.ts (33 tests) 274ms
+
+ Test Files  3 passed (3)
+      Tests  105 passed (105)
+   Start at  06:39:19
+   Duration  995ms (transform 256ms, setup 0ms, collect 616ms, tests 362ms, environment 1ms, prepare 369ms)
+
+
+> frontend@1.0.0 test
+> vitest run --config vitest.config.ts
+
+
+ RUN  v2.1.9 /runs/claude-opus47-seed1/candidate/frontend
+
+ ✓ src/utils/format.test.ts (7 tests) 12ms
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  06:39:21
+   Duration  1.04s (transform 55ms, setup 131ms, collect 32ms, tests 12ms, environment 517ms, prepare 93ms)
+

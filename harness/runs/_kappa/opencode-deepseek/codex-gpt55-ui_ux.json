@@ -1,0 +1,24 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "codex-gpt55",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"score\": 1,\n  \"confidence\": \"high\",\n  \"evidence\": [\n    \"Evidence directory contains only axe-summary.json and lighthouse-summary.json; screenshots/ directory is empty.\",\n    \"Manifest (manifest.json) confirms ui-ux evidence is limited to those two files with no screenshots, no HTML excerpts, and no interaction captures.\",\n    \"No screenshots of pages in empty/populated/error states exist, making it impossible to evaluate visual hierarchy, scannability, affordance clarity, or consistency.\",\n    \"No checkout flow capture or modal interaction capture exists to verify step indicators, back-navigation, focus trapping, or ESC behavior.\",\n    \"No rendered HTML of catalog or member profile pages exists to assess form quality, labels, validation, or error messages.\",\n    \"axe-summary.json states 'skipped: no axe spec in candidate', providing no accessibility violation data.\",\n    \"Lighthouse accessibility score is 1 (100) across /books, /checkout, and /members, suggesting basic label presence, but this alone is insufficient to raise the score above 1 given the total absence of visual evidence for all other rubric dimensions.\",\n    \"Cannot verify any of the positive attributes described in score levels 2\u20135 (loading indicators, empty state copy, modal behavior, microcopy, visual emphasis, live countdowns, secondary affordances, adaptive layouts).\"\n  ],\n  \"justification\": \"The candidate provided no visual evidence whatsoever \u2014 no screenshots, no HTML, no interaction captures. The only artifacts are a skipped axe report and Lighthouse performance/accessibility scores (which the rubric notes are 'for context only \u2014 they have their own weight'). Without any visual or structural evidence, it is impossible to verify a single positive attribute from the rubric's criteria grid. Score 1 applies because the rubric requires evidence of pages rendering, form labels, empty states, error handling, loading states, and consistent layout \u2014 none of which can be observed from the provided materials.\"\n}\n```\n",
+  "parsed": {
+    "score": 1,
+    "confidence": "high",
+    "evidence": [
+      "Evidence directory contains only axe-summary.json and lighthouse-summary.json; screenshots/ directory is empty.",
+      "Manifest (manifest.json) confirms ui-ux evidence is limited to those two files with no screenshots, no HTML excerpts, and no interaction captures.",
+      "No screenshots of pages in empty/populated/error states exist, making it impossible to evaluate visual hierarchy, scannability, affordance clarity, or consistency.",
+      "No checkout flow capture or modal interaction capture exists to verify step indicators, back-navigation, focus trapping, or ESC behavior.",
+      "No rendered HTML of catalog or member profile pages exists to assess form quality, labels, validation, or error messages.",
+      "axe-summary.json states 'skipped: no axe spec in candidate', providing no accessibility violation data.",
+      "Lighthouse accessibility score is 1 (100) across /books, /checkout, and /members, suggesting basic label presence, but this alone is insufficient to raise the score above 1 given the total absence of visual evidence for all other rubric dimensions.",
+      "Cannot verify any of the positive attributes described in score levels 2\u20135 (loading indicators, empty state copy, modal behavior, microcopy, visual emphasis, live countdowns, secondary affordances, adaptive layouts)."
+    ],
+    "justification": "The candidate provided no visual evidence whatsoever \u2014 no screenshots, no HTML, no interaction captures. The only artifacts are a skipped axe report and Lighthouse performance/accessibility scores (which the rubric notes are 'for context only \u2014 they have their own weight'). Without any visual or structural evidence, it is impossible to verify a single positive attribute from the rubric's criteria grid. Score 1 applies because the rubric requires evidence of pages rendering, form labels, empty states, error handling, loading states, and consistent layout \u2014 none of which can be observed from the provided materials."
+  },
+  "parse_failed": false
+}

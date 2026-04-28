@@ -1,0 +1,6 @@
+export const MAX_ACTIVE_LOANS = 5;
+export const LOAN_PERIOD_DAYS = 14;
+export const LATE_FINE_RATE_CENTS_PER_DAY = 50;
+export const LATE_FINE_CAP_CENTS = 1000;
+export const RESERVATION_NOTIFICATION_HOURS = 48;
+export const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500;

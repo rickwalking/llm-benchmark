@@ -1,0 +1,12 @@
+
+> library-lending@1.0.0 typecheck
+> npm run typecheck -w backend && npm run typecheck -w frontend
+
+
+> backend@1.0.0 typecheck
+> tsc --noEmit
+
+
+> frontend@1.0.0 typecheck
+> tsc --noEmit
+

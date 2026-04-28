@@ -1,0 +1,21 @@
+src/
+├── db/
+│   └── database.ts
+├── policy/
+│   ├── index.ts
+│   └── policy.test.ts
+├── routes/
+│   ├── books.ts
+│   ├── fines.ts
+│   ├── loans.ts
+│   ├── members.ts
+│   └── reservations.ts
+├── services/
+│   ├── bookService.ts
+│   ├── fineService.ts
+│   ├── loanService.ts
+│   ├── memberService.ts
+│   ├── reservationService.ts
+│   └── services.test.ts
+├── errors.ts
+└── index.ts

@@ -1,0 +1,45 @@
+{
+  "vendor": "claude-opus47",
+  "model": "claude-opus-4-7",
+  "gen": "opencode-glm",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 3,\n    \"alignment\": 4,\n    \"declarative\": 3,\n    \"atomic\": 4\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"Tags found: @AC-1.1, @AC-1.2, @AC-1.4, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-3.5b, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-4.5, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-6.1, @AC-6.2, @AC-6.3 (25 of 29 ACs from ac-ids.txt)\",\n      \"Missing AC IDs: AC-1.3, AC-3.6, AC-5.6, AC-6.4 \u2014 no scenarios tag these IDs\",\n      \"Boundary outline present in returns_and_fines.feature:22-33: 'Scenario Outline: Return a book late creates a fine' with Examples table covering days_late 0/1/10/20/21 (boundary at the 20-day cap)\",\n      \"All 200 step results in bdd-report.json show \\\"status\\\": \\\"passed\\\" \u2014 no undefined/skipped steps\"\n    ],\n    \"alignment\": [\n      \"Every scenario across all 6 feature files carries exactly one @AC-x.y tag (grep across features dir)\",\n      \"Scenario names are human-readable restatements: 'Reject loan when member has 5 active loans' (lending.feature:21), 'Cannot create a duplicate reservation' (reservations.feature:29), 'Pay an already-paid fine' (fines.feature:24)\",\n      \"Background blocks reduce setup duplication appropriately (catalog.feature:7, lending.feature:7, reservations.feature:7, returns_and_fines.feature:7, fines.feature:7)\",\n      \"Non-standard tag @AC-3.5b on lending.feature:48 (not in ac-ids.txt) \u2014 invents a sub-AC; bidirectional traceability is broken since AC-1.3, AC-3.6, AC-5.6, AC-6.4 are unmapped\"\n    ],\n    \"declarative\": [\n      \"Good (domain language): 'When the librarian lends \\\"Dune\\\" to \\\"Alice\\\"' (lending.feature:15), 'And the book \\\"Dune\\\" has 1 available copy' (lending.feature:18), 'When the system expires stale reservations' (reservations.feature:41), 'And the reservation for \\\"Bob\\\" transitions to \\\"notified\\\"' (reservations.feature:43)\",\n      \"Bad (HTTP-level): 'Then the response status is 201' / '409' / '402' / '403' / '404' appearing across all features (e.g. lending.feature:16,24,31,38,45,63; add_resources.feature:10,17,23,29)\",\n      \"Magic numbers: 'And the loan has a due date 14 days from now' (lending.feature:17), 'And the reservation has an expiry 48 hours from now' (returns_and_fines.feature:48) \u2014 constants hard-coded rather than named ('<loan period>')\",\n      \"JSON-key leakage: 'Then the profile shows unpaid_fines_cents of 350' (fines.feature:14), 'each book includes title, author, ISBN, total_copies, and available_copies' (catalog.feature:18)\"\n    ],\n    \"atomic\": [\n      \"Compound step: 'Given the member \\\"Alice\\\" has borrowed and returned \\\"Dune\\\"' (returns_and_fines.feature:37) \u2014 two actions in one step\",\n      \"Atomic example: 'Given all copies of \\\"Dune\\\" are on loan' / 'And a member \\\"Bob\\\" with email \\\"bob@example.com\\\" exists' / 'And the member \\\"Alice\\\" has a notified reservation for \\\"Dune\\\"' (lending.feature:50-52) \u2014 properly chained with separate And clauses\",\n      \"Atomic example: 'Then the fine is marked as paid' / 'And the response status is 200' (fines.feature:20-21)\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n```\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 3,
+      "alignment": 4,
+      "declarative": 3,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "Tags found: @AC-1.1, @AC-1.2, @AC-1.4, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-3.5b, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-4.5, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-6.1, @AC-6.2, @AC-6.3 (25 of 29 ACs from ac-ids.txt)",
+        "Missing AC IDs: AC-1.3, AC-3.6, AC-5.6, AC-6.4 \u2014 no scenarios tag these IDs",
+        "Boundary outline present in returns_and_fines.feature:22-33: 'Scenario Outline: Return a book late creates a fine' with Examples table covering days_late 0/1/10/20/21 (boundary at the 20-day cap)",
+        "All 200 step results in bdd-report.json show \"status\": \"passed\" \u2014 no undefined/skipped steps"
+      ],
+      "alignment": [
+        "Every scenario across all 6 feature files carries exactly one @AC-x.y tag (grep across features dir)",
+        "Scenario names are human-readable restatements: 'Reject loan when member has 5 active loans' (lending.feature:21), 'Cannot create a duplicate reservation' (reservations.feature:29), 'Pay an already-paid fine' (fines.feature:24)",
+        "Background blocks reduce setup duplication appropriately (catalog.feature:7, lending.feature:7, reservations.feature:7, returns_and_fines.feature:7, fines.feature:7)",
+        "Non-standard tag @AC-3.5b on lending.feature:48 (not in ac-ids.txt) \u2014 invents a sub-AC; bidirectional traceability is broken since AC-1.3, AC-3.6, AC-5.6, AC-6.4 are unmapped"
+      ],
+      "declarative": [
+        "Good (domain language): 'When the librarian lends \"Dune\" to \"Alice\"' (lending.feature:15), 'And the book \"Dune\" has 1 available copy' (lending.feature:18), 'When the system expires stale reservations' (reservations.feature:41), 'And the reservation for \"Bob\" transitions to \"notified\"' (reservations.feature:43)",
+        "Bad (HTTP-level): 'Then the response status is 201' / '409' / '402' / '403' / '404' appearing across all features (e.g. lending.feature:16,24,31,38,45,63; add_resources.feature:10,17,23,29)",
+        "Magic numbers: 'And the loan has a due date 14 days from now' (lending.feature:17), 'And the reservation has an expiry 48 hours from now' (returns_and_fines.feature:48) \u2014 constants hard-coded rather than named ('<loan period>')",
+        "JSON-key leakage: 'Then the profile shows unpaid_fines_cents of 350' (fines.feature:14), 'each book includes title, author, ISBN, total_copies, and available_copies' (catalog.feature:18)"
+      ],
+      "atomic": [
+        "Compound step: 'Given the member \"Alice\" has borrowed and returned \"Dune\"' (returns_and_fines.feature:37) \u2014 two actions in one step",
+        "Atomic example: 'Given all copies of \"Dune\" are on loan' / 'And a member \"Bob\" with email \"bob@example.com\" exists' / 'And the member \"Alice\" has a notified reservation for \"Dune\"' (lending.feature:50-52) \u2014 properly chained with separate And clauses",
+        "Atomic example: 'Then the fine is marked as paid' / 'And the response status is 200' (fines.feature:20-21)"
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

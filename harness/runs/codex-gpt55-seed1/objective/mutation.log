@@ -1,0 +1,297 @@
+
+> library-lending@1.0.0 mutation
+> stryker run tests/stryker.conf.json
+
+[32m06:21:09 (1937) INFO ProjectReader[39m Found 7 of 90 file(s) to be mutated.
+[32m06:21:09 (1937) INFO Instrumenter[39m Instrumented 7 source file(s) with 265 mutant(s)
+[32m06:21:09 (1937) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m06:21:10 (1937) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m06:21:10 (1937) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m06:21:12 (1937) INFO DryRunExecutor[39m Initial test run succeeded. Ran 44 tests in 2 seconds (net 429.675610999999 ms, overhead 1718.324389000001 ms).
+Mutation testing 30% (elapsed: <1m, remaining: <1m) 94/265 tested (1 survived, 0 timed out)
+Mutation testing 62% (elapsed: <1m, remaining: <1m) 195/265 tested (5 survived, 0 timed out)
+
+All tests
+  api.catalog.test.ts
+    ✓ catalog and creation API AC-1.1: lists all books sorted by title with availability (killed 2)
+    ✓ catalog and creation API AC-1.2: returns a book with current reservation queue depth (killed 7)
+    ✓ catalog and creation API AC-1.4: returns 404 for a missing book (killed 3)
+    ✓ catalog and creation API AC-2.1 and AC-2.2: creates books and rejects duplicate ISBNs (killed 3)
+    ✓ catalog and creation API AC-2.3 and AC-2.4: creates members and rejects duplicate emails (killed 3)
+    ✓ catalog and creation API lists members by name (killed 1)
+    ✓ catalog and creation API service creation trims persisted book and member fields (killed 5)
+    ✓ catalog and creation API returns null queue position for inactive reservations (killed 5)
+  api.lending.test.ts
+    ✓ loan and return API AC-3.1: creates a loan and decreases available copies (killed 26)
+    ✓ loan and return API AC-3.2: rejects the sixth active loan (killed 8)
+    ✓ loan and return API AC-3.3: rejects suspended members (killed 7)
+    ✓ loan and return API AC-3.4: rejects members whose unpaid fines exceed the threshold (killed 7)
+    ✓ loan and return API AC-3.5: rejects borrowing when no copy is available (killed 5)
+    ✓ loan and return API AC-4.1 and AC-4.3: returns a loan once and rejects a second return (killed 12)
+    ✓ loan and return API AC-4.2: creates capped late fines from days late (killed 14)
+    ✓ loan and return API AC-4.4: notifies the head reservation and keeps the returned copy held (killed 8)
+    ✓ loan and return API allows borrowing an available copy while another member only has a waiting reservation (killed 1)
+    ✓ loan and return API AC-6.1, AC-6.2, and AC-6.3: reports, pays, and rejects repaying fines (killed 9)
+    ✓ loan and return API returns 404 for missing loans (killed 3)
+    ✓ loan and return API returns 404 for missing fines (killed 3)
+  api.reservations.test.ts
+    ✓ reservation API AC-5.1: creates a waiting reservation (killed 12)
+    ✓ reservation API AC-5.2: rejects reservations when the member already has the book on loan (killed 8)
+    ✓ reservation API AC-5.3: rejects duplicate active reservations (killed 3)
+    ✓ reservation API AC-5.4: lets the notified member borrow and fulfills their reservation (killed 14)
+    ✓ reservation API AC-5.5: expires stale notifications and notifies the next waiting reservation (killed 14)
+    ✓ reservation API cancels only active reservations in the service layer (killed 11)
+    ✓ reservation API reports missing reservations from the service layer (killed 3)
+    ✓ reservation API does not notify a waiting reservation when no copy is available (killed 2)
+  policy.test.ts
+    ✓ policy date helpers adds loan days and reservation hours without changing the original date (killed 4)
+    ~ policy computeFineCents returns zero at exactly the due time (covered 8)
+    ✓ policy computeFineCents returns zero before the due time (killed 3)
+    ~ policy computeFineCents charges one late day for any fraction after the due time (covered 9)
+    ~ policy computeFineCents charges 19 late days below the cap (covered 9)
+    ~ policy computeFineCents hits the cap at 20 late days (covered 9)
+    ~ policy computeFineCents stays capped after 21 late days (covered 9)
+    ✓ policy canBorrow allows an active member with four active loans and fines at the threshold (killed 8)
+    ✓ policy canBorrow blocks at five active loans (killed 6)
+    ~ policy canBorrow blocks above five active loans (covered 13)
+    ~ policy canBorrow allows fines below and at the borrow block threshold (covered 15)
+    ✓ policy canBorrow blocks fines over the borrow block threshold (killed 3)
+    ✓ policy canBorrow blocks suspended members (killed 3)
+    ✓ policy nextReservationToNotify selects the oldest waiting reservation and ignores notified or expired rows (killed 11)
+    ✓ policy nextReservationToNotify breaks queue ties by reservation id (killed 2)
+    ~ policy nextReservationToNotify returns null when no waiting reservation exists (covered 9)
+
+[Survived] ConditionalExpression
+backend/src/policy/index.ts:62:14
+-         return byDate === 0 ? left.id.localeCompare(right.id) : byDate;
++         return true ? left.id.localeCompare(right.id) : byDate;
+Tests ran:
+    reservation API AC-5.5: expires stale notifications and notifies the next waiting reservation
+    policy nextReservationToNotify selects the oldest waiting reservation and ignores notified or expired rows
+    policy nextReservationToNotify breaks queue ties by reservation id
+
+
+[Survived] StringLiteral
+backend/src/services/loanService.ts:64:83
+-       const next = nextReservationToNotify(getReservationsForBook(db, loan.book_id, "waiting"));
++       const next = nextReservationToNotify(getReservationsForBook(db, loan.book_id, ""));
+Tests ran:
+    loan and return API AC-4.1 and AC-4.3: returns a loan once and rejects a second return
+    loan and return API AC-4.2: creates capped late fines from days late
+    loan and return API AC-4.4: notifies the head reservation and keeps the returned copy held
+  and 2 more tests!
+
+
+[NoCoverage] ObjectLiteral
+backend/src/services/memberService.ts:62:27
+-     ).map((reservation) => ({ ...reservation, queue_position: queuePosition(db, reservation) }));
++     ).map((reservation) => ({}));
+
+[Survived] ArrowFunction
+backend/src/services/memberService.ts:62:9
+-     ).map((reservation) => ({ ...reservation, queue_position: queuePosition(db, reservation) }));
++     ).map(() => undefined);
+Tests ran:
+    loan and return API AC-4.2: creates capped late fines from days late
+    loan and return API AC-6.1, AC-6.2, and AC-6.3: reports, pays, and rejects repaying fines
+
+
+[NoCoverage] BlockStatement
+backend/src/services/reservationService.ts:79:16
+-       if (!next) {
+-         break;
+-       }
++       if (!next) {}
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:44:43
+-     if (reservation.status !== "waiting" && reservation.status !== "notified") {
++     if (reservation.status !== "waiting" && true) {
+Tests ran:
+    reservation API cancels only active reservations in the service layer
+
+
+[Survived] StringLiteral
+backend/src/services/reservationService.ts:44:66
+-     if (reservation.status !== "waiting" && reservation.status !== "notified") {
++     if (reservation.status !== "waiting" && reservation.status !== "") {
+Tests ran:
+    reservation API cancels only active reservations in the service layer
+
+
+[Survived] StringLiteral
+backend/src/services/reservationService.ts:78:77
+-       const next = nextReservationToNotify(getReservationsForBook(db, bookId, "waiting"));
++       const next = nextReservationToNotify(getReservationsForBook(db, bookId, ""));
+Tests ran:
+    reservation API AC-5.5: expires stale notifications and notifies the next waiting reservation
+
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:79:9
+-       if (!next) {
++       if (false) {
+Tests ran:
+    reservation API AC-5.5: expires stale notifications and notifies the next waiting reservation
+
+
+[NoCoverage] BlockStatement
+backend/src/services/serviceHelpers.ts:64:16
+-     if (!member) {
+-       throw new NotFoundError("Member not found");
+-     }
++     if (!member) {}
+
+[NoCoverage] StringLiteral
+backend/src/services/serviceHelpers.ts:65:29
+-       throw new NotFoundError("Member not found");
++       throw new NotFoundError("");
+
+[NoCoverage] StringLiteral
+backend/src/services/serviceHelpers.ts:85:51
+-     const whereStatus = status ? "AND status = ?" : "";
++     const whereStatus = status ? "AND status = ?" : "Stryker was here!";
+
+[NoCoverage] ArrayDeclaration
+backend/src/services/serviceHelpers.ts:86:46
+-     const params = status ? [bookId, status] : [bookId];
++     const params = status ? [bookId, status] : [];
+
+[Survived] MethodExpression
+backend/src/services/serviceHelpers.ts:12:10
+-     return isbn.trim().replaceAll("-", "");
++     return isbn.replaceAll("-", "");
+Tests ran:
+    loan and return API AC-3.1: creates a loan and decreases available copies
+    loan and return API AC-3.2: rejects the sixth active loan
+    loan and return API AC-3.3: rejects suspended members
+  and 19 more tests!
+
+
+[Survived] StringLiteral
+backend/src/services/serviceHelpers.ts:12:33
+-     return isbn.trim().replaceAll("-", "");
++     return isbn.trim().replaceAll("", "");
+Tests ran:
+    loan and return API AC-3.1: creates a loan and decreases available copies
+    loan and return API AC-3.2: rejects the sixth active loan
+    loan and return API AC-3.3: rejects suspended members
+  and 19 more tests!
+
+
+[Survived] StringLiteral
+backend/src/services/serviceHelpers.ts:12:38
+-     return isbn.trim().replaceAll("-", "");
++     return isbn.trim().replaceAll("-", "Stryker was here!");
+Tests ran:
+    loan and return API AC-3.1: creates a loan and decreases available copies
+    loan and return API AC-3.2: rejects the sixth active loan
+    loan and return API AC-3.3: rejects suspended members
+  and 19 more tests!
+
+
+[Survived] MethodExpression
+backend/src/services/serviceHelpers.ts:16:10
+-     return email.trim().toLowerCase();
++     return email.toLowerCase();
+Tests ran:
+    loan and return API AC-3.1: creates a loan and decreases available copies
+    loan and return API AC-3.2: rejects the sixth active loan
+    loan and return API AC-3.3: rejects suspended members
+  and 19 more tests!
+
+
+[Survived] MethodExpression
+backend/src/services/serviceHelpers.ts:16:10
+-     return email.trim().toLowerCase();
++     return email.trim().toUpperCase();
+Tests ran:
+    loan and return API AC-3.1: creates a loan and decreases available copies
+    loan and return API AC-3.2: rejects the sixth active loan
+    loan and return API AC-3.3: rejects suspended members
+  and 19 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/services/serviceHelpers.ts:98:7
+-     if (reservation.status !== "waiting" && reservation.status !== "notified") {
++     if (true) {
+Tests ran:
+    loan and return API AC-4.4: notifies the head reservation and keeps the returned copy held
+    catalog and creation API returns null queue position for inactive reservations
+
+
+[Survived] LogicalOperator
+backend/src/services/serviceHelpers.ts:98:7
+-     if (reservation.status !== "waiting" && reservation.status !== "notified") {
++     if (reservation.status !== "waiting" || reservation.status !== "notified") {
+Tests ran:
+    loan and return API AC-4.4: notifies the head reservation and keeps the returned copy held
+    catalog and creation API returns null queue position for inactive reservations
+
+
+[Survived] ConditionalExpression
+backend/src/services/serviceHelpers.ts:64:7
+-     if (!member) {
++     if (false) {
+Tests ran:
+    loan and return API AC-3.1: creates a loan and decreases available copies
+    loan and return API AC-3.2: rejects the sixth active loan
+    loan and return API AC-3.3: rejects suspended members
+  and 19 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/services/serviceHelpers.ts:98:7
+-     if (reservation.status !== "waiting" && reservation.status !== "notified") {
++     if (true && reservation.status !== "notified") {
+Tests ran:
+    loan and return API AC-4.4: notifies the head reservation and keeps the returned copy held
+    catalog and creation API returns null queue position for inactive reservations
+
+
+[Survived] StringLiteral
+backend/src/services/serviceHelpers.ts:98:30
+-     if (reservation.status !== "waiting" && reservation.status !== "notified") {
++     if (reservation.status !== "" && reservation.status !== "notified") {
+Tests ran:
+    loan and return API AC-4.4: notifies the head reservation and keeps the returned copy held
+    catalog and creation API returns null queue position for inactive reservations
+
+
+[Survived] ConditionalExpression
+backend/src/services/serviceHelpers.ts:98:43
+-     if (reservation.status !== "waiting" && reservation.status !== "notified") {
++     if (reservation.status !== "waiting" && true) {
+Tests ran:
+    loan and return API AC-4.4: notifies the head reservation and keeps the returned copy held
+    catalog and creation API returns null queue position for inactive reservations
+
+
+[Survived] StringLiteral
+backend/src/services/serviceHelpers.ts:98:66
+-     if (reservation.status !== "waiting" && reservation.status !== "notified") {
++     if (reservation.status !== "waiting" && reservation.status !== "") {
+Tests ran:
+    loan and return API AC-4.4: notifies the head reservation and keeps the returned copy held
+    catalog and creation API returns null queue position for inactive reservations
+
+
+Ran 2.83 tests per mutant on average.
+------------------------|------------------|----------|-----------|------------|----------|----------|
+                        | % Mutation score |          |           |            |          |          |
+File                    |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+------------------------|--------|---------|----------|-----------|------------|----------|----------|
+All files               |  90.57 |   92.66 |      239 |         1 |         19 |        6 |        0 |
+ policy                 |  98.39 |   98.39 |       61 |         0 |          1 |        0 |        0 |
+  index.ts              |  98.39 |   98.39 |       61 |         0 |          1 |        0 |        0 |
+ services               |  88.18 |   90.86 |      178 |         1 |         18 |        6 |        0 |
+  bookService.ts        | 100.00 |  100.00 |       14 |         0 |          0 |        0 |        0 |
+  fineService.ts        | 100.00 |  100.00 |       12 |         0 |          0 |        0 |        0 |
+  loanService.ts        |  98.55 |   98.55 |       68 |         0 |          1 |        0 |        0 |
+  memberService.ts      |  85.71 |   92.31 |       12 |         0 |          1 |        1 |        0 |
+  reservationService.ts |  90.38 |   92.16 |       46 |         1 |          4 |        1 |        0 |
+  serviceHelpers.ts     |  61.90 |   68.42 |       26 |         0 |         12 |        4 |        0 |
+------------------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m06:21:42 (1937) INFO MutationTestReportHelper[39m Final mutation score of 90.57 is greater than or equal to break threshold 80
+[32m06:21:42 (1937) INFO MutationTestExecutor[39m Done in 33 seconds.

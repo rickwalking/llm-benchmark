@@ -1,0 +1,35 @@
+
+> library-lending@1.0.0 test:unit
+> npm run test:unit -w backend && npm run test:unit -w frontend --reporter=json
+
+
+> @library/backend@1.0.0 test:unit
+> vitest run --config vitest.config.ts
+
+
+ RUN  v3.2.4 /runs/codex-gpt55-seed1/candidate/backend
+
+ ✓ tests/policy.test.ts (16 tests) 9ms
+ ✓ tests/api.catalog.test.ts (8 tests) 102ms
+ ✓ tests/api.reservations.test.ts (8 tests) 161ms
+ ✓ tests/api.lending.test.ts (12 tests) 191ms
+
+ Test Files  4 passed (4)
+      Tests  44 passed (44)
+   Start at  06:20:20
+   Duration  1.01s (transform 136ms, setup 0ms, collect 1.32s, tests 464ms, environment 1ms, prepare 637ms)
+
+
+> @library/frontend@1.0.0 test:unit
+> vitest run --config vitest.config.ts
+
+
+ RUN  v3.2.4 /runs/codex-gpt55-seed1/candidate/frontend
+
+ ✓ tests/modal.test.tsx (1 test) 56ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  06:20:22
+   Duration  1.20s (transform 50ms, setup 87ms, collect 184ms, tests 56ms, environment 537ms, prepare 100ms)
+

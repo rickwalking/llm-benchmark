@@ -1,0 +1,38 @@
+{
+  "ui-ux": [
+    "axe-summary.json",
+    "lighthouse-summary.json"
+  ],
+  "api-design": [
+    "api-probe.json",
+    "error-middleware.ts",
+    "loan-handler.ts",
+    "openapi-validation.log",
+    "openapi.yaml",
+    "reservation-handler.ts",
+    "routes.ts"
+  ],
+  "architecture": [
+    "backend-tree.txt",
+    "file-sizes.csv",
+    "frontend-routes.tsx",
+    "frontend-tree.txt",
+    "loan-service.ts",
+    "madge.json",
+    "policy/index.ts"
+  ],
+  "gherkin": [
+    "ac-ids.txt",
+    "bdd-report.json",
+    "features/step_definitions/library.steps.ts",
+    "features/support/hooks.ts",
+    "features/support/state.ts",
+    "features/support/world.ts",
+    "features/us-1-catalog.feature",
+    "features/us-2-create-records.feature",
+    "features/us-3-lending.feature",
+    "features/us-4-returns.feature",
+    "features/us-5-reservations.feature",
+    "features/us-6-fines.feature"
+  ]
+}

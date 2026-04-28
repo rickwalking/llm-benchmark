@@ -1,0 +1,24 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-kimi",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "{\"score\":3,\"rationale\":\"Clean enough, but not well-modularized. The backend has clear db/policy/routes/services layering, centralized policy constants, small domain errors by reference, no cycles, no orphans, and no oversized source files. It falls short of a 4 because services call raw db.prepare directly instead of using a thin DB-access abstraction, the HTTP route is coupled to DatabaseInstance, response DTOs mirror DB row shapes, the frontend is organized by technical role rather than feature ownership, and no shared frontend/backend types boundary is visible.\",\"evidence\":[\"backend-tree.txt shows clear backend layering: src/db, src/policy, src/routes, src/services, errors.ts, index.ts.\",\"policy/index.ts centralizes business values: export const MAX_ACTIVE_LOANS = 5; LOAN_PERIOD_DAYS = 14; LATE_FINE_RATE_CENTS_PER_DAY = 50; RESERVATION_NOTIFICATION_HOURS = 48; FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500.\",\"madge.json reports no dependency cycles or dead modules: circular: [], orphans: [].\",\"file-sizes.csv has no files over 300 lines; largest is backend/src/services/loanService.ts at 262 lines, followed by frontend page files at 238 and 234 lines.\",\"loan-service.ts directly uses raw SQL in the service layer, for example const memberStmt = db.prepare('SELECT status FROM members WHERE id = ?') and multiple other db.prepare calls.\",\"loan-handler.ts imports the DB layer type directly: import type { DatabaseInstance } from '../db/database.js'; and sends service results directly as HTTP JSON with res.status(201).json(loan).\",\"loan-service.ts exposes row-shaped models with snake_case fields such as book_id, member_id, borrowed_at, due_at, returned_at, which are returned by the HTTP handler.\",\"frontend-tree.txt shows technical-role organization only: components, contexts, hooks, pages, types. There is no feature directory such as checkout/, members/, or books/.\",\"frontend-tree.txt shows frontend/src/types/index.ts, while loan-service.ts defines backend-side Loan/CreateLoanInput interfaces; no shared workspace, generated client, or shared types package is visible in the evidence.\"]}\n",
+  "parsed": {
+    "score": 3,
+    "rationale": "Clean enough, but not well-modularized. The backend has clear db/policy/routes/services layering, centralized policy constants, small domain errors by reference, no cycles, no orphans, and no oversized source files. It falls short of a 4 because services call raw db.prepare directly instead of using a thin DB-access abstraction, the HTTP route is coupled to DatabaseInstance, response DTOs mirror DB row shapes, the frontend is organized by technical role rather than feature ownership, and no shared frontend/backend types boundary is visible.",
+    "evidence": [
+      "backend-tree.txt shows clear backend layering: src/db, src/policy, src/routes, src/services, errors.ts, index.ts.",
+      "policy/index.ts centralizes business values: export const MAX_ACTIVE_LOANS = 5; LOAN_PERIOD_DAYS = 14; LATE_FINE_RATE_CENTS_PER_DAY = 50; RESERVATION_NOTIFICATION_HOURS = 48; FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500.",
+      "madge.json reports no dependency cycles or dead modules: circular: [], orphans: [].",
+      "file-sizes.csv has no files over 300 lines; largest is backend/src/services/loanService.ts at 262 lines, followed by frontend page files at 238 and 234 lines.",
+      "loan-service.ts directly uses raw SQL in the service layer, for example const memberStmt = db.prepare('SELECT status FROM members WHERE id = ?') and multiple other db.prepare calls.",
+      "loan-handler.ts imports the DB layer type directly: import type { DatabaseInstance } from '../db/database.js'; and sends service results directly as HTTP JSON with res.status(201).json(loan).",
+      "loan-service.ts exposes row-shaped models with snake_case fields such as book_id, member_id, borrowed_at, due_at, returned_at, which are returned by the HTTP handler.",
+      "frontend-tree.txt shows technical-role organization only: components, contexts, hooks, pages, types. There is no feature directory such as checkout/, members/, or books/.",
+      "frontend-tree.txt shows frontend/src/types/index.ts, while loan-service.ts defines backend-side Loan/CreateLoanInput interfaces; no shared workspace, generated client, or shared types package is visible in the evidence."
+    ]
+  },
+  "parse_failed": false
+}

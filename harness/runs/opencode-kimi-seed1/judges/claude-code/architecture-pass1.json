@@ -1,0 +1,22 @@
+{
+  "criterion": "architecture",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "architecture",
+    "score": 3,
+    "anchor_match": "Clean enough",
+    "evidence_quotes": [
+      "src/\n\u251c\u2500\u2500 db/\n\u2502   \u2514\u2500\u2500 database.ts\n\u251c\u2500\u2500 policy/\n\u2502   \u251c\u2500\u2500 index.ts\n\u2502   \u2514\u2500\u2500 policy.test.ts\n\u251c\u2500\u2500 routes/\n\u2502   \u251c\u2500\u2500 books.ts\n\u2502   \u251c\u2500\u2500 fines.ts\n\u2502   \u251c\u2500\u2500 loans.ts\n\u2502   \u251c\u2500\u2500 members.ts\n\u2502   \u2514\u2500\u2500 reservations.ts\n\u251c\u2500\u2500 services/\n\u2502   \u251c\u2500\u2500 bookService.ts\n\u2502   \u251c\u2500\u2500 fineService.ts\n\u2502   \u251c\u2500\u2500 loanService.ts\n\u2502   \u251c\u2500\u2500 memberService.ts\n\u2502   \u251c\u2500\u2500 reservationService.ts\n\u2502   \u2514\u2500\u2500 services.test.ts\n\u251c\u2500\u2500 errors.ts\n\u2514\u2500\u2500 index.ts",
+      "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+      "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50; // $0.50\nexport const LATE_FINE_CAP_CENTS = 1000; // $10.00\nexport const RESERVATION_NOTIFICATION_HOURS = 48;\nexport const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500; // $5.00",
+      "import { NotFoundError, ConflictError, ForbiddenError, PaymentRequiredError } from '../errors.js';\nimport * as policy from '../policy/index.js';",
+      "backend/src/services/loanService.ts,262 (largest source file; no files >300 lines)",
+      "src/\n\u251c\u2500\u2500 components/\n\u2502   \u251c\u2500\u2500 Button.tsx\n\u2502   \u251c\u2500\u2500 Layout.tsx\n\u2502   \u251c\u2500\u2500 Modal.tsx\n\u2502   \u2514\u2500\u2500 Status.tsx\n\u251c\u2500\u2500 contexts/\n\u251c\u2500\u2500 hooks/\n\u2502   \u2514\u2500\u2500 useApi.ts\n\u251c\u2500\u2500 pages/\n\u251c\u2500\u2500 types/\n\u2502   \u2514\u2500\u2500 index.ts"
+    ],
+    "anchor_rejected_above": "Anchor 4 (Well-modularized) does not match because: (a) services call raw `db.prepare(...)` directly throughout loanService.ts (e.g., `const memberStmt = db.prepare('SELECT status FROM members WHERE id = ?');`) rather than going through a thin DB-access abstraction; (b) the frontend is organized by technical role (`components/`, `hooks/`, `pages/`, `types/`) \u2014 not by feature (no `checkout/`, `members/`, `books/` feature folders); (c) shared types are duplicated \u2014 frontend/src/types/index.ts redeclares `Loan`, `LoanWithBook`, `Book`, `Member` etc. that already exist in the backend services (e.g., `loanService.ts` exports its own `Loan` and `LoanWithBook`), with no shared workspace or generated client.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

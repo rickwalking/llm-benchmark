@@ -1,0 +1,129 @@
+{
+  "judge": "claude-code",
+  "passes": 1,
+  "results": {
+    "ui_ux": [
+      {
+        "criterion": "ui_ux",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "ui_ux",
+          "score": 3,
+          "anchor_match": "Competent",
+          "evidence_quotes": [
+            "frontend/src/components/Modal.tsx:26-54 \u2014 `if (e.key === 'Escape') { e.preventDefault(); onClose(); }` plus Tab cycle logic and `previouslyFocused?.focus?.();` in cleanup (focus trap + ESC + focus restore + overlay-click close at line 63-65).",
+            "frontend/src/pages/BooksPage.tsx:39-49 \u2014 `<EmptyState title=\"The catalog is empty\" description=\"Add your first book to get started.\" action={<button \u2026 >Add a book</button>} />` (empty state with CTA).",
+            "frontend/src/pages/CheckoutPage.tsx:115-127 \u2014 `<ol className=\"steps\" aria-label=\"Checkout progress\">` with `steps__item--active` / `steps__item--done`, plus `<button \u2026 onClick={back} disabled={step === 1}>Back</button>` (line 236) and a 'Confirm' summary step.",
+            "frontend/src/components/Spinner.tsx:1-5 \u2014 `<div role=\"status\" aria-live=\"polite\" \u2026>{label}</div>` used as `<Spinner label=\"Loading catalog\u2026\" />`, `\"Preparing checkout\u2026\"`, `\"Loading member\u2026\"` across pages.",
+            "frontend/src/utils/format.ts:32-41 \u2014 `countdownTo` returns `HH:MM:SS`, paired with `setInterval(() => setNow(new Date()), 1000)` in MemberDetailPage.tsx:30-33 and BookDetailPage.tsx:46-49 (live countdown).",
+            "frontend/src/pages/CheckoutPage.tsx:75-78,212-214 \u2014 `willBeFifth = memberDetail.active_loans.length === 4 ? 'This will be the member's 5th and final loan.' : null` rendered as a warning banner at the confirm step.",
+            "frontend/src/styles/global.css:166-172 \u2014 `.btn--danger { background-color: var(--color-danger); }` is defined but never applied: ConfirmReturnModal/ConfirmPayModal use `<button \u2026 className=\"btn\" \u2026>Confirm return</button>` / `Confirm payment` (MemberDetailPage.tsx:215, 266).",
+            "frontend/src/pages/BooksPage.tsx:51-66 \u2014 catalog renders `<ul className=\"book-grid\">` with no sort/filter control; the toolbar only contains the page heading and an `Add book` button.",
+            "frontend/src/pages/MemberDetailPage.tsx:46-52,68-72 \u2014 Suspended/Overdue/Notified are conveyed via `<span className=\"badge badge--unavailable\">Suspended</span>` and `<span className=\"badge badge--overdue\">Overdue</span>` \u2014 color + text only, no icon.",
+            "frontend/src/pages/BooksPage.tsx:146-184 \u2014 every input has `<label htmlFor=\u2026>` paired with `<input id=\u2026>` (Title, Author, ISBN, Total copies); however errors come from `err instanceof HttpError ? err.message : 'Could not create book'` (no client-side specific validation messages like 'ISBN must be 10 or 13 digits').",
+            "evidence/ui-ux/lighthouse-summary.json \u2014 accessibility 0.98\u20131.00 across /books, /checkout, /members (confirms semantic structure renders cleanly)."
+          ],
+          "anchor_rejected_above": "Level 4 (Polished) requires ALL of: color+icon emphasis for overdue/notified/unpaid (the app uses color-only badges, no icons), distinct 'danger' treatment for destructive confirms (`.btn--danger` exists in CSS but the Return and Pay confirm buttons use the plain `.btn` primary style), AND at least one catalog secondary affordance like sort or filter (BooksPage has none \u2014 only an Add-book button). The live HH:MM:SS countdown and 5th-loan warning are level-4-flavored, but three of the five level-4 markers are absent, so the app cannot be 4.",
+          "confidence": "medium"
+        },
+        "parse_failed": false
+      }
+    ],
+    "api_design": [
+      {
+        "criterion": "api_design",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "api_design",
+          "score": 3,
+          "anchor_match": "Reasonable \u2014 valid OpenAPI, complete coverage, correct status codes, single error shape, RESTful URLs, zod validation",
+          "evidence_quotes": [
+            "/runs/claude-opus47-seed1/candidate/backend/openapi.yaml is valid",
+            "if (err instanceof NotFoundError) return 404; if (err instanceof ConflictError) return 409; if (err instanceof ForbiddenError) return 403; if (err instanceof PaymentRequiredError) return 402; if (err instanceof ValidationError) return 400;",
+            "if (err instanceof ZodError) { res.status(400).json({ error: 'Validation failed', details: err.issues.map((issue) => ({ path: issue.path.join('.'), message: issue.message })) }); return; }",
+            "Error: type: object properties: error: { type: string } details: {} required: [error]",
+            "router.post('/loans/:id/return', ... ); router.post('/reservations/expire', ... ); router.delete('/reservations/:id', ... ); router.post('/fines/:id/pay', ... );",
+            "{\"method\":\"POST\",\"path\":\"/api/books\",\"status\":400,\"body\":\"{\\\"error\\\":\\\"Validation failed\\\",\\\"details\\\":[{\\\"path\\\":\\\"isbn\\\",\\\"message\\\":\\\"String must contain at least 10 character(s)\\\"}]}\"}",
+            "if (decision.reason === 'fines_exceeded') { throw new PaymentRequiredError('Outstanding fines exceed limit'); } if (decision.reason === 'loan_limit') { throw new ConflictError('Loan limit reached'); }",
+            "router.get('/books/:id', (req, res) => { expireStaleReservations(db); res.json(getBook(db, req.params.id)); });"
+          ],
+          "anchor_rejected_above": "Anchor 4 requires a stable machine-readable `code` field on error responses (e.g. 'LOAN_LIMIT_REACHED'), but the implementation only emits human messages: `res.status(statusForError(err)).json({ error: err.message })` and the OpenAPI Error schema is just `{ error: string, details: {} }` with no `code`. Anchor 4 also requires OpenAPI to describe meaningful examples for each negative AC \u2014 the spec contains no `examples` blocks anywhere. The error envelope itself is consistent and the mapping is centralized, but without the `code` field and examples, the contract stops at 'reasonable'.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "architecture": [
+      {
+        "criterion": "architecture",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "architecture",
+          "score": 3,
+          "anchor_match": "Clean enough",
+          "evidence_quotes": [
+            "src/\n\u251c\u2500\u2500 db/\n\u2502   \u251c\u2500\u2500 index.ts\n\u2502   \u251c\u2500\u2500 migrate.ts\n\u2502   \u2514\u2500\u2500 seed.ts\n\u251c\u2500\u2500 http/\n\u2502   \u251c\u2500\u2500 middleware.ts\n\u2502   \u251c\u2500\u2500 routes.ts\n\u2502   \u2514\u2500\u2500 schemas.ts\n\u251c\u2500\u2500 policy/\n\u2502   \u251c\u2500\u2500 index.ts\n\u2502   \u2514\u2500\u2500 policy.test.ts\n\u251c\u2500\u2500 services/\n\u2502   \u251c\u2500\u2500 bookService.ts\n\u2502   \u251c\u2500\u2500 fineService.ts\n\u2502   \u251c\u2500\u2500 loanService.ts\n\u2502   \u251c\u2500\u2500 memberService.ts\n\u2502   \u251c\u2500\u2500 reservationService.ts",
+            "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+            "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50;\nexport const LATE_FINE_CAP_CENTS = 1000;\nexport const RESERVATION_NOTIFICATION_HOURS = 48;\nexport const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500;",
+            "import {\n  canBorrow,\n  computeFineCents,\n  dueDateFromBorrow,\n} from '../policy/index.js';",
+            "export class DomainError extends Error { ... } export class NotFoundError extends DomainError { ... } export class ConflictError extends DomainError { ... } export class ForbiddenError extends DomainError { ... } export class PaymentRequiredError extends DomainError { ... }",
+            "frontend/src/pages/MemberDetailPage.tsx,272 ... backend/src/http/routes.ts,212 ... backend/src/services/loanService.ts,202 (largest non-test files all under 300 lines)",
+            "src/\n\u251c\u2500\u2500 api/\n\u2502   \u251c\u2500\u2500 client.ts\n\u2502   \u2514\u2500\u2500 types.ts\n\u251c\u2500\u2500 components/\n\u2502   \u251c\u2500\u2500 EmptyState.tsx ...\n\u251c\u2500\u2500 pages/\n\u2502   \u251c\u2500\u2500 BookDetailPage.tsx\n\u2502   \u251c\u2500\u2500 BooksPage.tsx\n\u2502   \u251c\u2500\u2500 CheckoutPage.tsx ..."
+          ],
+          "anchor_rejected_above": "Anchor 4 (Well-modularized) does not match for three reasons: (a) services call raw better-sqlite3 statements directly rather than going through a thin DB-access abstraction \u2014 e.g. loanService.ts repeatedly does `db.prepare('SELECT id, total_copies FROM books WHERE id = ?').get(...)` and `db.prepare('INSERT INTO loans ...')`, mixing SQL into business logic; (b) the frontend is organized by technical role (`pages/`, `components/`, `api/`, `utils/`) rather than by feature \u2014 there is no `checkout/`, `members/`, `books/` directory that owns its own components, hooks and API calls; (c) shared types are duplicated, not single-sourced \u2014 backend `src/types.ts` and frontend `src/api/types.ts` independently declare Book/Member/Loan/Reservation/Fine shapes with no shared package or generated client. Additionally the literal `5` in loanService.ts line 106 (`if (activeLoanCount + 1 === 5)`) duplicates the policy constant `MAX_ACTIVE_LOANS = 5` instead of importing it.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "gherkin": [
+      {
+        "criterion": "gherkin",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "gherkin",
+          "sub_scores": {
+            "completeness": 3,
+            "alignment": 4,
+            "declarative": 3,
+            "atomic": 4
+          },
+          "evidence_quotes": {
+            "completeness": [
+              "Tags present in features cover: AC-1.1, AC-1.2, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-3.6, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-6.1, AC-6.2, AC-6.3 \u2014 25/29 = 86%",
+              "Missing AC IDs from features (no @AC-x.y tag exists): AC-1.3, AC-4.5, AC-5.6, AC-6.4",
+              "us4_returns.feature:23  Scenario Outline: Late returns produce a fine, capped at $10.00  Examples: | days_late | fine_cents | | 1 | 50 | | 5 | 250 | | 19 | 950 | | 20 | 1000 | | 25 | 1000 |",
+              "Negative scenarios are present in every user story (e.g. us3_lend.feature:24 '@AC-3.2 @negative Scenario: A 6th simultaneous loan is rejected'; us6_fines.feature:27 '@AC-6.3 @negative Scenario: Paying an already-paid fine is rejected'). All 33 scenarios pass per bdd-report.json (statuses={'passed'} for every element)."
+            ],
+            "alignment": [
+              "Every scenario carries exactly one AC tag, e.g. us3_lend.feature:16 '@AC-3.1\\n  Scenario: A successful checkout creates an active loan with a 14-day due date'",
+              "Scenario names are human-readable restatements of the AC: us3_lend.feature:25 'Scenario: A 6th simultaneous loan is rejected'; us3_lend.feature:39 'Scenario: A member with too many unpaid fines is blocked'; us4_returns.feature:65 'Scenario: Returning a copy with a queue notifies the head of the queue'",
+              "Background blocks remove setup duplication, e.g. us3_lend.feature:5 'Background: Given the library has the following members: | Alice | | Bob | And the library has the following books: | Dune | F. Herbert | 1 | ...'",
+              "Bidirectional traceability is broken: AC-1.3, AC-4.5, AC-5.6, AC-6.4 have no scenario at all \u2014 caps below the level-5 anchor"
+            ],
+            "declarative": [
+              "Good declarative steps: us3_lend.feature:18 'When the librarian lends \"Dune\" to \"Alice\"'; us4_returns.feature:17 'When the librarian returns \"Dune\" from \"Alice\"'; us5_reservations.feature:18 'When \"Alice\" reserves \"Dune\"'; us4_returns.feature:70 'And \"Alice\"'s reservation for \"Dune\" is in status \"notified\"'",
+              "Implementation/HTTP leakage that prevents level-4: every feature contains 'Then the request succeeds with status 201', 'Then the request fails with status 404', 'Then the request fails with status 409' (rubric level-4 requires 'No mention of HTTP status codes, JSON keys, or DOM elements'). Magic numbers also remain (us3_lend.feature:20 'And the loan due date is 14 days from today' rather than naming a 'loan period' constant)."
+            ],
+            "atomic": [
+              "Atomic single-action steps throughout, e.g. us3_lend.feature:18-22 'When the librarian lends \"Dune\" to \"Alice\" / Then the request succeeds with status 201 / And the loan due date is 14 days from today / And the available copies of \"Dune\" is 0 / And \"Alice\" now has 1 active loans' \u2014 no 'and ... and ...' chaining inside a single Given/When/Then",
+              "Composite Givens are used appropriately rather than over-decomposing: us3_lend.feature:26 'Given \"Alice\" has 5 active loans'; us3_lend.feature:33 'Given \"Alice\" is suspended'; us3_lend.feature:40 'Given \"Alice\" has unpaid fines totaling $5.01'",
+              "Slight over-decomposition in us1_catalog.feature:21-23 'Given \"Alice\" borrowed \"Dune\" / And \"Alice\" borrowed \"Dune\" / And \"Alice\" borrowed \"Dune\"' (three separate identical steps where a composite 'Given \"Alice\" has 3 active loans of \"Dune\"' would read better) \u2014 keeps this below the level-5 'judgment about when to compose vs. decompose is exercised well' anchor"
+            ]
+          },
+          "final_score": 3,
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ]
+  }
+}

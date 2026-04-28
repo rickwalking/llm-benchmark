@@ -1,0 +1,23 @@
+{
+  "criterion": "api_design",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "api_design",
+    "score": 3,
+    "anchor_match": "Reasonable: valid OpenAPI, REST URLs, consistent error shape, zod validation",
+    "evidence_quotes": [
+      "/runs/opencode-kimi-seed1/candidate/backend/openapi.yaml is valid",
+      "{\"method\":\"POST\",\"path\":\"/api/loans\",\"status\":400,\"body\":\"{\\\"error\\\":\\\"Invalid input\\\",\\\"details\\\":[{\\\"validation\\\":\\\"uuid\\\",\\\"code\\\":\\\"invalid_string\\\",\\\"message\\\":\\\"Invalid uuid\\\",\\\"path\\\":[\\\"member_id\\\"]}",
+      "if (eligibility.reason === 'suspended') {\n      throw new ForbiddenError(eligibility.message);\n    }\n    if (eligibility.reason === 'loan_limit') {\n      throw new ConflictError(eligibility.message);\n    }\n    if (eligibility.reason === 'outstanding_fines') {\n      throw new PaymentRequiredError(eligibility.message);\n    }",
+      "Error:\n      type: object\n      required:\n        - error\n      properties:\n        error:\n          type: string",
+      "router.post('/:id/return', (req, res) => {\n    try {\n      const loan = loanService.returnLoan(db, req.params.id);",
+      "// GET /api/members/:id/loans/history - Get member's loan history\n  router.get('/:id/loans/history', (req, res) => {",
+      "router.post('/', (req, res) => {\n    try {\n      const input = createLoanSchema.parse(req.body);\n      const loan = loanService.createLoan(db, input);\n      res.status(201).json(loan);\n    } catch (error) {\n      if (error instanceof z.ZodError) {\n        res.status(400).json({ error: 'Invalid input', details: error.errors });"
+    ],
+    "anchor_rejected_above": "Anchor 4 fails on three counts: (1) error responses contain only a human `error` string with no stable machine-readable `code` field \u2014 domain errors map to HTTP via class checks per handler but the wire payload exposes no code (e.g., no 'LOAN_LIMIT_REACHED'); (2) the OpenAPI spec contains zero `examples` for the negative ACs (402, 403, 409 responses each just `$ref` the Error schema with no example body); (3) response envelopes are not fully consistent \u2014 `POST /reservations/:id/cancel` returns `{success: true}` while sibling mutations like `POST /loans/:id/return` return the full resource. Additionally, `GET /api/members/:id/loans/history` is implemented in routes/members.ts but is absent from openapi.yaml, a minor implementation/spec drift that prevents the 'every endpoint present' clause of anchor 3 from being clean and certainly blocks anchor 4.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

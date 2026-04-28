@@ -1,0 +1,38 @@
+{
+  "vendor": "claude-opus47",
+  "model": "claude-opus-4-7",
+  "gen": "claude-opus47",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 3,\n    \"alignment\": 4,\n    \"declarative\": 3,\n    \"atomic\": 4\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"AC IDs found across features: @AC-1.1, @AC-1.2, @AC-1.4, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-3.6, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-6.1, @AC-6.2, @AC-6.3 (25/29 = 86%)\",\n      \"Missing AC IDs (none of these tags appear): AC-1.3, AC-4.5, AC-5.6, AC-6.4. Boundary outlines exist (us4_returns.feature 'Scenario Outline: Late returns produce a fine, capped at $10.00' with examples 1/5/19/20/25 days_late, and us3_lend.feature pair $5.00 allowed vs $5.01 blocked) \u2014 strong boundary work but 4 ACs are uncovered. All 276 step statuses in bdd-report.json are 'passed', so step defs are wired up and don't cap completeness.\"\n    ],\n    \"alignment\": [\n      \"Every scenario carries an @AC-x.y tag (e.g. '@AC-3.2 @negative\\\\n  Scenario: A 6th simultaneous loan is rejected', '@AC-3.3 @negative\\\\n  Scenario: A suspended member cannot borrow'). Scenario titles are human-readable restatements of the AC.\",\n      \"Not fully bidirectional: AC-1.3, AC-4.5, AC-5.6, AC-6.4 have no scenario. Two scenarios share @AC-3.4 (positive at threshold + negative over threshold) and two share @AC-4.3 \u2014 sensible split rather than bundling. Background blocks are used in us3/us4/us5/us6 to remove duplication.\"\n    ],\n    \"declarative\": [\n      \"Good business-level steps: 'When the librarian lends \\\"Dune\\\" to \\\"Alice\\\"', 'When \\\"Alice\\\" reserves \\\"Dune\\\"', 'Then \\\"Alice\\\"\u2019s reservation for \\\"Dune\\\" is in status \\\"notified\\\"', 'And the available copies of \\\"Dune\\\" is 0'.\",\n      \"Backend/HTTP leakage throughout caps this at 3: 'Then the request succeeds with status 200', 'Then the request fails with status 409', 'And the response error message is \\\"Loan limit reached\\\"'. Magic numbers like '14 days from today' instead of a named loan-period constant. Status codes (200/201/402/403/404/409) are not librarian-level vocabulary.\"\n    ],\n    \"atomic\": [\n      \"Steps are strictly one action per step throughout: 'Given \\\"Alice\\\" has 5 active loans', 'When the librarian tries to lend \\\"Dune\\\" to \\\"Alice\\\"', 'Then the request fails with status 409', 'And the response error message is \\\"Loan limit reached\\\"'. 'And' chains separate steps, never used as a comma inside one.\",\n      \"us4_returns.feature line 44-53 'Scenario: Returning an already-returned loan is rejected' contains in-feature comments ('# We can't easily reach the same loan id... let's set up another scenario for the actual double-return.') indicating an unfinished/duplicate scenario alongside the proper 'Scenario: Double-return is rejected' \u2014 minor noise, not a step-atomicity defect.\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n```\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 3,
+      "alignment": 4,
+      "declarative": 3,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "AC IDs found across features: @AC-1.1, @AC-1.2, @AC-1.4, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-3.6, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-6.1, @AC-6.2, @AC-6.3 (25/29 = 86%)",
+        "Missing AC IDs (none of these tags appear): AC-1.3, AC-4.5, AC-5.6, AC-6.4. Boundary outlines exist (us4_returns.feature 'Scenario Outline: Late returns produce a fine, capped at $10.00' with examples 1/5/19/20/25 days_late, and us3_lend.feature pair $5.00 allowed vs $5.01 blocked) \u2014 strong boundary work but 4 ACs are uncovered. All 276 step statuses in bdd-report.json are 'passed', so step defs are wired up and don't cap completeness."
+      ],
+      "alignment": [
+        "Every scenario carries an @AC-x.y tag (e.g. '@AC-3.2 @negative\\n  Scenario: A 6th simultaneous loan is rejected', '@AC-3.3 @negative\\n  Scenario: A suspended member cannot borrow'). Scenario titles are human-readable restatements of the AC.",
+        "Not fully bidirectional: AC-1.3, AC-4.5, AC-5.6, AC-6.4 have no scenario. Two scenarios share @AC-3.4 (positive at threshold + negative over threshold) and two share @AC-4.3 \u2014 sensible split rather than bundling. Background blocks are used in us3/us4/us5/us6 to remove duplication."
+      ],
+      "declarative": [
+        "Good business-level steps: 'When the librarian lends \"Dune\" to \"Alice\"', 'When \"Alice\" reserves \"Dune\"', 'Then \"Alice\"\u2019s reservation for \"Dune\" is in status \"notified\"', 'And the available copies of \"Dune\" is 0'.",
+        "Backend/HTTP leakage throughout caps this at 3: 'Then the request succeeds with status 200', 'Then the request fails with status 409', 'And the response error message is \"Loan limit reached\"'. Magic numbers like '14 days from today' instead of a named loan-period constant. Status codes (200/201/402/403/404/409) are not librarian-level vocabulary."
+      ],
+      "atomic": [
+        "Steps are strictly one action per step throughout: 'Given \"Alice\" has 5 active loans', 'When the librarian tries to lend \"Dune\" to \"Alice\"', 'Then the request fails with status 409', 'And the response error message is \"Loan limit reached\"'. 'And' chains separate steps, never used as a comma inside one.",
+        "us4_returns.feature line 44-53 'Scenario: Returning an already-returned loan is rejected' contains in-feature comments ('# We can't easily reach the same loan id... let's set up another scenario for the actual double-return.') indicating an unfinished/duplicate scenario alongside the proper 'Scenario: Double-return is rejected' \u2014 minor noise, not a step-atomicity defect."
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

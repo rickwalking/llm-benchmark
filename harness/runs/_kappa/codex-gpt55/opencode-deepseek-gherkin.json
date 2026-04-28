@@ -1,0 +1,43 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-deepseek",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 3,\n    \"alignment\": 3,\n    \"declarative\": 2,\n    \"atomic\": 3\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"ac-ids.txt lists 29 ACs: AC-1.1 AC-1.2 AC-1.3 AC-1.4 AC-2.1 AC-2.2 AC-2.3 AC-2.4 AC-3.1 AC-3.2 AC-3.3 AC-3.4 AC-3.5 AC-3.6 AC-4.1 AC-4.2 AC-4.3 AC-4.4 AC-4.5 AC-5.1 AC-5.2 AC-5.3 AC-5.4 AC-5.5 AC-5.6 AC-6.1 AC-6.2 AC-6.3 AC-6.4\",\n      \"features cover exact AC tags for 24/29 ACs; missing exact tags: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4. bdd-report.json has 25 scenarios, all passed, with no undefined steps.\"\n    ],\n    \"alignment\": [\n      \"features/catalog.feature:36-37: @AC-1.1-ready / Scenario: Available copies count with active loans\",\n      \"features/lending.feature:23-24: @AC-3.2 / Scenario: Reject borrowing more than 5 books\",\n      \"features/reservations.feature:36-37: @AC-5.4 / Scenario: Notified member can borrow while others cannot\"\n    ],\n    \"declarative\": [\n      \"features/lending.feature:18: When Alice Johnson borrows \\\"Dune\\\"\",\n      \"features/returns.feature:29: Then a fine of $1.50 is created for the loan\",\n      \"features/catalog.feature:19: Then the response status is 200\",\n      \"features/catalog.feature:27: And the book has a queue_depth field\",\n      \"features/fines.feature:18: Then the response includes unpaid_fines_cents of 350\"\n    ],\n    \"atomic\": [\n      \"features/reservations.feature:40: When the book is returned and Bob Smith is notified\",\n      \"features/reservations.feature:41-42: Then Bob Smith can borrow \\\"Dune\\\" / And another member cannot borrow \\\"Dune\\\"\",\n      \"features/manage.feature:8: When the librarian creates a book with title \\\"The Hobbit\\\", author \\\"J.R.R. Tolkien\\\", ISBN \\\"978-0547928227\\\", and 4 copies\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 3,
+      "alignment": 3,
+      "declarative": 2,
+      "atomic": 3
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "ac-ids.txt lists 29 ACs: AC-1.1 AC-1.2 AC-1.3 AC-1.4 AC-2.1 AC-2.2 AC-2.3 AC-2.4 AC-3.1 AC-3.2 AC-3.3 AC-3.4 AC-3.5 AC-3.6 AC-4.1 AC-4.2 AC-4.3 AC-4.4 AC-4.5 AC-5.1 AC-5.2 AC-5.3 AC-5.4 AC-5.5 AC-5.6 AC-6.1 AC-6.2 AC-6.3 AC-6.4",
+        "features cover exact AC tags for 24/29 ACs; missing exact tags: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4. bdd-report.json has 25 scenarios, all passed, with no undefined steps."
+      ],
+      "alignment": [
+        "features/catalog.feature:36-37: @AC-1.1-ready / Scenario: Available copies count with active loans",
+        "features/lending.feature:23-24: @AC-3.2 / Scenario: Reject borrowing more than 5 books",
+        "features/reservations.feature:36-37: @AC-5.4 / Scenario: Notified member can borrow while others cannot"
+      ],
+      "declarative": [
+        "features/lending.feature:18: When Alice Johnson borrows \"Dune\"",
+        "features/returns.feature:29: Then a fine of $1.50 is created for the loan",
+        "features/catalog.feature:19: Then the response status is 200",
+        "features/catalog.feature:27: And the book has a queue_depth field",
+        "features/fines.feature:18: Then the response includes unpaid_fines_cents of 350"
+      ],
+      "atomic": [
+        "features/reservations.feature:40: When the book is returned and Bob Smith is notified",
+        "features/reservations.feature:41-42: Then Bob Smith can borrow \"Dune\" / And another member cannot borrow \"Dune\"",
+        "features/manage.feature:8: When the librarian creates a book with title \"The Hobbit\", author \"J.R.R. Tolkien\", ISBN \"978-0547928227\", and 4 copies"
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

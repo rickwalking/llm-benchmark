@@ -1,0 +1,20 @@
+{
+  "vendor": "claude-opus47",
+  "model": "claude-opus-4-7",
+  "gen": "claude-opus47",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"ui_ux\",\n  \"score\": 2,\n  \"rationale\": \"Evidence is severely limited: the screenshots/ directory is empty, axe-summary is skipped ('no axe spec in candidate'), and there is no rendered HTML, no checkout flow capture, and no modal capture provided. The only positive signal is Lighthouse accessibility scores of 0.98-1.0 across /books, /checkout, /members, which strongly implies form inputs have proper labels (ruling out the level-1 anchor 'Missing labels on form inputs OR placeholder-only labels'). The app does render at all three core URLs (catalog, checkout, members) with performance 0.88, so flows likely complete. However, with zero visual evidence I cannot verify any level-3 anchors: visual hierarchy, consistent layout, loading skeletons, empty-state copy, modal focus traps, inline validation messages, or step indicators. Per the rubric instruction to 'score what is there, not what could be there,' the absence of screenshots and HTML evidence prevents crediting polish, microcopy, live countdowns, or considered design. Score is anchored at 2 (functional but rough) on the basis that the app exists, renders, and has good accessibility metrics suggesting labeled forms, but no further competence can be established from the supplied evidence.\",\n  \"evidence_quotes\": [\n    \"axe-summary.json: {\\\"skipped\\\": true, \\\"reason\\\": \\\"no axe spec in candidate\\\"}\",\n    \"screenshots/ directory listing: 'total 8' with only . and .. entries (no PNG files)\",\n    \"lighthouse-summary.json: /books accessibility 0.98, /checkout accessibility 1, /members accessibility 0.98\",\n    \"lighthouse-summary.json: performance 0.88 across all three pages\"\n  ]\n}\n```\n",
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 2,
+    "rationale": "Evidence is severely limited: the screenshots/ directory is empty, axe-summary is skipped ('no axe spec in candidate'), and there is no rendered HTML, no checkout flow capture, and no modal capture provided. The only positive signal is Lighthouse accessibility scores of 0.98-1.0 across /books, /checkout, /members, which strongly implies form inputs have proper labels (ruling out the level-1 anchor 'Missing labels on form inputs OR placeholder-only labels'). The app does render at all three core URLs (catalog, checkout, members) with performance 0.88, so flows likely complete. However, with zero visual evidence I cannot verify any level-3 anchors: visual hierarchy, consistent layout, loading skeletons, empty-state copy, modal focus traps, inline validation messages, or step indicators. Per the rubric instruction to 'score what is there, not what could be there,' the absence of screenshots and HTML evidence prevents crediting polish, microcopy, live countdowns, or considered design. Score is anchored at 2 (functional but rough) on the basis that the app exists, renders, and has good accessibility metrics suggesting labeled forms, but no further competence can be established from the supplied evidence.",
+    "evidence_quotes": [
+      "axe-summary.json: {\"skipped\": true, \"reason\": \"no axe spec in candidate\"}",
+      "screenshots/ directory listing: 'total 8' with only . and .. entries (no PNG files)",
+      "lighthouse-summary.json: /books accessibility 0.98, /checkout accessibility 1, /members accessibility 0.98",
+      "lighthouse-summary.json: performance 0.88 across all three pages"
+    ]
+  },
+  "parse_failed": false
+}

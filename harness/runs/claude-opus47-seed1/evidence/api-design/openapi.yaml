@@ -1,0 +1,416 @@
+openapi: 3.1.0
+info:
+  title: Library Lending API
+  version: 1.0.0
+  description: REST API for managing book lending, returns, fines and reservations.
+servers:
+  - url: http://localhost:3001
+    description: Local dev
+paths:
+  /api/health:
+    get:
+      summary: Service health check
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                required: [status]
+  /api/books:
+    get:
+      summary: List all books
+      responses:
+        '200':
+          description: List of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      summary: Create a book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBook'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '409': { $ref: '#/components/responses/ConflictError' }
+  /api/books/{id}:
+    get:
+      summary: Get a book by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Book details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BookDetail'
+        '404': { $ref: '#/components/responses/NotFoundError' }
+  /api/members:
+    get:
+      summary: List members
+      responses:
+        '200':
+          description: Member list
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Member' }
+    post:
+      summary: Create a member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateMember' }
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Member' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '409': { $ref: '#/components/responses/ConflictError' }
+  /api/members/{id}:
+    get:
+      summary: Get member detail
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Detailed member view
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/MemberDetail' }
+        '404': { $ref: '#/components/responses/NotFoundError' }
+  /api/loans:
+    get:
+      summary: List active loans
+      responses:
+        '200':
+          description: Active loans
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Loan' }
+    post:
+      summary: Borrow a book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateLoan' }
+      responses:
+        '201':
+          description: Loan created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/LoanWithWarnings' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '402':
+          description: Outstanding fines
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '403':
+          description: Member suspended
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404': { $ref: '#/components/responses/NotFoundError' }
+        '409': { $ref: '#/components/responses/ConflictError' }
+  /api/loans/{id}/return:
+    post:
+      summary: Return a loan
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Return confirmed
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ReturnResult' }
+        '404': { $ref: '#/components/responses/NotFoundError' }
+        '409': { $ref: '#/components/responses/ConflictError' }
+  /api/reservations:
+    post:
+      summary: Reserve a book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CreateReservation' }
+      responses:
+        '201':
+          description: Reservation created
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Reservation' }
+        '400': { $ref: '#/components/responses/ValidationError' }
+        '404': { $ref: '#/components/responses/NotFoundError' }
+        '409': { $ref: '#/components/responses/ConflictError' }
+  /api/reservations/expire:
+    post:
+      summary: Expire stale notified reservations
+      responses:
+        '200':
+          description: Count of expired reservations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  expired_count: { type: integer }
+                required: [expired_count]
+  /api/reservations/{id}:
+    delete:
+      summary: Cancel a reservation
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Cancelled
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Reservation' }
+        '404': { $ref: '#/components/responses/NotFoundError' }
+        '409': { $ref: '#/components/responses/ConflictError' }
+  /api/fines:
+    get:
+      summary: List fines (optionally by member)
+      parameters:
+        - name: member_id
+          in: query
+          required: false
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Fines
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: '#/components/schemas/Fine' }
+  /api/fines/{id}/pay:
+    post:
+      summary: Mark a fine as paid
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Paid
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Fine' }
+        '404': { $ref: '#/components/responses/NotFoundError' }
+        '409': { $ref: '#/components/responses/ConflictError' }
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error: { type: string }
+        details: {}
+      required: [error]
+    Book:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        title: { type: string }
+        author: { type: string }
+        isbn: { type: string }
+        total_copies: { type: integer }
+        available_copies: { type: integer }
+      required: [id, title, author, isbn, total_copies, available_copies]
+    BookDetail:
+      allOf:
+        - $ref: '#/components/schemas/Book'
+        - type: object
+          properties:
+            reservation_queue_depth: { type: integer }
+            active_loans: { type: integer }
+          required: [reservation_queue_depth, active_loans]
+    CreateBook:
+      type: object
+      properties:
+        title: { type: string }
+        author: { type: string }
+        isbn: { type: string }
+        total_copies: { type: integer, minimum: 1 }
+      required: [title, author, isbn, total_copies]
+    Member:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        email: { type: string, format: email }
+        member_since: { type: string }
+        status:
+          type: string
+          enum: [active, suspended]
+      required: [id, name, email, member_since, status]
+    CreateMember:
+      type: object
+      properties:
+        name: { type: string }
+        email: { type: string, format: email }
+      required: [name, email]
+    Loan:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        book_id: { type: string, format: uuid }
+        member_id: { type: string, format: uuid }
+        borrowed_at: { type: string, format: date-time }
+        due_at: { type: string, format: date-time }
+        returned_at:
+          type: [string, 'null']
+          format: date-time
+      required: [id, book_id, member_id, borrowed_at, due_at, returned_at]
+    LoanWithWarnings:
+      allOf:
+        - $ref: '#/components/schemas/Loan'
+        - type: object
+          properties:
+            warnings:
+              type: array
+              items: { type: string }
+          required: [warnings]
+    CreateLoan:
+      type: object
+      properties:
+        member_id: { type: string, format: uuid }
+        book_id: { type: string, format: uuid }
+      required: [member_id, book_id]
+    Reservation:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        book_id: { type: string, format: uuid }
+        member_id: { type: string, format: uuid }
+        queued_at: { type: string, format: date-time }
+        status:
+          type: string
+          enum: [waiting, notified, expired, fulfilled, cancelled]
+        notified_at:
+          type: [string, 'null']
+          format: date-time
+        expires_at:
+          type: [string, 'null']
+          format: date-time
+      required: [id, book_id, member_id, queued_at, status, notified_at, expires_at]
+    CreateReservation:
+      type: object
+      properties:
+        member_id: { type: string, format: uuid }
+        book_id: { type: string, format: uuid }
+      required: [member_id, book_id]
+    Fine:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        member_id: { type: string, format: uuid }
+        loan_id: { type: string, format: uuid }
+        amount_cents: { type: integer, minimum: 0 }
+        paid_at:
+          type: [string, 'null']
+          format: date-time
+        created_at: { type: string, format: date-time }
+      required: [id, member_id, loan_id, amount_cents, paid_at, created_at]
+    LoanWithDetails:
+      allOf:
+        - $ref: '#/components/schemas/Loan'
+        - type: object
+          properties:
+            book_title: { type: string }
+            book_author: { type: string }
+    ReservationWithDetails:
+      allOf:
+        - $ref: '#/components/schemas/Reservation'
+        - type: object
+          properties:
+            book_title: { type: string }
+            position: { type: integer }
+    FineWithDetails:
+      allOf:
+        - $ref: '#/components/schemas/Fine'
+        - type: object
+          properties:
+            book_title: { type: string }
+    MemberDetail:
+      allOf:
+        - $ref: '#/components/schemas/Member'
+        - type: object
+          properties:
+            active_loans:
+              type: array
+              items: { $ref: '#/components/schemas/LoanWithDetails' }
+            reservations:
+              type: array
+              items: { $ref: '#/components/schemas/ReservationWithDetails' }
+            unpaid_fines:
+              type: array
+              items: { $ref: '#/components/schemas/FineWithDetails' }
+            unpaid_fines_cents: { type: integer }
+          required: [active_loans, reservations, unpaid_fines, unpaid_fines_cents]
+    ReturnResult:
+      type: object
+      properties:
+        loan: { $ref: '#/components/schemas/Loan' }
+        fine_cents: { type: integer }
+        fine_id:
+          type: [string, 'null']
+          format: uuid
+        notified_reservation_id:
+          type: [string, 'null']
+          format: uuid
+      required: [loan, fine_cents, fine_id, notified_reservation_id]
+  responses:
+    ValidationError:
+      description: Validation failed
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    ConflictError:
+      description: Conflict
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }

@@ -1,0 +1,23 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-glm",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "{\n  \"criterion\": \"api_design\",\n  \"score\": 2,\n  \"rationale\": \"The API is functional and the OpenAPI document validates, but the contract is not faithful enough for a 3. The biggest failures are undocumented 400 validation responses, an error schema that says error is a string while validation returns an array of zod issues, and implementation status codes that are absent from the spec.\",\n  \"evidence\": [\n    \"openapi-validation.log: `/runs/opencode-glm-seed1/candidate/backend/openapi.yaml is valid`.\",\n    \"openapi.yaml:166-190 documents POST /api/loans responses as only 201/402/403/409, but loan-handler.ts:21-22 returns `res.status(400).json({ error: parsed.error.issues })` for invalid input.\",\n    \"api-probe.json reports POST /api/loans status 400 with body starting `{\\\"error\\\":[{\\\"validation\\\":\\\"uuid\\\",\\\"code\\\":\\\"invalid_string\\\"...`, which is not listed in the OpenAPI response set.\",\n    \"openapi.yaml:217-247 documents POST /api/reservations responses as only 201/409, but reservation-handler.ts:21-22 returns 400 validation errors; api-probe.json confirms POST /api/reservations status 400.\",\n    \"openapi.yaml:449-453 defines `Error` as `{ error: string }`, while validation failures return `{ error: [...] }`; non-validation failures return string messages such as api-probe.json GET /api/books/00000000-0000-0000-0000-000000000000 => `{\\\"error\\\":\\\"Book not found\\\"}`.\",\n    \"openapi.yaml:203-215 documents POST /api/loans/{id}/return responses as 200/409 only, but loan-handler.ts:55-57 returns 404 for `Loan not found`.\",\n    \"error-middleware.ts only defines error classes; route handlers map errors inline, e.g. loan-handler.ts:29-39 and reservation-handler.ts:29-33, so there is no single documented middleware mapping and no stable machine-readable error `code` field.\"\n  ]\n}\n",
+  "parsed": {
+    "criterion": "api_design",
+    "score": 2,
+    "rationale": "The API is functional and the OpenAPI document validates, but the contract is not faithful enough for a 3. The biggest failures are undocumented 400 validation responses, an error schema that says error is a string while validation returns an array of zod issues, and implementation status codes that are absent from the spec.",
+    "evidence": [
+      "openapi-validation.log: `/runs/opencode-glm-seed1/candidate/backend/openapi.yaml is valid`.",
+      "openapi.yaml:166-190 documents POST /api/loans responses as only 201/402/403/409, but loan-handler.ts:21-22 returns `res.status(400).json({ error: parsed.error.issues })` for invalid input.",
+      "api-probe.json reports POST /api/loans status 400 with body starting `{\"error\":[{\"validation\":\"uuid\",\"code\":\"invalid_string\"...`, which is not listed in the OpenAPI response set.",
+      "openapi.yaml:217-247 documents POST /api/reservations responses as only 201/409, but reservation-handler.ts:21-22 returns 400 validation errors; api-probe.json confirms POST /api/reservations status 400.",
+      "openapi.yaml:449-453 defines `Error` as `{ error: string }`, while validation failures return `{ error: [...] }`; non-validation failures return string messages such as api-probe.json GET /api/books/00000000-0000-0000-0000-000000000000 => `{\"error\":\"Book not found\"}`.",
+      "openapi.yaml:203-215 documents POST /api/loans/{id}/return responses as 200/409 only, but loan-handler.ts:55-57 returns 404 for `Loan not found`.",
+      "error-middleware.ts only defines error classes; route handlers map errors inline, e.g. loan-handler.ts:29-39 and reservation-handler.ts:29-33, so there is no single documented middleware mapping and no stable machine-readable error `code` field."
+    ]
+  },
+  "parse_failed": false
+}

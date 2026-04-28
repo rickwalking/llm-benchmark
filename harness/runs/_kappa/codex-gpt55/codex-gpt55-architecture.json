@@ -1,0 +1,24 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "codex-gpt55",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "{\n  \"score\": 3,\n  \"evidence\": [\n    \"No dependency cycles or orphan modules: madge.json reports \\\"circular\\\": [] and \\\"orphans\\\": [].\",\n    \"File sizes are healthy: file-sizes.csv max is backend/src/app.ts at 173 lines; no files exceed 300 lines, and computed p95 is 160 lines.\",\n    \"Backend has recognizable layers in backend-tree.txt: src/policy/index.ts, src/services/*, src/db.ts, src/errors.ts, but src/routes/ is empty and the HTTP handler excerpt requested by the rubric is not present in this evidence directory.\",\n    \"Business constants are centralized in policy/index.ts: \\\"MAX_ACTIVE_LOANS = 5\\\", \\\"LOAN_PERIOD_DAYS = 14\\\", \\\"LATE_FINE_RATE_CENTS_PER_DAY = 50\\\", \\\"RESERVATION_NOTIFICATION_HOURS = 48\\\", and \\\"FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500\\\".\",\n    \"loan-service.ts imports policy rather than hard-coding loan rules: `import { LOAN_PERIOD_DAYS, addDays, canBorrow, computeFineCents, nextReservationToNotify } from \\\"../policy\\\";`.\",\n    \"Services still call raw SQL directly, so this does not reach the well-modularized anchor: loan-service.ts contains multiple `db.prepare(...)` calls, including inserting loans, updating loans, and creating fines.\",\n    \"Reservation transitions are not fully isolated in one state-machine module: loan-service.ts directly executes `UPDATE reservations SET status = 'fulfilled' WHERE id = ?` while also importing `notifyReservation` from reservationService.\",\n    \"Frontend is organized by technical role, not feature: frontend-tree.txt shows components/, pages/, api.ts, types.ts. checkout is a page (`frontend/src/pages/CheckoutPage.tsx`), not a feature directory owning its API/hooks/components.\",\n    \"Shared frontend/backend types boundary is not shown: backend has backend/src/services/types.ts while frontend has frontend/src/types.ts, with no shared workspace, generated client, or named types package in the provided tree.\"\n  ],\n  \"rationale\": \"This is clean enough architecture: small files, no cycles, clear backend policy/services/db separation, centralized business constants, and a straightforward frontend pages/components/api split. It falls short of 4 because services are coupled to raw db.prepare calls, the frontend is not feature-organized, shared API types are not demonstrated, and reservation state transitions are not owned by a single named module.\"\n}\n",
+  "parsed": {
+    "score": 3,
+    "evidence": [
+      "No dependency cycles or orphan modules: madge.json reports \"circular\": [] and \"orphans\": [].",
+      "File sizes are healthy: file-sizes.csv max is backend/src/app.ts at 173 lines; no files exceed 300 lines, and computed p95 is 160 lines.",
+      "Backend has recognizable layers in backend-tree.txt: src/policy/index.ts, src/services/*, src/db.ts, src/errors.ts, but src/routes/ is empty and the HTTP handler excerpt requested by the rubric is not present in this evidence directory.",
+      "Business constants are centralized in policy/index.ts: \"MAX_ACTIVE_LOANS = 5\", \"LOAN_PERIOD_DAYS = 14\", \"LATE_FINE_RATE_CENTS_PER_DAY = 50\", \"RESERVATION_NOTIFICATION_HOURS = 48\", and \"FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500\".",
+      "loan-service.ts imports policy rather than hard-coding loan rules: `import { LOAN_PERIOD_DAYS, addDays, canBorrow, computeFineCents, nextReservationToNotify } from \"../policy\";`.",
+      "Services still call raw SQL directly, so this does not reach the well-modularized anchor: loan-service.ts contains multiple `db.prepare(...)` calls, including inserting loans, updating loans, and creating fines.",
+      "Reservation transitions are not fully isolated in one state-machine module: loan-service.ts directly executes `UPDATE reservations SET status = 'fulfilled' WHERE id = ?` while also importing `notifyReservation` from reservationService.",
+      "Frontend is organized by technical role, not feature: frontend-tree.txt shows components/, pages/, api.ts, types.ts. checkout is a page (`frontend/src/pages/CheckoutPage.tsx`), not a feature directory owning its API/hooks/components.",
+      "Shared frontend/backend types boundary is not shown: backend has backend/src/services/types.ts while frontend has frontend/src/types.ts, with no shared workspace, generated client, or named types package in the provided tree."
+    ],
+    "rationale": "This is clean enough architecture: small files, no cycles, clear backend policy/services/db separation, centralized business constants, and a straightforward frontend pages/components/api split. It falls short of 4 because services are coupled to raw db.prepare calls, the frontend is not feature-organized, shared API types are not demonstrated, and reservation state transitions are not owned by a single named module."
+  },
+  "parse_failed": false
+}

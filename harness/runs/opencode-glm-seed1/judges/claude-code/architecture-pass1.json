@@ -1,0 +1,23 @@
+{
+  "criterion": "architecture",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "architecture",
+    "score": 3,
+    "anchor_match": "Clean enough",
+    "evidence_quotes": [
+      "src/\n\u251c\u2500\u2500 db/\n\u251c\u2500\u2500 middleware/\n\u251c\u2500\u2500 policy/\n\u2502   \u251c\u2500\u2500 constants.ts\n\u2502   \u251c\u2500\u2500 index.ts\n\u2502   \u2514\u2500\u2500 policy.test.ts\n\u251c\u2500\u2500 routes/\n\u251c\u2500\u2500 services/\n\u251c\u2500\u2500 app.ts\n\u251c\u2500\u2500 errors.ts\n\u2514\u2500\u2500 index.ts",
+      "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+      "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50;",
+      "import { canBorrow, computeDueAt, computeFineCents, computeNotificationExpiry } from '../policy/index.js';\nimport { ConflictError, NotFoundError, ForbiddenError, PaymentRequiredError } from '../errors.js';",
+      "const member = db.prepare('SELECT * FROM members WHERE id = ?').get(memberId) as {",
+      "src/\n\u251c\u2500\u2500 api/\n\u2502   \u2514\u2500\u2500 index.ts\n\u251c\u2500\u2500 components/\n\u251c\u2500\u2500 features/\n\u251c\u2500\u2500 hooks/\n\u251c\u2500\u2500 pages/",
+      "backend/src/services/api.test.ts,355\nbackend/src/policy/policy.test.ts,230\nfrontend/src/pages/MemberDetail.tsx,219"
+    ],
+    "anchor_rejected_above": "Anchor 4 requires (a) services to depend on a thin DB-access abstraction rather than calling raw db.prepare directly \u2014 but services/loan.ts calls db.prepare('SELECT * FROM members WHERE id = ?') and 7+ other raw SQL statements directly; (b) frontend organized by feature (checkout/, members/, books/) \u2014 but the frontend uses technical-role folders (pages/, components/, api/, hooks/) with empty features/ and hooks/ directories; (c) shared types between frontend and backend in a single source \u2014 no shared/ workspace exists, the LoanRow interface lives in services/loan.ts and frontend api/index.ts (119 lines) defines its own types separately.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

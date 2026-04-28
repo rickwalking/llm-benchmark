@@ -1,0 +1,63 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-glm",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "Now let me check additional handler files to see if more evidence exists:\n```json\n{\n  \"score\": 2,\n  \"anchors\": [\n    {\n      \"level\": 2,\n      \"name\": \"Functional but messy\",\n      \"match\": true,\n      \"evidence\": [\n        \"OpenAPI is valid per swagger-cli (`openapi-validation.log:1`)\",\n        \"POST /api/loans/{id}/return handler returns 404 for 'Loan not found' (`loan-handler.ts:56-57`) but the OpenAPI spec for that endpoint only documents 200 and 409 responses \u2014 a missing status code in the spec\",\n        \"POST /api/books returns `reservation_queue_depth` in the actual response (`api-probe.json:4`) but the OpenAPI `POST /api/books` 201 response references `#/components/schemas/Book`, which does not include that field \u2014 a response schema mismatch\",\n        \"Validation errors (400) return `{\\\"error\\\": [...]}` \u2014 an array of zod issues (`loan-handler.ts:22`, `api-probe.json:5,9,10`) \u2014 while the OpenAPI `Error` schema defines `error` as `type: string` (`openapi.yaml:449-453`). This is inconsistent both internally (400 array vs other errors string) and against the spec\",\n        \"The OpenAPI lacks a `code` field in error responses and has no `examples` on any response\",\n        \"Error-to-HTTP mapping is spread across individual handlers (`loan-handler.ts:28-42`, `reservation-handler.ts:28-34`) rather than centralized in a single middleware (`routes.ts:40-43` only catches unhandled exceptions generically as 500)\"\n      ]\n    },\n    {\n      \"level\": 1,\n      \"name\": \"Broken contract\",\n      \"match\": false,\n      \"evidence\": [\n        \"OpenAPI exists and is valid, all endpoints are described, URLs follow a consistent /api/{resource}/{id}/{action} pattern, and error responses all use the {error: ...} shape \u2014 does not meet the 'broken contract' threshold\"\n      ]\n    },\n    {\n      \"level\": 3,\n      \"name\": \"Reasonable\",\n      \"match\": false,\n      \"evidence\": [\n        \"The 404 on loan return missing from OpenAPI, the Book vs BookDetail response schema mismatch on POST /api/books, and the inconsistent 400 error format (array vs string for the `error` field) mean the OpenAPI does not fully match the implementation for status codes, response shapes, and error format\"\n      ]\n    },\n    {\n      \"level\": 4,\n      \"name\": \"Well-designed\",\n      \"match\": false,\n      \"evidence\": [\n        \"No stable `code` field in error responses (`error-middleware.ts` defines classes with string messages only, OpenAPI Error schema lacks a `code` property)\",\n        \"No examples in OpenAPI for any response\",\n        \"Error responses do not match the spec (400 returns array, spec says string)\"\n      ]\n    },\n    {\n      \"level\": 5,\n      \"name\": \"Disciplined\",\n      \"match\": false,\n      \"evidence\": [\n        \"Error-to-HTTP mapping is per-handler, not centralized in a single middleware\",\n        \"OpenAPI response schemas are not fully faithful to implementation (Book vs BookDetail, missing 404, error type mismatch)\",\n        \"Error format is not byte-for-byte consistent with the spec\"\n      ]\n    }\n  ]\n}\n```\n",
+  "parsed": {
+    "score": 2,
+    "anchors": [
+      {
+        "level": 2,
+        "name": "Functional but messy",
+        "match": true,
+        "evidence": [
+          "OpenAPI is valid per swagger-cli (`openapi-validation.log:1`)",
+          "POST /api/loans/{id}/return handler returns 404 for 'Loan not found' (`loan-handler.ts:56-57`) but the OpenAPI spec for that endpoint only documents 200 and 409 responses \u2014 a missing status code in the spec",
+          "POST /api/books returns `reservation_queue_depth` in the actual response (`api-probe.json:4`) but the OpenAPI `POST /api/books` 201 response references `#/components/schemas/Book`, which does not include that field \u2014 a response schema mismatch",
+          "Validation errors (400) return `{\"error\": [...]}` \u2014 an array of zod issues (`loan-handler.ts:22`, `api-probe.json:5,9,10`) \u2014 while the OpenAPI `Error` schema defines `error` as `type: string` (`openapi.yaml:449-453`). This is inconsistent both internally (400 array vs other errors string) and against the spec",
+          "The OpenAPI lacks a `code` field in error responses and has no `examples` on any response",
+          "Error-to-HTTP mapping is spread across individual handlers (`loan-handler.ts:28-42`, `reservation-handler.ts:28-34`) rather than centralized in a single middleware (`routes.ts:40-43` only catches unhandled exceptions generically as 500)"
+        ]
+      },
+      {
+        "level": 1,
+        "name": "Broken contract",
+        "match": false,
+        "evidence": [
+          "OpenAPI exists and is valid, all endpoints are described, URLs follow a consistent /api/{resource}/{id}/{action} pattern, and error responses all use the {error: ...} shape \u2014 does not meet the 'broken contract' threshold"
+        ]
+      },
+      {
+        "level": 3,
+        "name": "Reasonable",
+        "match": false,
+        "evidence": [
+          "The 404 on loan return missing from OpenAPI, the Book vs BookDetail response schema mismatch on POST /api/books, and the inconsistent 400 error format (array vs string for the `error` field) mean the OpenAPI does not fully match the implementation for status codes, response shapes, and error format"
+        ]
+      },
+      {
+        "level": 4,
+        "name": "Well-designed",
+        "match": false,
+        "evidence": [
+          "No stable `code` field in error responses (`error-middleware.ts` defines classes with string messages only, OpenAPI Error schema lacks a `code` property)",
+          "No examples in OpenAPI for any response",
+          "Error responses do not match the spec (400 returns array, spec says string)"
+        ]
+      },
+      {
+        "level": 5,
+        "name": "Disciplined",
+        "match": false,
+        "evidence": [
+          "Error-to-HTTP mapping is per-handler, not centralized in a single middleware",
+          "OpenAPI response schemas are not fully faithful to implementation (Book vs BookDetail, missing 404, error type mismatch)",
+          "Error format is not byte-for-byte consistent with the spec"
+        ]
+      }
+    ]
+  },
+  "parse_failed": false
+}

@@ -1,0 +1,13 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-deepseek",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "Let me check the actual file paths for frontend files.\nNow let me check the frontend API file path in the file-sizes.csv to understand types:\n```json\n{\"score\": 3, \"explanation\": \"Backend has clear layers (policy/ pure, services/ business+db, routes/ HTTP) with all business constants centralized in policy/ and imported without duplication. No cycles, no orphans, no files >300 lines in production code. Domain errors used consistently. Frontend splits pages/, components/, api.ts. However: (1) routes import from db directly (loan-handler.ts line 2: `import { getDb } from '../db.js'`) \u2014 a layer leak; (2) services call raw `db.prepare()` with no thin DB-access abstraction; (3) frontend organized by technical role not by feature; (4) no shared types boundary between frontend/backend; (5) tests aggregated in a single 493-line file rather than per-service. These issues prevent level 4, but the core architecture is sound, well above the level 2 threshold of duplicated business constants or DB rows leaking to HTTP responses.\"}\n```\n",
+  "parsed": {
+    "score": 3,
+    "explanation": "Backend has clear layers (policy/ pure, services/ business+db, routes/ HTTP) with all business constants centralized in policy/ and imported without duplication. No cycles, no orphans, no files >300 lines in production code. Domain errors used consistently. Frontend splits pages/, components/, api.ts. However: (1) routes import from db directly (loan-handler.ts line 2: `import { getDb } from '../db.js'`) \u2014 a layer leak; (2) services call raw `db.prepare()` with no thin DB-access abstraction; (3) frontend organized by technical role not by feature; (4) no shared types boundary between frontend/backend; (5) tests aggregated in a single 493-line file rather than per-service. These issues prevent level 4, but the core architecture is sound, well above the level 2 threshold of duplicated business constants or DB rows leaking to HTTP responses."
+  },
+  "parse_failed": false
+}

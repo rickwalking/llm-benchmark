@@ -1,0 +1,33 @@
+
+> library-lending@1.0.0 test:unit
+> npm run test:unit --workspace=backend && npm run test:unit --workspace=frontend --reporter=json
+
+
+> backend@1.0.0 test:unit
+> vitest run
+
+
+ RUN  v3.2.4 /runs/opencode-glm-seed1/candidate/backend
+
+ ✓ src/policy/policy.test.ts (34 tests) 5ms
+ ✓ src/services/api.test.ts (25 tests) 251ms
+
+ Test Files  2 passed (2)
+      Tests  59 passed (59)
+   Start at  13:09:47
+   Duration  1.03s (transform 156ms, setup 0ms, collect 432ms, tests 256ms, environment 0ms, prepare 292ms)
+
+
+> frontend@1.0.0 test:unit
+> vitest run
+
+
+ RUN  v3.2.4 /runs/opencode-glm-seed1/candidate/frontend
+
+ ✓ src/app.test.ts (1 test) 2ms
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  13:09:49
+   Duration  388ms (transform 23ms, setup 0ms, collect 22ms, tests 2ms, environment 0ms, prepare 110ms)
+

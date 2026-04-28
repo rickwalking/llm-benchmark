@@ -1,0 +1,41 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "claude-opus47",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 3,\n    \"alignment\": 4,\n    \"declarative\": 3,\n    \"atomic\": 4\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"ac-ids.txt: AC-1.1 AC-1.2 AC-1.3 AC-1.4 AC-2.1 AC-2.2 AC-2.3 AC-2.4 AC-3.1 AC-3.2 AC-3.3 AC-3.4 AC-3.5 AC-3.6 AC-4.1 AC-4.2 AC-4.3 AC-4.4 AC-4.5 AC-5.1 AC-5.2 AC-5.3 AC-5.4 AC-5.5 AC-5.6 AC-6.1 AC-6.2 AC-6.3 AC-6.4\",\n      \"Missing from feature tags: AC-1.3, AC-4.5, AC-5.6, AC-6.4\",\n      \"features/us4_returns.feature:55-62: @AC-4.3 @negative Scenario: Double-return is rejected ... Then the request succeeds with status 200\"\n    ],\n    \"alignment\": [\n      \"features/us3_lend.feature:24-25: @AC-3.2 @negative\\n  Scenario: A 6th simultaneous loan is rejected\",\n      \"features/us4_returns.feature:22-23: @AC-4.2\\n  Scenario Outline: Late returns produce a fine, capped at $10.00\",\n      \"features/us5_reservations.feature:47-48: @AC-5.4 @negative\\n  Scenario: A non-priority member cannot jump the notified hold\"\n    ],\n    \"declarative\": [\n      \"features/us3_lend.feature:18: When the librarian lends \\\"Dune\\\" to \\\"Alice\\\"\",\n      \"features/us5_reservations.feature:18: When \\\"Alice\\\" reserves \\\"Dune\\\"\",\n      \"features/us1_catalog.feature:32: Then the request fails with status 404\"\n    ],\n    \"atomic\": [\n      \"features/us3_lend.feature:26-29: Given \\\"Alice\\\" has 5 active loans\\n    When the librarian tries to lend \\\"Dune\\\" to \\\"Alice\\\"\\n    Then the request fails with status 409\\n    And the response error message is \\\"Loan limit reached\\\"\",\n      \"features/us1_catalog.feature:21-24: Given \\\"Alice\\\" borrowed \\\"Dune\\\"\\n    And \\\"Alice\\\" borrowed \\\"Dune\\\"\\n    And \\\"Alice\\\" borrowed \\\"Dune\\\"\\n    And \\\"Bob\\\" reserved \\\"Dune\\\"\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 3,
+      "alignment": 4,
+      "declarative": 3,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "ac-ids.txt: AC-1.1 AC-1.2 AC-1.3 AC-1.4 AC-2.1 AC-2.2 AC-2.3 AC-2.4 AC-3.1 AC-3.2 AC-3.3 AC-3.4 AC-3.5 AC-3.6 AC-4.1 AC-4.2 AC-4.3 AC-4.4 AC-4.5 AC-5.1 AC-5.2 AC-5.3 AC-5.4 AC-5.5 AC-5.6 AC-6.1 AC-6.2 AC-6.3 AC-6.4",
+        "Missing from feature tags: AC-1.3, AC-4.5, AC-5.6, AC-6.4",
+        "features/us4_returns.feature:55-62: @AC-4.3 @negative Scenario: Double-return is rejected ... Then the request succeeds with status 200"
+      ],
+      "alignment": [
+        "features/us3_lend.feature:24-25: @AC-3.2 @negative\n  Scenario: A 6th simultaneous loan is rejected",
+        "features/us4_returns.feature:22-23: @AC-4.2\n  Scenario Outline: Late returns produce a fine, capped at $10.00",
+        "features/us5_reservations.feature:47-48: @AC-5.4 @negative\n  Scenario: A non-priority member cannot jump the notified hold"
+      ],
+      "declarative": [
+        "features/us3_lend.feature:18: When the librarian lends \"Dune\" to \"Alice\"",
+        "features/us5_reservations.feature:18: When \"Alice\" reserves \"Dune\"",
+        "features/us1_catalog.feature:32: Then the request fails with status 404"
+      ],
+      "atomic": [
+        "features/us3_lend.feature:26-29: Given \"Alice\" has 5 active loans\n    When the librarian tries to lend \"Dune\" to \"Alice\"\n    Then the request fails with status 409\n    And the response error message is \"Loan limit reached\"",
+        "features/us1_catalog.feature:21-24: Given \"Alice\" borrowed \"Dune\"\n    And \"Alice\" borrowed \"Dune\"\n    And \"Alice\" borrowed \"Dune\"\n    And \"Bob\" reserved \"Dune\""
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

@@ -1,0 +1,10 @@
+
+> test:bdd
+> cucumber-js --config cucumber.js --format json:/runs/opencode-deepseek-seed1/objective/bdd.json
+
+Cannot use 'progress-bar' formatter for output to 'stdout' as not a TTY. Switching to 'progress' formatter.
+..................................................................................................................................................................................................
+
+25 scenarios (25 passed)
+144 steps (144 passed)
+0m00.448s (executing steps: 0m00.370s)

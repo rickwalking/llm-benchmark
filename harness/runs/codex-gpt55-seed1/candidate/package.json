@@ -1,0 +1,63 @@
+{
+  "name": "library-lending",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.0.0 <23.0.0"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "overrides": {
+    "@apidevtools/swagger-parser": {
+      "ajv": "^8.20.0"
+    },
+    "ajv-draft-04": {
+      "ajv": "^8.20.0"
+    }
+  },
+  "scripts": {
+    "dev": "concurrently -k -n backend,frontend \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "test:unit": "npm run test:unit -w backend && npm run test:unit -w frontend",
+    "test:e2e": "rm -f backend/data/library.db && playwright test -c tests/playwright.config.ts",
+    "test:bdd": "cucumber-js \"features/**/*.feature\" --require-module tsx/cjs --require \"features/**/*.ts\"",
+    "test:all": "npm run test:unit && npm run test:bdd && npm run test:e2e",
+    "mutation": "stryker run tests/stryker.conf.json",
+    "lint": "eslint .",
+    "typecheck": "npm run typecheck -w backend && npm run typecheck -w frontend"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@cucumber/cucumber": "^11.2.0",
+    "@eslint/js": "^9.25.1",
+    "@playwright/test": "^1.51.1",
+    "@stryker-mutator/core": "^8.7.1",
+    "@stryker-mutator/vitest-runner": "^8.7.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@types/supertest": "^6.0.3",
+    "@typescript-eslint/eslint-plugin": "^8.31.0",
+    "@typescript-eslint/parser": "^8.31.0",
+    "ajv": "^8.20.0",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.25.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "jsdom": "^25.0.1",
+    "madge": "^8.0.0",
+    "supertest": "^7.1.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.2",
+    "wait-on": "^8.0.3"
+  }
+}

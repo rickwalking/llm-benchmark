@@ -1,0 +1,23 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-kimi",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"score\": 3,\n  \"anchor\": 3,\n  \"reasons\": [\n    \"OpenAPI is valid (swagger-cli confirms) and complete with all 13 endpoints documented across books, members, loans, reservations, and fines resources.\",\n    \"URL design follows REST conventions consistently \u2014 nouns, plural, hierarchical (e.g. /api/loans/{id}/return, /api/members/{id}/reservations) \u2014 with no verb-based paths.\",\n    \"All request bodies are validated with Zod in both representative handlers (loan-handler.ts:9, reservation-handler.ts:9); invalid input returns 400 with field-level details.\",\n    \"Status codes in the spec match the implementation: 201 for creation, 200 for success, 404 for not found, 402/403/409 for domain-specific errors (probe confirms these).\",\n    \"Error shape is consistent: {\\\"error\\\": \\\"<message>\\\"} as the base form, documented in the OpenAPI Error schema, with a details array appended for validation failures.\",\n    \"No centralized error-handling middleware exists; error-to-HTTP mapping is duplicated via instanceof chains in each handler (loan-handler.ts:21-35, reservation-handler.ts:21-31) rather than being read in one place.\",\n    \"Error responses lack a stable machine-readable code field (e.g. \\\"LOAN_LIMIT_REACHED\\\") for programmatic handling.\",\n    \"OpenAPI does not include examples for any negative acceptance criteria responses (402, 403, 409) \u2014 the operations describe status codes but no example payloads.\"\n  ]\n}\n```\n",
+  "parsed": {
+    "score": 3,
+    "anchor": 3,
+    "reasons": [
+      "OpenAPI is valid (swagger-cli confirms) and complete with all 13 endpoints documented across books, members, loans, reservations, and fines resources.",
+      "URL design follows REST conventions consistently \u2014 nouns, plural, hierarchical (e.g. /api/loans/{id}/return, /api/members/{id}/reservations) \u2014 with no verb-based paths.",
+      "All request bodies are validated with Zod in both representative handlers (loan-handler.ts:9, reservation-handler.ts:9); invalid input returns 400 with field-level details.",
+      "Status codes in the spec match the implementation: 201 for creation, 200 for success, 404 for not found, 402/403/409 for domain-specific errors (probe confirms these).",
+      "Error shape is consistent: {\"error\": \"<message>\"} as the base form, documented in the OpenAPI Error schema, with a details array appended for validation failures.",
+      "No centralized error-handling middleware exists; error-to-HTTP mapping is duplicated via instanceof chains in each handler (loan-handler.ts:21-35, reservation-handler.ts:21-31) rather than being read in one place.",
+      "Error responses lack a stable machine-readable code field (e.g. \"LOAN_LIMIT_REACHED\") for programmatic handling.",
+      "OpenAPI does not include examples for any negative acceptance criteria responses (402, 403, 409) \u2014 the operations describe status codes but no example payloads."
+    ]
+  },
+  "parse_failed": false
+}

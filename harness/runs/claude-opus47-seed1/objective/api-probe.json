@@ -1,0 +1,11 @@
+[
+  {"method":"GET","path":"/api/books","status":200,"body":"[]"},
+  {"method":"GET","path":"/api/books/00000000-0000-0000-0000-000000000000","status":404,"body":"{\"error\":\"Book not found\"}"},
+  {"method":"POST","path":"/api/books","status":400,"body":"{\"error\":\"Validation failed\",\"details\":[{\"path\":\"isbn\",\"message\":\"String must contain at least 10 character(s)\"},{\"path\":\"isbn\",\"message\":\"ISBN must be 10 or 13 digits (hyphens allowed)\"}]}"},
+  {"method":"POST","path":"/api/books","status":400,"body":"{\"error\":\"Validation failed\",\"details\":[{\"path\":\"title\",\"message\":\"Required\"},{\"path\":\"author\",\"message\":\"Required\"},{\"path\":\"isbn\",\"message\":\"Required\"},{\"path\":\"total_copies\",\"message\":\"Required\"}]}"},
+  {"method":"GET","path":"/api/members","status":200,"body":"[]"},
+  {"method":"POST","path":"/api/members","status":201,"body":"{\"id\":\"45c8aedb-35d6-488e-b9f8-b58b43f17944\",\"name\":\"Test\",\"email\":\"test@example.com\",\"member_since\":\"2026-04-27\",\"status\":\"active\"}"},
+  {"method":"GET","path":"/api/members/00000000-0000-0000-0000-000000000000","status":404,"body":"{\"error\":\"Member not found\"}"},
+  {"method":"POST","path":"/api/loans","status":400,"body":"{\"error\":\"Validation failed\",\"details\":[{\"path\":\"member_id\",\"message\":\"member_id must be a UUID\"},{\"path\":\"book_id\",\"message\":\"book_id must be a UUID\"}]}"},
+  {"method":"POST","path":"/api/reservations","status":400,"body":"{\"error\":\"Validation failed\",\"details\":[{\"path\":\"member_id\",\"message\":\"member_id must be a UUID\"},{\"path\":\"book_id\",\"message\":\"book_id must be a UUID\"}]}"},
+  {"method":"POST","path":"/api/reservations/expire","status":200,"body":"{\"expired_count\":0}"}]

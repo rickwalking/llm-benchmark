@@ -1,0 +1,18 @@
+```json
+{
+  "criterion": "architecture",
+  "score": 3,
+  "anchor_match": "Clean enough",
+  "evidence_quotes": [
+    "src/\n├── db/\n├── middleware/\n├── policy/\n│   ├── constants.ts\n│   ├── index.ts\n│   └── policy.test.ts\n├── routes/\n├── services/\n├── app.ts\n├── errors.ts\n└── index.ts",
+    "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+    "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50;",
+    "import { canBorrow, computeDueAt, computeFineCents, computeNotificationExpiry } from '../policy/index.js';\nimport { ConflictError, NotFoundError, ForbiddenError, PaymentRequiredError } from '../errors.js';",
+    "const member = db.prepare('SELECT * FROM members WHERE id = ?').get(memberId) as {",
+    "src/\n├── api/\n│   └── index.ts\n├── components/\n├── features/\n├── hooks/\n├── pages/",
+    "backend/src/services/api.test.ts,355\nbackend/src/policy/policy.test.ts,230\nfrontend/src/pages/MemberDetail.tsx,219"
+  ],
+  "anchor_rejected_above": "Anchor 4 requires (a) services to depend on a thin DB-access abstraction rather than calling raw db.prepare directly — but services/loan.ts calls db.prepare('SELECT * FROM members WHERE id = ?') and 7+ other raw SQL statements directly; (b) frontend organized by feature (checkout/, members/, books/) — but the frontend uses technical-role folders (pages/, components/, api/, hooks/) with empty features/ and hooks/ directories; (c) shared types between frontend and backend in a single source — no shared/ workspace exists, the LoanRow interface lives in services/loan.ts and frontend api/index.ts (119 lines) defines its own types separately.",
+  "confidence": "high"
+}
+```

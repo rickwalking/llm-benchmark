@@ -1,0 +1,6 @@
+stdin
+5400
+bash
+-c
+cd "/home/pmarins/projects/llm-benchmark-library/harness/runs/claude-opus47-seed1/candidate" && exec claude --print --dangerously-skip-permissions --model claude-opus-4-7 --add-dir "/home/pmarins/projects/llm-benchmark-library/harness/runs/claude-opus47-seed1/candidate"
+==END==

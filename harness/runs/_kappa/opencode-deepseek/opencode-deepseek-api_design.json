@@ -1,0 +1,29 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-deepseek",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"score\": 3,\n  \"anchors\": [\n    \"OpenAPI is valid per swagger-cli (openapi-validation.log:2): `/runs/.../openapi.yaml is valid`\",\n    \"All endpoints present in OpenAPI match probed behavior \u2014 e.g., GET /api/books \u2192 200, POST /api/books (bad input) \u2192 400, GET /api/books/<uuid> \u2192 404, POST /api/reservations/expire \u2192 200 (api-probe.json:2\u201311)\",\n    \"Specific HTTP status codes used: 201 for creation, 402 for fines, 403 for suspended, 409 for conflicts \u2014 documented in openapi.yaml:140\u2013175\",\n    \"Single error shape `{ \\\"error\\\": \\\"<message>\\\" }` used consistently across all handlers (loan-handler.ts:12,25; reservation-handler.ts:12,25,45) and documented in OpenAPI Error schema (openapi.yaml:292\u2013298)\",\n    \"RESTful URL design: nouns, plural, hierarchical \u2014 `/api/loans/{id}/return`, `/api/reservations/{id}/cancel` \u2014 no verb-based endpoints\",\n    \"All mutable endpoints validate with zod: `createLoanSchema.safeParse` (loan-handler.ts:10), `createReservationSchema.safeParse` (reservation-handler.ts:10), returning 400 on invalid input\",\n    \"Clean domain-error class hierarchy mapping to HTTP: DomainError \u2192 NotFoundError(404), ConflictError(409), ForbiddenError(403), PaymentRequiredError(402) \u2014 readable in one file (error-middleware.ts:1\u201337)\"\n  ],\n  \"degradations\": [\n    \"No stable `code` field in error responses (e.g., `LOAN_LIMIT_REACHED`) \u2014 only human-readable string, preventing level 4\",\n    \"No OpenAPI examples defined for any response, including negative ACs \u2014 preventing level 4\",\n    \"400 validation errors return only `parsed.error.issues[0].message` (a single flat string like `\\\"Required\\\"`), not structured field-level error info \u2014 falls short of level 3's 'field-level error info' bar\",\n    \"Error handling is inline per-handler (catch + `instanceof DomainError`) rather than a single centralized error middleware \u2014 preventing level 5\",\n    \"Schemas use `nullable: true` on nested objects like `BookDetail.queue_position` and its children (openapi.yaml:323\u2013334), loosening the contract \u2014 preventing level 5\",\n    \"Evidence directory missing the route registration file the rubric says the judge receives; probe tests only a subset of negative ACs (no 402/403/409 scenario verification)\"\n  ]\n}\n```\n",
+  "parsed": {
+    "score": 3,
+    "anchors": [
+      "OpenAPI is valid per swagger-cli (openapi-validation.log:2): `/runs/.../openapi.yaml is valid`",
+      "All endpoints present in OpenAPI match probed behavior \u2014 e.g., GET /api/books \u2192 200, POST /api/books (bad input) \u2192 400, GET /api/books/<uuid> \u2192 404, POST /api/reservations/expire \u2192 200 (api-probe.json:2\u201311)",
+      "Specific HTTP status codes used: 201 for creation, 402 for fines, 403 for suspended, 409 for conflicts \u2014 documented in openapi.yaml:140\u2013175",
+      "Single error shape `{ \"error\": \"<message>\" }` used consistently across all handlers (loan-handler.ts:12,25; reservation-handler.ts:12,25,45) and documented in OpenAPI Error schema (openapi.yaml:292\u2013298)",
+      "RESTful URL design: nouns, plural, hierarchical \u2014 `/api/loans/{id}/return`, `/api/reservations/{id}/cancel` \u2014 no verb-based endpoints",
+      "All mutable endpoints validate with zod: `createLoanSchema.safeParse` (loan-handler.ts:10), `createReservationSchema.safeParse` (reservation-handler.ts:10), returning 400 on invalid input",
+      "Clean domain-error class hierarchy mapping to HTTP: DomainError \u2192 NotFoundError(404), ConflictError(409), ForbiddenError(403), PaymentRequiredError(402) \u2014 readable in one file (error-middleware.ts:1\u201337)"
+    ],
+    "degradations": [
+      "No stable `code` field in error responses (e.g., `LOAN_LIMIT_REACHED`) \u2014 only human-readable string, preventing level 4",
+      "No OpenAPI examples defined for any response, including negative ACs \u2014 preventing level 4",
+      "400 validation errors return only `parsed.error.issues[0].message` (a single flat string like `\"Required\"`), not structured field-level error info \u2014 falls short of level 3's 'field-level error info' bar",
+      "Error handling is inline per-handler (catch + `instanceof DomainError`) rather than a single centralized error middleware \u2014 preventing level 5",
+      "Schemas use `nullable: true` on nested objects like `BookDetail.queue_position` and its children (openapi.yaml:323\u2013334), loosening the contract \u2014 preventing level 5",
+      "Evidence directory missing the route registration file the rubric says the judge receives; probe tests only a subset of negative ACs (no 402/403/409 scenario verification)"
+    ]
+  },
+  "parse_failed": false
+}

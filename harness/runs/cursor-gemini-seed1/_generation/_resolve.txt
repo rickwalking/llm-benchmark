@@ -1,0 +1,13 @@
+arg
+5400
+cursor-agent
+--print
+--yolo
+--trust
+--sandbox
+disabled
+--model
+gemini-3.1-pro
+--workspace
+/home/pmarins/projects/llm-benchmark-library/harness/runs/cursor-gemini-seed1/candidate
+==END==

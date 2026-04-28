@@ -1,0 +1,40 @@
+{
+  "vendor": "claude-opus47",
+  "model": "claude-opus-4-7",
+  "gen": "codex-gpt55",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 4,\n    \"alignment\": 4,\n    \"declarative\": 3,\n    \"atomic\": 4\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"AC IDs covered: @AC-1.1, @AC-1.2, @AC-1.3, @AC-1.4, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-3.6, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-4.5, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-5.6, @AC-6.1, @AC-6.2, @AC-6.3, @AC-6.4 \u2014 100% of the 29 listed ACs\",\n      \"Negative paths covered (e.g. 'Members cannot exceed five active loans', 'Suspended members cannot borrow', 'Duplicate ISBNs are rejected', 'Returned loans cannot be returned again', 'Stale notifications expire'); no Scenario Outline / boundary cases beyond AC list (e.g. no parametrized 4-vs-5-vs-6 loan boundary, no fine threshold sweep)\"\n    ],\n    \"alignment\": [\n      \"Every scenario carries an @AC tag (e.g. '@AC-3.2\\\\n  Scenario: Members cannot exceed five active loans')\",\n      \"Scenario names are human-readable AC restatements: 'Returning a reserved book notifies the head of the queue', 'A notified reservation can be fulfilled by checkout'\",\n      \"Background blocks remove setup duplication (us-3-lending.feature: shared books/members table); one AC per scenario; no Scenario Outline / per-row Examples tagging is used\"\n    ],\n    \"declarative\": [\n      \"Good: 'When the librarian lends \\\"Dune\\\" to Alice', 'Then Alice has 1 active loan', 'Then Bob's reservation for \\\"Dune\\\" is \\\"notified\\\"'\",\n      \"Bad \u2014 HTTP status codes leak into Then steps repeatedly: 'Then the response status is 201', 'Then the response status is 409', 'Then the response status is 404', 'Then the response status is 402', 'Then the response status is 403' \u2014 a librarian would not recognise these. Also magic numbers 'unpaid fines of 501 cents', 'is 3 days overdue' rather than named domain constants like <fine threshold> or <loan period>.\"\n    ],\n    \"atomic\": [\n      \"Atomic: 'When the librarian lends \\\"Dune\\\" to Alice'\",\n      \"Atomic chain via And, not compound: 'Given Alice has borrowed \\\"Dune\\\"\\\\n    And Bob reserves \\\"Dune\\\"\\\\n    And the librarian returns Alice's loan for \\\"Dune\\\"\\\\n    And Bob's notification for \\\"Dune\\\" is stale' \u2014 separate steps each, no compound 'and ... and' inside one step\",\n      \"All 198 steps in bdd-report.json show status 'passed' (0 failed/undefined), so step definitions are wired up and do not cap completeness\"\n    ]\n  },\n  \"final_score\": 4,\n  \"confidence\": \"high\"\n}\n```\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 4,
+      "alignment": 4,
+      "declarative": 3,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "AC IDs covered: @AC-1.1, @AC-1.2, @AC-1.3, @AC-1.4, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-3.6, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-4.5, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-5.6, @AC-6.1, @AC-6.2, @AC-6.3, @AC-6.4 \u2014 100% of the 29 listed ACs",
+        "Negative paths covered (e.g. 'Members cannot exceed five active loans', 'Suspended members cannot borrow', 'Duplicate ISBNs are rejected', 'Returned loans cannot be returned again', 'Stale notifications expire'); no Scenario Outline / boundary cases beyond AC list (e.g. no parametrized 4-vs-5-vs-6 loan boundary, no fine threshold sweep)"
+      ],
+      "alignment": [
+        "Every scenario carries an @AC tag (e.g. '@AC-3.2\\n  Scenario: Members cannot exceed five active loans')",
+        "Scenario names are human-readable AC restatements: 'Returning a reserved book notifies the head of the queue', 'A notified reservation can be fulfilled by checkout'",
+        "Background blocks remove setup duplication (us-3-lending.feature: shared books/members table); one AC per scenario; no Scenario Outline / per-row Examples tagging is used"
+      ],
+      "declarative": [
+        "Good: 'When the librarian lends \"Dune\" to Alice', 'Then Alice has 1 active loan', 'Then Bob's reservation for \"Dune\" is \"notified\"'",
+        "Bad \u2014 HTTP status codes leak into Then steps repeatedly: 'Then the response status is 201', 'Then the response status is 409', 'Then the response status is 404', 'Then the response status is 402', 'Then the response status is 403' \u2014 a librarian would not recognise these. Also magic numbers 'unpaid fines of 501 cents', 'is 3 days overdue' rather than named domain constants like <fine threshold> or <loan period>."
+      ],
+      "atomic": [
+        "Atomic: 'When the librarian lends \"Dune\" to Alice'",
+        "Atomic chain via And, not compound: 'Given Alice has borrowed \"Dune\"\\n    And Bob reserves \"Dune\"\\n    And the librarian returns Alice's loan for \"Dune\"\\n    And Bob's notification for \"Dune\" is stale' \u2014 separate steps each, no compound 'and ... and' inside one step",
+        "All 198 steps in bdd-report.json show status 'passed' (0 failed/undefined), so step definitions are wired up and do not cap completeness"
+      ]
+    },
+    "final_score": 4,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

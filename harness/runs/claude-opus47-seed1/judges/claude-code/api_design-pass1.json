@@ -1,0 +1,24 @@
+{
+  "criterion": "api_design",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "api_design",
+    "score": 3,
+    "anchor_match": "Reasonable \u2014 valid OpenAPI, complete coverage, correct status codes, single error shape, RESTful URLs, zod validation",
+    "evidence_quotes": [
+      "/runs/claude-opus47-seed1/candidate/backend/openapi.yaml is valid",
+      "if (err instanceof NotFoundError) return 404; if (err instanceof ConflictError) return 409; if (err instanceof ForbiddenError) return 403; if (err instanceof PaymentRequiredError) return 402; if (err instanceof ValidationError) return 400;",
+      "if (err instanceof ZodError) { res.status(400).json({ error: 'Validation failed', details: err.issues.map((issue) => ({ path: issue.path.join('.'), message: issue.message })) }); return; }",
+      "Error: type: object properties: error: { type: string } details: {} required: [error]",
+      "router.post('/loans/:id/return', ... ); router.post('/reservations/expire', ... ); router.delete('/reservations/:id', ... ); router.post('/fines/:id/pay', ... );",
+      "{\"method\":\"POST\",\"path\":\"/api/books\",\"status\":400,\"body\":\"{\\\"error\\\":\\\"Validation failed\\\",\\\"details\\\":[{\\\"path\\\":\\\"isbn\\\",\\\"message\\\":\\\"String must contain at least 10 character(s)\\\"}]}\"}",
+      "if (decision.reason === 'fines_exceeded') { throw new PaymentRequiredError('Outstanding fines exceed limit'); } if (decision.reason === 'loan_limit') { throw new ConflictError('Loan limit reached'); }",
+      "router.get('/books/:id', (req, res) => { expireStaleReservations(db); res.json(getBook(db, req.params.id)); });"
+    ],
+    "anchor_rejected_above": "Anchor 4 requires a stable machine-readable `code` field on error responses (e.g. 'LOAN_LIMIT_REACHED'), but the implementation only emits human messages: `res.status(statusForError(err)).json({ error: err.message })` and the OpenAPI Error schema is just `{ error: string, details: {} }` with no `code`. Anchor 4 also requires OpenAPI to describe meaningful examples for each negative AC \u2014 the spec contains no `examples` blocks anywhere. The error envelope itself is consistent and the mapping is centralized, but without the `code` field and examples, the contract stops at 'reasonable'.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

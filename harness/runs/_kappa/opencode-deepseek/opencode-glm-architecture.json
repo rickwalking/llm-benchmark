@@ -1,0 +1,21 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-glm",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"score\": 3,\n  \"anchors\": [\n    \"Backend has clear layers: `policy/` (pure business rules), `services/` (db + logic), `routes/` (HTTP), `db/` (connection). The handler at `backend/src/routes/loans.ts:19-43` delegates to `loanService.borrow()` \u2014 no SQL in the HTTP layer.\",\n    \"All business constants (`MAX_ACTIVE_LOANS`, `LOAN_PERIOD_DAYS`, fine rates, etc.) live in `policy/constants.ts` and are imported via `policy/index.ts`; no duplication found across `loan-handler.ts` and `loan-service.ts`.\",\n    \"`madge.json` shows no cycles and no orphans.\",\n    \"File-size distribution is healthy: the largest non-test file is `frontend/src/pages/MemberDetail.tsx` at 219 lines. No god-files (>800 lines) and all production files are under 300 lines.\",\n    \"Domain errors (`ConflictError`, `ForbiddenError`, `PaymentRequiredError`, `NotFoundError`) are a small named hierarchy in `errors.ts`, used in the service layer and mostly in the handler \u2014 though `loan-handler.ts:55` falls back to a string-match for `'Loan not found'` instead of using the imported `NotFoundError`, a minor layering leak.\",\n    \"Frontend has a clear `pages/`, `components/`, `api/` split with feature pages (`BookList`, `Checkout`, `MemberDetail`) in `pages/`. However, it is organized by *technical role* rather than by feature; the `features/` and `hooks/` directories are empty.\",\n    \"Services call `db.prepare(...)` directly (e.g., `loan-service.ts:17`) rather than through a thin typed query abstraction, which prevents score 4. Tests do not mirror source structure 1:1 (`api.test.ts` covers services but no per-service test files exist). No shared types package between frontend and backend is evident.\"\n  ]\n}\n```\n",
+  "parsed": {
+    "score": 3,
+    "anchors": [
+      "Backend has clear layers: `policy/` (pure business rules), `services/` (db + logic), `routes/` (HTTP), `db/` (connection). The handler at `backend/src/routes/loans.ts:19-43` delegates to `loanService.borrow()` \u2014 no SQL in the HTTP layer.",
+      "All business constants (`MAX_ACTIVE_LOANS`, `LOAN_PERIOD_DAYS`, fine rates, etc.) live in `policy/constants.ts` and are imported via `policy/index.ts`; no duplication found across `loan-handler.ts` and `loan-service.ts`.",
+      "`madge.json` shows no cycles and no orphans.",
+      "File-size distribution is healthy: the largest non-test file is `frontend/src/pages/MemberDetail.tsx` at 219 lines. No god-files (>800 lines) and all production files are under 300 lines.",
+      "Domain errors (`ConflictError`, `ForbiddenError`, `PaymentRequiredError`, `NotFoundError`) are a small named hierarchy in `errors.ts`, used in the service layer and mostly in the handler \u2014 though `loan-handler.ts:55` falls back to a string-match for `'Loan not found'` instead of using the imported `NotFoundError`, a minor layering leak.",
+      "Frontend has a clear `pages/`, `components/`, `api/` split with feature pages (`BookList`, `Checkout`, `MemberDetail`) in `pages/`. However, it is organized by *technical role* rather than by feature; the `features/` and `hooks/` directories are empty.",
+      "Services call `db.prepare(...)` directly (e.g., `loan-service.ts:17`) rather than through a thin typed query abstraction, which prevents score 4. Tests do not mirror source structure 1:1 (`api.test.ts` covers services but no per-service test files exist). No shared types package between frontend and backend is evident."
+    ]
+  },
+  "parse_failed": false
+}

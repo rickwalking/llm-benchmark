@@ -1,0 +1,36 @@
+```json
+{
+  "criterion": "gherkin",
+  "sub_scores": {
+    "completeness": 3,
+    "alignment": 4,
+    "declarative": 3,
+    "atomic": 4
+  },
+  "evidence_quotes": {
+    "completeness": [
+      "Tags present in features cover: AC-1.1, AC-1.2, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-3.6, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-6.1, AC-6.2, AC-6.3 — 25/29 = 86%",
+      "Missing AC IDs from features (no @AC-x.y tag exists): AC-1.3, AC-4.5, AC-5.6, AC-6.4",
+      "us4_returns.feature:23  Scenario Outline: Late returns produce a fine, capped at $10.00  Examples: | days_late | fine_cents | | 1 | 50 | | 5 | 250 | | 19 | 950 | | 20 | 1000 | | 25 | 1000 |",
+      "Negative scenarios are present in every user story (e.g. us3_lend.feature:24 '@AC-3.2 @negative Scenario: A 6th simultaneous loan is rejected'; us6_fines.feature:27 '@AC-6.3 @negative Scenario: Paying an already-paid fine is rejected'). All 33 scenarios pass per bdd-report.json (statuses={'passed'} for every element)."
+    ],
+    "alignment": [
+      "Every scenario carries exactly one AC tag, e.g. us3_lend.feature:16 '@AC-3.1\\n  Scenario: A successful checkout creates an active loan with a 14-day due date'",
+      "Scenario names are human-readable restatements of the AC: us3_lend.feature:25 'Scenario: A 6th simultaneous loan is rejected'; us3_lend.feature:39 'Scenario: A member with too many unpaid fines is blocked'; us4_returns.feature:65 'Scenario: Returning a copy with a queue notifies the head of the queue'",
+      "Background blocks remove setup duplication, e.g. us3_lend.feature:5 'Background: Given the library has the following members: | Alice | | Bob | And the library has the following books: | Dune | F. Herbert | 1 | ...'",
+      "Bidirectional traceability is broken: AC-1.3, AC-4.5, AC-5.6, AC-6.4 have no scenario at all — caps below the level-5 anchor"
+    ],
+    "declarative": [
+      "Good declarative steps: us3_lend.feature:18 'When the librarian lends \"Dune\" to \"Alice\"'; us4_returns.feature:17 'When the librarian returns \"Dune\" from \"Alice\"'; us5_reservations.feature:18 'When \"Alice\" reserves \"Dune\"'; us4_returns.feature:70 'And \"Alice\"'s reservation for \"Dune\" is in status \"notified\"'",
+      "Implementation/HTTP leakage that prevents level-4: every feature contains 'Then the request succeeds with status 201', 'Then the request fails with status 404', 'Then the request fails with status 409' (rubric level-4 requires 'No mention of HTTP status codes, JSON keys, or DOM elements'). Magic numbers also remain (us3_lend.feature:20 'And the loan due date is 14 days from today' rather than naming a 'loan period' constant)."
+    ],
+    "atomic": [
+      "Atomic single-action steps throughout, e.g. us3_lend.feature:18-22 'When the librarian lends \"Dune\" to \"Alice\" / Then the request succeeds with status 201 / And the loan due date is 14 days from today / And the available copies of \"Dune\" is 0 / And \"Alice\" now has 1 active loans' — no 'and ... and ...' chaining inside a single Given/When/Then",
+      "Composite Givens are used appropriately rather than over-decomposing: us3_lend.feature:26 'Given \"Alice\" has 5 active loans'; us3_lend.feature:33 'Given \"Alice\" is suspended'; us3_lend.feature:40 'Given \"Alice\" has unpaid fines totaling $5.01'",
+      "Slight over-decomposition in us1_catalog.feature:21-23 'Given \"Alice\" borrowed \"Dune\" / And \"Alice\" borrowed \"Dune\" / And \"Alice\" borrowed \"Dune\"' (three separate identical steps where a composite 'Given \"Alice\" has 3 active loans of \"Dune\"' would read better) — keeps this below the level-5 'judgment about when to compose vs. decompose is exercised well' anchor"
+    ]
+  },
+  "final_score": 3,
+  "confidence": "high"
+}
+```

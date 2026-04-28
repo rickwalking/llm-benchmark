@@ -1,0 +1,14 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "claude-opus47",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "{\"criterion\":\"ui_ux\",\"score\":1,\"justification\":\"The evidence directory does not contain the UI artifacts needed to demonstrate a usable librarian experience. The only files present are axe-summary.json, lighthouse-summary.json, and an empty screenshots/ directory; no page screenshots, checkout flow capture, modal interaction capture, or rendered HTML for catalog/member profile are available. axe-summary.json reports {\\\"skipped\\\":true,\\\"reason\\\":\\\"no axe spec in candidate\\\"}. lighthouse-summary.json shows the routes /books, /checkout, and /members were measurable with performance 0.88 and accessibility 0.98-1.0, but Lighthouse is context-only for this rubric and does not establish visual hierarchy, form quality, empty/error states, modal behavior, checkout UX, async feedback, or consistency. With no inspectable UI evidence beyond route existence, the work cannot be credited above the unusable tier for UI/UX.\"}\n",
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 1,
+    "justification": "The evidence directory does not contain the UI artifacts needed to demonstrate a usable librarian experience. The only files present are axe-summary.json, lighthouse-summary.json, and an empty screenshots/ directory; no page screenshots, checkout flow capture, modal interaction capture, or rendered HTML for catalog/member profile are available. axe-summary.json reports {\"skipped\":true,\"reason\":\"no axe spec in candidate\"}. lighthouse-summary.json shows the routes /books, /checkout, and /members were measurable with performance 0.88 and accessibility 0.98-1.0, but Lighthouse is context-only for this rubric and does not establish visual hierarchy, form quality, empty/error states, modal behavior, checkout UX, async feedback, or consistency. With no inspectable UI evidence beyond route existence, the work cannot be credited above the unusable tier for UI/UX."
+  },
+  "parse_failed": false
+}

@@ -1,0 +1,13 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "claude-opus47",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "```json\n{\"score\": 1, \"rationale\": \"No evaluable evidence exists for UI/UX quality. The evidence directory contains only lighthouse-summary.json (performance 0.88, accessibility 0.98-1.0 \u2014 explicitly noted as 'for context only, they have their own weight') and axe-summary.json (skipped: 'no axe spec in candidate'). The screenshots/ directory is empty. The rubric requires screenshots of every page in three states, captures of the checkout flow and a modal interaction, and rendered HTML of two representative pages \u2014 none of which are present. Without any visual or structural evidence, no criterion from the rubric can be assessed; the score defaults to 1 (Unusable) as there is zero demonstration of UI/UX design.\"}\n```\n",
+  "parsed": {
+    "score": 1,
+    "rationale": "No evaluable evidence exists for UI/UX quality. The evidence directory contains only lighthouse-summary.json (performance 0.88, accessibility 0.98-1.0 \u2014 explicitly noted as 'for context only, they have their own weight') and axe-summary.json (skipped: 'no axe spec in candidate'). The screenshots/ directory is empty. The rubric requires screenshots of every page in three states, captures of the checkout flow and a modal interaction, and rendered HTML of two representative pages \u2014 none of which are present. Without any visual or structural evidence, no criterion from the rubric can be assessed; the score defaults to 1 (Unusable) as there is zero demonstration of UI/UX design."
+  },
+  "parse_failed": false
+}

@@ -1,0 +1,29 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-glm",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "{\"score\":3,\"rationale\":\"The project is clean enough: backend code is separated into db, policy, routes, services, and errors; policy constants are centralized; HTTP handlers delegate to services; and madge reports no cycles or orphans. It does not reach 4 because services call better-sqlite3 directly, HTTP responses expose service-returned DB rows, the frontend is organized by technical role rather than feature ownership, and there is no evident shared frontend/backend type boundary.\",\"evidence\":[\"backend-tree.txt shows clear backend layers: db/, policy/, routes/, services/, errors.ts, app.ts.\",\"frontend-tree.txt shows a conventional split with api/, components/, pages/, but features/ is empty, so it is not feature-owned architecture.\",\"madge.json reports \\\"circular\\\": [] and \\\"orphans\\\": [].\",\"policy/constants.ts centralizes rule values including MAX_ACTIVE_LOANS = 5, LOAN_PERIOD_DAYS = 14, LATE_FINE_RATE_CENTS_PER_DAY = 50, RESERVATION_NOTIFICATION_HOURS = 48, and FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500.\",\"loan-service.ts imports policy functions from ../policy/index.js and uses domain errors from ../errors.js, which supports separation of business rules from HTTP handling.\",\"loan-handler.ts validates requests with zod and calls loanService.borrow / loanService.returnLoan instead of embedding SQL in the route handler.\",\"loan-service.ts directly imports better-sqlite3 and calls db.prepare throughout, so services are coupled to raw DB access rather than a thin query abstraction.\",\"loan-service.ts returns LoanRow from SELECT * and loan-handler.ts responds with res.status(201).json(loan), showing DB-shaped rows pass through to HTTP responses.\",\"file-sizes.csv has no god files or production files over 300 lines; the largest production excerpts are frontend/src/pages/MemberDetail.tsx at 219 lines and frontend/src/pages/Checkout.tsx at 191 lines, while backend/src/services/api.test.ts is 355 lines.\"],\"caps_or_penalties\":[\"No madge cycle cap applies.\",\"No god-file cap applies.\",\"Score capped below 4 by raw DB access in services, role-based frontend organization, and no visible shared type boundary.\"]}\n",
+  "parsed": {
+    "score": 3,
+    "rationale": "The project is clean enough: backend code is separated into db, policy, routes, services, and errors; policy constants are centralized; HTTP handlers delegate to services; and madge reports no cycles or orphans. It does not reach 4 because services call better-sqlite3 directly, HTTP responses expose service-returned DB rows, the frontend is organized by technical role rather than feature ownership, and there is no evident shared frontend/backend type boundary.",
+    "evidence": [
+      "backend-tree.txt shows clear backend layers: db/, policy/, routes/, services/, errors.ts, app.ts.",
+      "frontend-tree.txt shows a conventional split with api/, components/, pages/, but features/ is empty, so it is not feature-owned architecture.",
+      "madge.json reports \"circular\": [] and \"orphans\": [].",
+      "policy/constants.ts centralizes rule values including MAX_ACTIVE_LOANS = 5, LOAN_PERIOD_DAYS = 14, LATE_FINE_RATE_CENTS_PER_DAY = 50, RESERVATION_NOTIFICATION_HOURS = 48, and FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500.",
+      "loan-service.ts imports policy functions from ../policy/index.js and uses domain errors from ../errors.js, which supports separation of business rules from HTTP handling.",
+      "loan-handler.ts validates requests with zod and calls loanService.borrow / loanService.returnLoan instead of embedding SQL in the route handler.",
+      "loan-service.ts directly imports better-sqlite3 and calls db.prepare throughout, so services are coupled to raw DB access rather than a thin query abstraction.",
+      "loan-service.ts returns LoanRow from SELECT * and loan-handler.ts responds with res.status(201).json(loan), showing DB-shaped rows pass through to HTTP responses.",
+      "file-sizes.csv has no god files or production files over 300 lines; the largest production excerpts are frontend/src/pages/MemberDetail.tsx at 219 lines and frontend/src/pages/Checkout.tsx at 191 lines, while backend/src/services/api.test.ts is 355 lines."
+    ],
+    "caps_or_penalties": [
+      "No madge cycle cap applies.",
+      "No god-file cap applies.",
+      "Score capped below 4 by raw DB access in services, role-based frontend organization, and no visible shared type boundary."
+    ]
+  },
+  "parse_failed": false
+}

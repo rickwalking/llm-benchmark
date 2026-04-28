@@ -1,0 +1,281 @@
+
+> library-lending@1.0.0 mutation
+> stryker run tests/stryker.conf.json
+
+[32m06:40:18 (2129) INFO ProjectReader[39m Found 6 of 119 file(s) to be mutated.
+[32m06:40:19 (2129) INFO Instrumenter[39m Instrumented 6 source file(s) with 298 mutant(s)
+[32m06:40:19 (2129) INFO ConcurrencyTokenProvider[39m Creating 2 test runner process(es).
+[32m06:40:19 (2129) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m06:40:20 (2129) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m06:40:21 (2129) INFO DryRunExecutor[39m Initial test run succeeded. Ran 105 tests in 1 second (net 339.7657099999999 ms, overhead 669.2342900000001 ms).
+Mutation testing 17% (elapsed: <1m, remaining: <1m) 40/298 tested (1 survived, 0 timed out)
+Mutation testing 33% (elapsed: <1m, remaining: <1m) 108/298 tested (3 survived, 0 timed out)
+Mutation testing 50% (elapsed: <1m, remaining: <1m) 158/298 tested (6 survived, 0 timed out)
+Mutation testing 71% (elapsed: <1m, remaining: <1m) 213/298 tested (8 survived, 0 timed out)
+Mutation testing 93% (elapsed: <1m, remaining: <1m) 262/298 tested (10 survived, 0 timed out)
+
+All tests
+  policy/policy.test.ts
+    ✘ policy constants expose the documented business values (covered 0)
+    ~ computeFineCents returns 0 when returned exactly at the due moment (covered 7)
+    ~ computeFineCents returns 0 when returned before the due date (covered 7)
+    ~ computeFineCents charges 50c for any partial day late (1ms over) (covered 9)
+    ~ computeFineCents charges 50c at exactly 1 day late (covered 9)
+    ~ computeFineCents charges 100c just past 1 day late (covered 9)
+    ~ computeFineCents charges 950c at 19 days late (cap minus one day) (covered 9)
+    ~ computeFineCents charges exactly the cap at 20 days late (covered 9)
+    ~ computeFineCents caps at 1000c past the cap (21 days late) (covered 9)
+    ~ computeFineCents caps at 1000c far past the cap (60 days late) (covered 9)
+    ✓ canBorrow allows an active member with no fines and no loans (killed 2)
+    ~ canBorrow blocks a suspended member regardless of other state (covered 9)
+    ~ canBorrow blocks a suspended member even when fines are zero and loans are at limit (covered 9)
+    ~ canBorrow allows borrowing at exactly 4 active loans (covered 15)
+    ~ canBorrow blocks borrowing at exactly 5 active loans (covered 17)
+    ~ canBorrow blocks borrowing above the loan limit (covered 17)
+    ~ canBorrow allows borrowing at $4.99 in fines (covered 15)
+    ~ canBorrow allows borrowing at exactly $5.00 in fines (covered 15)
+    ~ canBorrow blocks borrowing at $5.01 in fines (covered 13)
+    ~ canBorrow prefers the suspended reason over fines (covered 9)
+    ~ canBorrow prefers the fines reason over the loan limit (covered 13)
+    ✓ nextReservationToNotify returns null when there are no waiting reservations (killed 7)
+    ✓ nextReservationToNotify returns the only waiting reservation (killed 6)
+    ✓ nextReservationToNotify returns the earliest queued waiting reservation (killed 6)
+    ~ nextReservationToNotify skips notified, cancelled, expired, and fulfilled reservations (covered 13)
+    ~ nextReservationToNotify returns null on an empty list (covered 7)
+    ✓ dueDateFromBorrow adds exactly 14 days (killed 3)
+    ✓ reservationExpiry adds exactly 48 hours (killed 5)
+  services
+    services.test.ts
+      ✓ books AC-1.1 lists books sorted by title (case-insensitive) (killed 3)
+      ✓ books AC-1.2 includes reservation_queue_depth on detail (killed 23)
+      ~ books AC-1.4 returns 404 for unknown book (covered 10)
+      ~ books AC-2.1 creates a book and returns 201 (covered 9)
+      ~ books AC-2.2 rejects duplicate ISBN with 409 (covered 11)
+      ✘ books rejects invalid ISBN with 400 (covered 0)
+      ✘ books rejects total_copies < 1 with 400 (covered 0)
+      ~ members AC-2.3 creates a member (covered 11)
+      ~ members AC-2.4 rejects duplicate email with 409 (covered 13)
+      ✘ members rejects invalid email with 400 (covered 0)
+      ✓ members AC-6.1 includes unpaid_fines_cents on member detail (killed 5)
+      ✓ loans AC-3.1 borrowing returns 201 and decreases available_copies (killed 4)
+      ✓ loans AC-3.2 rejects 6th simultaneous loan with 409 (killed 14)
+      ~ loans AC-3.2 allows 5th loan and surfaces a warning (covered 75)
+      ✓ loans AC-3.3 rejects suspended members with 403 (killed 7)
+      ✓ loans AC-3.4 rejects when fines exceed $5.00 (boundary $5.01) (killed 6)
+      ✓ loans AC-3.4 allows when fines equal exactly $5.00 (killed 1)
+      ✓ loans AC-3.5 returns 409 with reservation message when no copies available (killed 5)
+      ✓ loans AC-4.1 returning a loan increments available copies (killed 3)
+      ✓ loans AC-4.2 creates a fine for late return (killed 5)
+      ~ loans AC-4.2 caps a 30-day-late fine at $10.00 (covered 104)
+      ~ loans AC-4.3 rejects double-return with 409 (covered 102)
+      ✓ loans AC-4.4 returning notifies head of queue and keeps copy unavailable (killed 6)
+      ✓ reservations AC-5.1 creates a waiting reservation (killed 2)
+      ✓ reservations AC-5.2 rejects when the member already has it on loan (killed 1)
+      ✓ reservations AC-5.3 rejects duplicate reservation (killed 1)
+      ✓ reservations AC-5.4 notified member can borrow, fulfilling reservation (killed 7)
+      ✓ reservations AC-5.4 rejects another member borrowing while reserved-for (killed 3)
+      ✓ reservations AC-5.5 expires stale notified reservations and notifies next (killed 3)
+      ✓ reservations cancelling a notified reservation promotes the next one (killed 6)
+      ~ fines AC-6.2 marks a fine paid (covered 113)
+      ~ fines AC-6.3 rejects paying an already-paid fine with 409 (covered 115)
+      ~ fines returns 404 paying an unknown fine (covered 6)
+    services.unit.test.ts
+      ✓ bookService unit createBook trims title, author, and isbn (killed 7)
+      ✓ bookService unit createBook throws ConflictError on duplicate ISBN (specific message) (killed 3)
+      ✓ bookService unit listBooks sorts case-insensitively by title (killed 1)
+      ✓ bookService unit listBooks computes available_copies as total minus active loans minus notified holds (killed 28)
+      ✓ bookService unit getBook returns notFound message exactly "Book not found" (killed 5)
+      ✓ bookService unit getBook reports queue depth and active loans (killed 1)
+      ✓ memberService unit createMember lowercases and trims the email (killed 4)
+      ✓ memberService unit createMember rejects duplicate email with the exact message (killed 3)
+      ✓ memberService unit listMembers sorts by name (killed 1)
+      ✓ memberService unit getMemberRow throws "Member not found" for unknown id (killed 3)
+      ✓ memberService unit unpaidFinesCentsFor returns 0 when there are no fines (killed 1)
+      ~ memberService unit activeLoanCountFor returns 0 when there are no loans (covered 12)
+      ✓ memberService unit getMemberDetail aggregates loans, reservations, fines, and unpaid totals (killed 4)
+      ✓ loanService unit borrow throws NotFoundError for unknown book (killed 2)
+      ~ loanService unit borrow throws NotFoundError for unknown member (covered 23)
+      ✓ loanService unit borrow returns no warning at 4 active loans (killed 4)
+      ✓ loanService unit borrow returns the 5th-loan warning at exactly 5 active loans (killed 4)
+      ✓ loanService unit borrow throws ConflictError "Loan limit reached" at the 6th loan (killed 5)
+      ✓ loanService unit borrow throws ForbiddenError "Member is suspended" for suspended members (killed 3)
+      ✓ loanService unit borrow throws PaymentRequiredError "Outstanding fines exceed limit" when fines > $5.00 (killed 4)
+      ~ loanService unit borrow throws ConflictError "No copies available — reserve instead" when no copies (covered 75)
+      ✓ loanService unit borrow throws "Book is reserved for another member" when notified hold belongs to someone else (killed 2)
+      ~ loanService unit borrow fulfils the notified reservation and marks status fulfilled (covered 135)
+      ✓ loanService unit returnLoan throws "Loan not found" for unknown loan id (killed 3)
+      ✓ loanService unit returnLoan throws "Loan already returned" on second attempt (killed 4)
+      ✓ loanService unit returnLoan creates no fine when on time and no fine row exists (killed 6)
+      ✓ loanService unit returnLoan creates a fine row for late returns (killed 5)
+      ~ loanService unit returnLoan promotes the next waiting reservation when no notified hold exists (covered 129)
+      ~ loanService unit returnLoan does not promote a waiting reservation when a notified hold already exists (covered 129)
+      ~ loanService unit listActiveLoans returns only loans without returned_at, sorted by due_at (covered 101)
+      ✓ reservationService unit createReservation rejects unknown book with NotFoundError "Book not found" (killed 3)
+      ✓ reservationService unit createReservation rejects unknown member with NotFoundError "Member not found" (killed 3)
+      ✓ reservationService unit createReservation rejects when member already has the book on loan (killed 2)
+      ✓ reservationService unit createReservation rejects a duplicate active reservation (killed 2)
+      ✓ reservationService unit cancelReservation throws NotFoundError "Reservation not found" for unknown id (killed 3)
+      ✓ reservationService unit cancelReservation throws ConflictError when reservation is not active (killed 9)
+      ✓ reservationService unit cancelling a notified reservation promotes the next waiter (killed 5)
+      ✓ reservationService unit expireStaleReservations is a no-op when nothing has expired (killed 1)
+      ✓ reservationService unit expireStaleReservations expires notified holds past their expires_at and notifies the next (killed 2)
+      ✓ reservationService unit promoteNextWaiting is a no-op when no waiting reservations exist (killed 1)
+      ✓ fineService unit payFine throws "Fine not found" for unknown id (killed 5)
+      ✓ fineService unit payFine sets paid_at to a non-null value and returns it (killed 5)
+      ✓ fineService unit payFine throws ConflictError "Fine already paid" the second time (killed 3)
+      ✓ fineService unit listFines returns only fines for the given member when filtered (killed 3)
+
+[Survived] EqualityOperator
+backend/src/policy/index.ts:36:7
+-     if (diffMs <= 0) {
++     if (diffMs < 0) {
+Tests ran:
+    bookService unit listBooks computes available_copies as total minus active loans minus notified holds
+    loanService unit borrow throws "Book is reserved for another member" when notified hold belongs to someone else
+    loanService unit borrow fulfils the notified reservation and marks status fulfilled
+  and 29 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/policy/index.ts:71:9
+-       if (candidate.queued_at < head.queued_at) {
++       if (true) {
+Tests ran:
+    nextReservationToNotify returns the earliest queued waiting reservation
+
+
+[Survived] EqualityOperator
+backend/src/policy/index.ts:71:9
+-       if (candidate.queued_at < head.queued_at) {
++       if (candidate.queued_at <= head.queued_at) {
+Tests ran:
+    nextReservationToNotify returns the earliest queued waiting reservation
+
+
+[Survived] StringLiteral
+backend/src/services/loanService.ts:43:29
+-       throw new NotFoundError('Book not found');
++       throw new NotFoundError("");
+Tests ran:
+    loanService unit borrow throws NotFoundError for unknown book
+
+
+[Survived] ConditionalExpression
+backend/src/services/loanService.ts:51:7
+-     if (!decision.allowed) {
++     if (true) {
+Tests ran:
+    bookService unit listBooks computes available_copies as total minus active loans minus notified holds
+    bookService unit getBook reports queue depth and active loans
+    memberService unit getMemberDetail aggregates loans, reservations, fines, and unpaid totals
+  and 45 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/services/loanService.ts:58:9
+-       if (decision.reason === 'loan_limit') {
++       if (true) {
+Tests ran:
+    loanService unit borrow throws ConflictError "Loan limit reached" at the 6th loan
+    loans AC-3.2 rejects 6th simultaneous loan with 409
+
+
+[Survived] ConditionalExpression
+backend/src/services/loanService.ts:97:9
+-       if (fulfillingReservationId) {
++       if (true) {
+Tests ran:
+    bookService unit listBooks computes available_copies as total minus active loans minus notified holds
+    bookService unit getBook reports queue depth and active loans
+    memberService unit getMemberDetail aggregates loans, reservations, fines, and unpaid totals
+  and 43 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/services/loanService.ts:170:9
+-       if (!hasNotified) {
++       if (true) {
+Tests ran:
+    bookService unit listBooks computes available_copies as total minus active loans minus notified holds
+    loanService unit borrow throws "Book is reserved for another member" when notified hold belongs to someone else
+    loanService unit borrow fulfils the notified reservation and marks status fulfilled
+  and 20 more tests!
+
+
+[Survived] MethodExpression
+backend/src/services/memberService.ts:106:23
+-     const memberSince = new Date().toISOString().slice(0, 10);
++     const memberSince = new Date().toISOString();
+Tests ran:
+    bookService unit listBooks computes available_copies as total minus active loans minus notified holds
+    bookService unit getBook reports queue depth and active loans
+    memberService unit createMember lowercases and trims the email
+  and 54 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:40:11
+-         if (next) {
++         if (true) {
+Tests ran:
+    reservationService unit expireStaleReservations expires notified holds past their expires_at and notifies the next
+    reservations AC-5.5 expires stale notified reservations and notifies next
+
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:110:23
+-     const wasNotified = row.status === 'notified';
++     const wasNotified = true;
+Tests ran:
+    reservationService unit cancelReservation throws ConflictError when reservation is not active
+    reservationService unit cancelling a notified reservation promotes the next waiter
+    reservations cancelling a notified reservation promotes the next one
+
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:113:7
+-     if (wasNotified) {
++     if (true) {
+Tests ran:
+    reservationService unit cancelReservation throws ConflictError when reservation is not active
+    reservationService unit cancelling a notified reservation promotes the next waiter
+    reservations cancelling a notified reservation promotes the next one
+
+
+[Survived] ObjectLiteral
+backend/src/services/reservationService.ts:117:10
+-     return { ...row, status: 'cancelled' };
++     return {};
+Tests ran:
+    reservationService unit cancelReservation throws ConflictError when reservation is not active
+    reservationService unit cancelling a notified reservation promotes the next waiter
+    reservations cancelling a notified reservation promotes the next one
+
+
+[Survived] StringLiteral
+backend/src/services/reservationService.ts:117:28
+-     return { ...row, status: 'cancelled' };
++     return { ...row, status: "" };
+Tests ran:
+    reservationService unit cancelReservation throws ConflictError when reservation is not active
+    reservationService unit cancelling a notified reservation promotes the next waiter
+    reservations cancelling a notified reservation promotes the next one
+
+
+Ran 3.95 tests per mutant on average.
+------------------------|------------------|----------|-----------|------------|----------|----------|
+                        | % Mutation score |          |           |            |          |          |
+File                    |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+------------------------|--------|---------|----------|-----------|------------|----------|----------|
+All files               |  95.30 |   95.30 |      284 |         0 |         14 |        0 |        0 |
+ policy                 |  95.65 |   95.65 |       66 |         0 |          3 |        0 |        0 |
+  index.ts              |  95.65 |   95.65 |       66 |         0 |          3 |        0 |        0 |
+ services               |  95.20 |   95.20 |      218 |         0 |         11 |        0 |        0 |
+  bookService.ts        | 100.00 |  100.00 |       30 |         0 |          0 |        0 |        0 |
+  fineService.ts        | 100.00 |  100.00 |       17 |         0 |          0 |        0 |        0 |
+  loanService.ts        |  94.19 |   94.19 |       81 |         0 |          5 |        0 |        0 |
+  memberService.ts      |  96.55 |   96.55 |       28 |         0 |          1 |        0 |        0 |
+  reservationService.ts |  92.54 |   92.54 |       62 |         0 |          5 |        0 |        0 |
+------------------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m06:41:18 (2129) INFO MutationTestReportHelper[39m Final mutation score of 95.30 is greater than or equal to break threshold 80
+[32m06:41:18 (2129) INFO MutationTestExecutor[39m Done in 1 minute and 0 seconds.

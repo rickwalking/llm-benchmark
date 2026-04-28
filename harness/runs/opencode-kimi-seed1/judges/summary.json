@@ -1,0 +1,123 @@
+{
+  "judge": "claude-code",
+  "passes": 1,
+  "results": {
+    "ui_ux": [
+      {
+        "criterion": "ui_ux",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "ui_ux",
+          "score": 3,
+          "anchor_match": "Competent \u2014 clear hierarchy, consistent layout, working loading/empty/error states, focus-trapped modals, step indicator with back-nav",
+          "evidence_quotes": [
+            "frontend/src/components/Modal.tsx:14-71 \u2014 `useEffect(() => { ... if (e.key === 'Escape') onClose(); ... if (e.target === overlayRef.current) onClose(); ... const handleTabKey = (e) => { if (e.key !== 'Tab') return; ... } ... firstElement?.focus();` (focus trap, ESC, overlay-click close, autofocus)",
+            "frontend/src/pages/CheckoutPage.tsx:9 `const STEPS = ['Select Member', 'Select Book', 'Confirm']` and lines 59-75 render `<div className=\"step-indicator\" role=\"tablist\">` with `index < currentStep ? 'completed' : ''` \u2014 visible step indicator with back nav at lines 207-213 (`<Button variant=\"secondary\" onClick={() => setCurrentStep(prev => prev - 1)} disabled={currentStep === 0}>Back</Button>`)",
+            "frontend/src/pages/MembersPage.tsx:74-78 `<EmptyState message=\"No members yet.\" action={<Button onClick={() => setShowAddModal(true)}>Add First Member</Button>} />` \u2014 empty state with primary CTA",
+            "frontend/src/pages/BooksPage.tsx:16-22 `{isAllOnLoan ? (<span className=\"unavailable\">All copies on loan</span>) : (<span ...>{book.available_copies} of {book.total_copies} available</span>)}` \u2014 microcopy upgrade vs. '0 available'",
+            "frontend/src/components/Status.tsx:1-8 `<div className=\"loading\" role=\"status\" aria-label=\"Loading\"><div className=\"loading-spinner\"></div><p>Loading...</p></div>` \u2014 loading indicator",
+            "frontend/src/pages/MembersPage.tsx:99-106 `<label htmlFor=\"member-name\">Name *</label><input id=\"member-name\" type=\"text\" ... required />` \u2014 labeled inputs, but only HTML `required`; error path is generic server-mirrored `formError` shown via `<p className=\"error-text\">{formError}</p>` (no field-specific inline messages like 'ISBN must be 10 or 13 digits')"
+          ],
+          "anchor_rejected_above": "Level 4 fails on multiple required anchors. (a) The reservation countdown is computed once per render with no setInterval/state tick \u2014 `BookDetailPage.tsx:10-22 formatTimeRemaining` is called inline at line 103 inside JSX with no useEffect to re-render, so the HH:MM:SS does NOT 'update without page reload'. (b) The catalog has no secondary affordance: `BooksPage.tsx:42-51` renders `<div className=\"books-grid\">{books.map(book => <BookCard.../>)}</div>` with zero sort, filter, or search controls. (c) Confirm-destructive actions lack a distinct danger treatment \u2014 `MemberDetailPage.tsx:130-139` uses default-primary `<Button onClick={...}>Confirm Payment</Button>` (a `.btn-danger` class exists in `index.css:200-207` but is unused in any flow). (d) Visual emphasis is mostly color, not 'color + icon': the overdue badge `index.css:484-491` and `MemberDetailPage.tsx:38 <span className=\"overdue-badge\">{loan.days_overdue} days overdue</span>` is text+color only with no icon.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "api_design": [
+      {
+        "criterion": "api_design",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "api_design",
+          "score": 3,
+          "anchor_match": "Reasonable: valid OpenAPI, REST URLs, consistent error shape, zod validation",
+          "evidence_quotes": [
+            "/runs/opencode-kimi-seed1/candidate/backend/openapi.yaml is valid",
+            "{\"method\":\"POST\",\"path\":\"/api/loans\",\"status\":400,\"body\":\"{\\\"error\\\":\\\"Invalid input\\\",\\\"details\\\":[{\\\"validation\\\":\\\"uuid\\\",\\\"code\\\":\\\"invalid_string\\\",\\\"message\\\":\\\"Invalid uuid\\\",\\\"path\\\":[\\\"member_id\\\"]}",
+            "if (eligibility.reason === 'suspended') {\n      throw new ForbiddenError(eligibility.message);\n    }\n    if (eligibility.reason === 'loan_limit') {\n      throw new ConflictError(eligibility.message);\n    }\n    if (eligibility.reason === 'outstanding_fines') {\n      throw new PaymentRequiredError(eligibility.message);\n    }",
+            "Error:\n      type: object\n      required:\n        - error\n      properties:\n        error:\n          type: string",
+            "router.post('/:id/return', (req, res) => {\n    try {\n      const loan = loanService.returnLoan(db, req.params.id);",
+            "// GET /api/members/:id/loans/history - Get member's loan history\n  router.get('/:id/loans/history', (req, res) => {",
+            "router.post('/', (req, res) => {\n    try {\n      const input = createLoanSchema.parse(req.body);\n      const loan = loanService.createLoan(db, input);\n      res.status(201).json(loan);\n    } catch (error) {\n      if (error instanceof z.ZodError) {\n        res.status(400).json({ error: 'Invalid input', details: error.errors });"
+          ],
+          "anchor_rejected_above": "Anchor 4 fails on three counts: (1) error responses contain only a human `error` string with no stable machine-readable `code` field \u2014 domain errors map to HTTP via class checks per handler but the wire payload exposes no code (e.g., no 'LOAN_LIMIT_REACHED'); (2) the OpenAPI spec contains zero `examples` for the negative ACs (402, 403, 409 responses each just `$ref` the Error schema with no example body); (3) response envelopes are not fully consistent \u2014 `POST /reservations/:id/cancel` returns `{success: true}` while sibling mutations like `POST /loans/:id/return` return the full resource. Additionally, `GET /api/members/:id/loans/history` is implemented in routes/members.ts but is absent from openapi.yaml, a minor implementation/spec drift that prevents the 'every endpoint present' clause of anchor 3 from being clean and certainly blocks anchor 4.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "architecture": [
+      {
+        "criterion": "architecture",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "architecture",
+          "score": 3,
+          "anchor_match": "Clean enough",
+          "evidence_quotes": [
+            "src/\n\u251c\u2500\u2500 db/\n\u2502   \u2514\u2500\u2500 database.ts\n\u251c\u2500\u2500 policy/\n\u2502   \u251c\u2500\u2500 index.ts\n\u2502   \u2514\u2500\u2500 policy.test.ts\n\u251c\u2500\u2500 routes/\n\u2502   \u251c\u2500\u2500 books.ts\n\u2502   \u251c\u2500\u2500 fines.ts\n\u2502   \u251c\u2500\u2500 loans.ts\n\u2502   \u251c\u2500\u2500 members.ts\n\u2502   \u2514\u2500\u2500 reservations.ts\n\u251c\u2500\u2500 services/\n\u2502   \u251c\u2500\u2500 bookService.ts\n\u2502   \u251c\u2500\u2500 fineService.ts\n\u2502   \u251c\u2500\u2500 loanService.ts\n\u2502   \u251c\u2500\u2500 memberService.ts\n\u2502   \u251c\u2500\u2500 reservationService.ts\n\u2502   \u2514\u2500\u2500 services.test.ts\n\u251c\u2500\u2500 errors.ts\n\u2514\u2500\u2500 index.ts",
+            "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+            "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50; // $0.50\nexport const LATE_FINE_CAP_CENTS = 1000; // $10.00\nexport const RESERVATION_NOTIFICATION_HOURS = 48;\nexport const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500; // $5.00",
+            "import { NotFoundError, ConflictError, ForbiddenError, PaymentRequiredError } from '../errors.js';\nimport * as policy from '../policy/index.js';",
+            "backend/src/services/loanService.ts,262 (largest source file; no files >300 lines)",
+            "src/\n\u251c\u2500\u2500 components/\n\u2502   \u251c\u2500\u2500 Button.tsx\n\u2502   \u251c\u2500\u2500 Layout.tsx\n\u2502   \u251c\u2500\u2500 Modal.tsx\n\u2502   \u2514\u2500\u2500 Status.tsx\n\u251c\u2500\u2500 contexts/\n\u251c\u2500\u2500 hooks/\n\u2502   \u2514\u2500\u2500 useApi.ts\n\u251c\u2500\u2500 pages/\n\u251c\u2500\u2500 types/\n\u2502   \u2514\u2500\u2500 index.ts"
+          ],
+          "anchor_rejected_above": "Anchor 4 (Well-modularized) does not match because: (a) services call raw `db.prepare(...)` directly throughout loanService.ts (e.g., `const memberStmt = db.prepare('SELECT status FROM members WHERE id = ?');`) rather than going through a thin DB-access abstraction; (b) the frontend is organized by technical role (`components/`, `hooks/`, `pages/`, `types/`) \u2014 not by feature (no `checkout/`, `members/`, `books/` feature folders); (c) shared types are duplicated \u2014 frontend/src/types/index.ts redeclares `Loan`, `LoanWithBook`, `Book`, `Member` etc. that already exist in the backend services (e.g., `loanService.ts` exports its own `Loan` and `LoanWithBook`), with no shared workspace or generated client.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "gherkin": [
+      {
+        "criterion": "gherkin",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "gherkin",
+          "sub_scores": {
+            "completeness": 2,
+            "alignment": 4,
+            "declarative": 3,
+            "atomic": 4
+          },
+          "evidence_quotes": {
+            "completeness": [
+              "AC IDs from REQUIREMENTS: AC-1.1..AC-1.4, AC-2.1..AC-2.4, AC-3.1..AC-3.6, AC-4.1..AC-4.5, AC-5.1..AC-5.6, AC-6.1..AC-6.4 (29 total). Tagged in features: AC-1.1, AC-1.2, AC-1.4, AC-2.1-2.4, AC-3.1-3.5, AC-4.1-4.4, AC-5.1-5.5, AC-6.1-6.3 (24/29 = ~83%). Missing: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4.",
+              "Running `npm run test:bdd` fails to load step definitions: `SyntaxError: The requested module '@playwright/test' does not provide an export named 'APIRequestContext' at ModuleJobSync.runSync` \u2014 and steps.ts contains zero step bindings for lending/returns/reservations/fines scenarios (e.g., no Given for `a member \"Alice\" with ID \"m1\" is active`, no When for `the librarian lends the book to the member`, no Then for `a fine of $3.00 is created`). Per rubric note, this caps completeness at 2."
+            ],
+            "alignment": [
+              "@AC-3.2\\n  Scenario: Reject loan when member has reached loan limit",
+              "@AC-4.2\\n  Scenario: Return a book very late with fine cap",
+              "Every scenario across all 6 feature files carries exactly one @AC-x.y tag, and scenario titles are human-readable restatements of the AC. However, AC-1.3, AC-3.6, AC-4.5, AC-5.6, and AC-6.4 have no scenarios \u2014 bidirectional traceability fails."
+            ],
+            "declarative": [
+              "Good: `When the librarian lends the book to the member` / `Then the loan is created` / `And sets the due date to 14 days from now` (lending.feature:13-15)",
+              "Bad (HTTP status leakage throughout): `Then the system returns a 409 error` (lending.feature:22), `Then the system returns a 402 error` (lending.feature:36), `Then the system returns a 404 error` (catalog.feature:25) \u2014 implementation-leaky terms in business specs prevent score 4."
+            ],
+            "atomic": [
+              "Given a member \"Alice\" with ID \"m1\" is active",
+              "And a book \"The Hobbit\" with ID \"b1\" has available copies",
+              "When the librarian lends the book to the member",
+              "Then the system creates a loan",
+              "And sets the due date to 14 days from now",
+              "And decreases the available copies by 1",
+              "Slight compound exception: `And each book shows title, author, ISBN, total copies, and available copies` (catalog.feature:13)"
+            ]
+          },
+          "final_score": 3,
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ]
+  }
+}

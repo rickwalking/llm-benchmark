@@ -1,0 +1,689 @@
+{
+  "models": [
+    {
+      "model": "opencode-deepseek",
+      "n": 1,
+      "mean": 71.25,
+      "stdev": 0.0,
+      "min": 71.25,
+      "max": 71.25,
+      "seeds": [
+        {
+          "run": "/home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-deepseek-seed1",
+          "final_score": 71.25,
+          "per_criterion": {
+            "first_run_success": 1.0,
+            "functional_correctness": 1.0,
+            "mutation_score": 0.0,
+            "ui_ux": 0.75,
+            "api_design": 0.75,
+            "architecture": 0.75,
+            "gherkin": 0.5,
+            "security": 1.0
+          },
+          "objective_detail": {
+            "first_run_success": {
+              "score": 1.0,
+              "detail": {
+                "install": true,
+                "booted": true
+              }
+            },
+            "functional_correctness": {
+              "score": 1.0,
+              "detail": {
+                "e2e_pass": 0,
+                "e2e_total": 0,
+                "bdd_pass": 25,
+                "bdd_total": 25
+              }
+            },
+            "mutation_score": {
+              "score": 0.0,
+              "detail": {
+                "reason": "no mutation report"
+              }
+            },
+            "security": {
+              "score": 1.0,
+              "detail": {
+                "high": 0,
+                "critical": 0
+              }
+            },
+            "ui_ux": {
+              "score": 1.0,
+              "detail": {
+                "axe_serious": 0,
+                "axe_critical": 0,
+                "lighthouse_min_perf": 0.85
+              }
+            },
+            "api_design": {
+              "score": 1.0,
+              "detail": {
+                "openapi_valid": true,
+                "probe_non5xx_rate": 1.0
+              }
+            },
+            "architecture": {
+              "score": 1.0,
+              "detail": {
+                "cycles": 0,
+                "file_size_p95": 251
+              }
+            }
+          },
+          "judge_detail": {
+            "ui_ux": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "ui_ux-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "api_design": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "api_design-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "architecture": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "architecture-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "gherkin": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "gherkin-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "codex-gpt55",
+      "n": 1,
+      "mean": 70.0,
+      "stdev": 0.0,
+      "min": 70.0,
+      "max": 70.0,
+      "seeds": [
+        {
+          "run": "/home/pmarins/projects/llm-benchmark-library/harness/runs/codex-gpt55-seed1",
+          "final_score": 70.0,
+          "per_criterion": {
+            "first_run_success": 1.0,
+            "functional_correctness": 1.0,
+            "mutation_score": 0.0,
+            "ui_ux": 0.5,
+            "api_design": 0.75,
+            "architecture": 0.75,
+            "gherkin": 0.75,
+            "security": 1.0
+          },
+          "objective_detail": {
+            "first_run_success": {
+              "score": 1.0,
+              "detail": {
+                "install": true,
+                "booted": true
+              }
+            },
+            "functional_correctness": {
+              "score": 1.0,
+              "detail": {
+                "e2e_pass": 0,
+                "e2e_total": 0,
+                "bdd_pass": 29,
+                "bdd_total": 29
+              }
+            },
+            "mutation_score": {
+              "score": 0.0,
+              "detail": {
+                "reason": "no mutation report"
+              }
+            },
+            "security": {
+              "score": 1.0,
+              "detail": {
+                "high": 0,
+                "critical": 0
+              }
+            },
+            "ui_ux": {
+              "score": 0.5,
+              "detail": {
+                "axe_serious": 0,
+                "axe_critical": 0,
+                "lighthouse_min_perf": 0.78
+              }
+            },
+            "api_design": {
+              "score": 1.0,
+              "detail": {
+                "openapi_valid": true,
+                "probe_non5xx_rate": 1.0
+              }
+            },
+            "architecture": {
+              "score": 1.0,
+              "detail": {
+                "cycles": 0,
+                "file_size_p95": 160
+              }
+            }
+          },
+          "judge_detail": {
+            "ui_ux": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "ui_ux-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "api_design": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "api_design-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "architecture": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "architecture-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "gherkin": {
+              "score": 0.75,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "gherkin-pass1.json",
+                    "score": 4
+                  }
+                ],
+                "median": 4,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.75
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "claude-opus47",
+      "n": 1,
+      "mean": 68.75,
+      "stdev": 0.0,
+      "min": 68.75,
+      "max": 68.75,
+      "seeds": [
+        {
+          "run": "/home/pmarins/projects/llm-benchmark-library/harness/runs/claude-opus47-seed1",
+          "final_score": 68.75,
+          "per_criterion": {
+            "first_run_success": 1.0,
+            "functional_correctness": 1.0,
+            "mutation_score": 0.0,
+            "ui_ux": 0.75,
+            "api_design": 0.75,
+            "architecture": 0.5,
+            "gherkin": 0.5,
+            "security": 1.0
+          },
+          "objective_detail": {
+            "first_run_success": {
+              "score": 1.0,
+              "detail": {
+                "install": true,
+                "booted": true
+              }
+            },
+            "functional_correctness": {
+              "score": 1.0,
+              "detail": {
+                "e2e_pass": 0,
+                "e2e_total": 0,
+                "bdd_pass": 33,
+                "bdd_total": 33
+              }
+            },
+            "mutation_score": {
+              "score": 0.0,
+              "detail": {
+                "reason": "no mutation report"
+              }
+            },
+            "security": {
+              "score": 1.0,
+              "detail": {
+                "high": 0,
+                "critical": 0
+              }
+            },
+            "ui_ux": {
+              "score": 1.0,
+              "detail": {
+                "axe_serious": 0,
+                "axe_critical": 0,
+                "lighthouse_min_perf": 0.88
+              }
+            },
+            "api_design": {
+              "score": 1.0,
+              "detail": {
+                "openapi_valid": true,
+                "probe_non5xx_rate": 1.0
+              }
+            },
+            "architecture": {
+              "score": 0.5,
+              "detail": {
+                "cycles": 0,
+                "file_size_p95": 486
+              }
+            }
+          },
+          "judge_detail": {
+            "ui_ux": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "ui_ux-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "api_design": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "api_design-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "architecture": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "architecture-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "gherkin": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "gherkin-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "opencode-kimi",
+      "n": 1,
+      "mean": 64.75,
+      "stdev": 0.0,
+      "min": 64.75,
+      "max": 64.75,
+      "seeds": [
+        {
+          "run": "/home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-kimi-seed1",
+          "final_score": 64.75,
+          "per_criterion": {
+            "first_run_success": 1.0,
+            "functional_correctness": 1.0,
+            "mutation_score": 0.0,
+            "ui_ux": 0.75,
+            "api_design": 0.35,
+            "architecture": 0.75,
+            "gherkin": 0.25,
+            "security": 1.0
+          },
+          "objective_detail": {
+            "first_run_success": {
+              "score": 1.0,
+              "detail": {
+                "install": true,
+                "booted": true
+              }
+            },
+            "functional_correctness": {
+              "score": 1.0,
+              "detail": {
+                "e2e_pass": 0,
+                "e2e_total": 0,
+                "bdd_pass": 19,
+                "bdd_total": 19
+              }
+            },
+            "mutation_score": {
+              "score": 0.0,
+              "detail": {
+                "reason": "no mutation report"
+              }
+            },
+            "security": {
+              "score": 1.0,
+              "detail": {
+                "high": 0,
+                "critical": 0
+              }
+            },
+            "ui_ux": {
+              "score": 1.0,
+              "detail": {
+                "axe_serious": 0,
+                "axe_critical": 0,
+                "lighthouse_min_perf": 0.81
+              }
+            },
+            "api_design": {
+              "score": 0.45,
+              "detail": {
+                "openapi_valid": false,
+                "probe_non5xx_rate": 0.9
+              }
+            },
+            "architecture": {
+              "score": 1.0,
+              "detail": {
+                "cycles": 0,
+                "file_size_p95": 214
+              }
+            }
+          },
+          "judge_detail": {
+            "ui_ux": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "ui_ux-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "api_design": {
+              "score": 0.25,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "api_design-pass1.json",
+                    "score": 2
+                  }
+                ],
+                "median": 2,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.25
+              }
+            },
+            "architecture": {
+              "score": 0.5,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "architecture-pass1.json",
+                    "score": 3
+                  }
+                ],
+                "median": 3,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.5
+              }
+            },
+            "gherkin": {
+              "score": 0.25,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "gherkin-pass1.json",
+                    "score": 2
+                  }
+                ],
+                "median": 2,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.25
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "opencode-glm",
+      "n": 1,
+      "mean": 43.75,
+      "stdev": 0.0,
+      "min": 43.75,
+      "max": 43.75,
+      "seeds": [
+        {
+          "run": "/home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-glm-seed1",
+          "final_score": 43.75,
+          "per_criterion": {
+            "first_run_success": 1.0,
+            "functional_correctness": 0.0,
+            "mutation_score": 0.0,
+            "ui_ux": 0.5,
+            "api_design": 0.625,
+            "architecture": 1.0,
+            "gherkin": 0.0,
+            "security": 1.0
+          },
+          "objective_detail": {
+            "first_run_success": {
+              "score": 1.0,
+              "detail": {
+                "install": true,
+                "booted": true
+              }
+            },
+            "functional_correctness": {
+              "score": 0.0,
+              "detail": {
+                "reason": "no tests found"
+              }
+            },
+            "mutation_score": {
+              "score": 0.0,
+              "detail": {
+                "reason": "no mutation report"
+              }
+            },
+            "security": {
+              "score": 1.0,
+              "detail": {
+                "high": 0,
+                "critical": 0
+              }
+            },
+            "ui_ux": {
+              "score": 1.0,
+              "detail": {
+                "axe_serious": 0,
+                "axe_critical": 0,
+                "lighthouse_min_perf": 0.9
+              }
+            },
+            "api_design": {
+              "score": 1.0,
+              "detail": {
+                "openapi_valid": true,
+                "probe_non5xx_rate": 1.0
+              }
+            },
+            "architecture": {
+              "score": 1.0,
+              "detail": {
+                "cycles": 0,
+                "file_size_p95": 139
+              }
+            }
+          },
+          "judge_detail": {
+            "ui_ux": {
+              "score": 0.0,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "ui_ux-pass1.json",
+                    "score": 1
+                  }
+                ],
+                "median": 1,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.0
+              }
+            },
+            "api_design": {
+              "score": 0.25,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [
+                  {
+                    "file": "api_design-pass1.json",
+                    "score": 2
+                  }
+                ],
+                "median": 2,
+                "within_judge_stdev": 0.0,
+                "scaled": 0.25
+              }
+            },
+            "architecture": {
+              "score": null,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [],
+                "reason": "no usable judge outputs"
+              }
+            },
+            "gherkin": {
+              "score": null,
+              "detail": {
+                "judge": "claude-code",
+                "passes": [],
+                "reason": "no usable judge outputs"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "model": "cursor-gemini",
+      "n": 0,
+      "mean": null,
+      "stdev": null,
+      "seeds": []
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "criterion": "api_design",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "api_design",
+    "score": 3,
+    "anchor_match": "Reasonable: valid OpenAPI, every endpoint present, consistent error shape, status codes match",
+    "evidence_quotes": [
+      "/runs/opencode-deepseek-seed1/candidate/backend/openapi.yaml is valid",
+      "{\"method\":\"GET\",\"path\":\"/api/books/00000000-0000-0000-0000-000000000000\",\"status\":404,\"body\":\"{\\\"error\\\":\\\"Book not found\\\"}\"}",
+      "{\"method\":\"POST\",\"path\":\"/api/loans\",\"status\":400,\"body\":\"{\\\"error\\\":\\\"Invalid member ID\\\"}\"}",
+      "Error:\n      type: object\n      properties:\n        error:\n          type: string\n      required:\n        - error",
+      "export class DomainError extends Error {\n  constructor(\n    message: string,\n    public statusCode: number,\n  )",
+      "app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {\n    if (err instanceof DomainError) {\n      res.status(err.statusCode).json({ error: err.message });",
+      "router.post('/expire', (_req: Request, res: Response) => {\n  const db = getDb();\n  const count = reservationService.expireStaleReservations(db);\n  res.json({ expired_count: count });\n});",
+      "reservationService.expireStaleReservations(db);\n  const books = bookService.listBooks(db);",
+      "\"402\":\n          description: Outstanding fines exceed limit",
+      "\"403\":\n          description: Member is suspended",
+      "\"409\":\n          description: Loan limit reached, no copies available, or duplicate loan"
+    ],
+    "anchor_rejected_above": "Anchor 4 requires error responses with a stable `code` field for programmatic handling and OpenAPI examples for negative ACs \u2014 neither is present. Errors are emitted only as `{ error: err.message }` (loan-handler.ts: `res.status(err.statusCode).json({ error: err.message })`) with no `code`, and the openapi.yaml has zero `examples:` blocks. Additionally, validation 400 responses returned by the implementation (e.g. POST /api/loans returning `{\"error\":\"Invalid member ID\"}`) are not documented at all in the OpenAPI's `responses:` for those endpoints, so the spec doesn't fully match the implementation as anchor 4 demands.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

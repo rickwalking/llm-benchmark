@@ -1,0 +1,19 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-kimi",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "{\"criterion\":\"ui_ux\",\"score\":1,\"rationale\":\"The evidence directory does not contain the requested UI evidence needed to judge visual hierarchy, forms, empty/error states, checkout flow, or modal behavior. The only UI-related directory, `screenshots/`, is empty, so there are no screenshots of pages in empty/populated/error states, no checkout-flow capture, no modal capture, and no rendered catalog/member HTML. The only available files are objective summaries, which the rubric says are context only and cannot demonstrate librarian-facing UX quality. With no shown UI or interaction evidence, the work shown cannot rise above unusable for this criterion.\",\"evidence\":[\"`screenshots/` is empty: `[]`.\",\"`axe-summary.json` contains `{\\\"skipped\\\": true, \\\"reason\\\": \\\"no axe spec in candidate\\\"}`.\",\"`lighthouse-summary.json` only lists summary metrics for `/books`, `/checkout`, and `/members`, e.g. `performance: 0.7`, `0.67`, `0.62`; it does not show UI states or interaction behavior.\"]}\n",
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 1,
+    "rationale": "The evidence directory does not contain the requested UI evidence needed to judge visual hierarchy, forms, empty/error states, checkout flow, or modal behavior. The only UI-related directory, `screenshots/`, is empty, so there are no screenshots of pages in empty/populated/error states, no checkout-flow capture, no modal capture, and no rendered catalog/member HTML. The only available files are objective summaries, which the rubric says are context only and cannot demonstrate librarian-facing UX quality. With no shown UI or interaction evidence, the work shown cannot rise above unusable for this criterion.",
+    "evidence": [
+      "`screenshots/` is empty: `[]`.",
+      "`axe-summary.json` contains `{\"skipped\": true, \"reason\": \"no axe spec in candidate\"}`.",
+      "`lighthouse-summary.json` only lists summary metrics for `/books`, `/checkout`, and `/members`, e.g. `performance: 0.7`, `0.67`, `0.62`; it does not show UI states or interaction behavior."
+    ]
+  },
+  "parse_failed": false
+}

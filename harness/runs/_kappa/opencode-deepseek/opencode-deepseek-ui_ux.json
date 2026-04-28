@@ -1,0 +1,13 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-deepseek",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"score\": 1,\n  \"rationale\": \"Evidence directory contains no screenshots (screenshots/ is empty), no rendered HTML of representative pages, no screen captures of checkout flow or modal interactions, and the axe audit was skipped entirely. The only evidence present is Lighthouse scores (performance 0.85\u20130.86, accessibility 0.96), which the rubric explicitly notes are \\\"for context only \u2014 they have their own weight.\\\" Without any visual evidence of the interface, it is impossible to assess visual hierarchy, form quality, empty/error states, loading indicators, modal behavior, or any other UI/UX criterion. Per the rubric anchor: score 1 \u2014 \\\"Pages render but core flows are broken or confusing enough that a new librarian could not complete a checkout without instruction\\\" \u2014 is the minimum applicable score, as no evidence demonstrates even render-level usability. Score cannot be 0 as the rubric scale starts at 1.\"\n}\n```\n",
+  "parsed": {
+    "score": 1,
+    "rationale": "Evidence directory contains no screenshots (screenshots/ is empty), no rendered HTML of representative pages, no screen captures of checkout flow or modal interactions, and the axe audit was skipped entirely. The only evidence present is Lighthouse scores (performance 0.85\u20130.86, accessibility 0.96), which the rubric explicitly notes are \"for context only \u2014 they have their own weight.\" Without any visual evidence of the interface, it is impossible to assess visual hierarchy, form quality, empty/error states, loading indicators, modal behavior, or any other UI/UX criterion. Per the rubric anchor: score 1 \u2014 \"Pages render but core flows are broken or confusing enough that a new librarian could not complete a checkout without instruction\" \u2014 is the minimum applicable score, as no evidence demonstrates even render-level usability. Score cannot be 0 as the rubric scale starts at 1."
+  },
+  "parse_failed": false
+}

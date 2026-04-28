@@ -1,0 +1,12 @@
+node_modules/
+backend/data/library.db
+backend/data/*.db
+dist/
+.stryker-tmp/
+.env
+.env.local
+*.log
+coverage/
+.DS_Store
+.vscode/
+.idea/

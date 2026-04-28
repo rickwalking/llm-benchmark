@@ -1,0 +1,11 @@
+{
+  "default": {
+    "paths": ["features/**/*.feature"],
+    "require": ["features/step_definitions/**/*.ts"],
+    "format": ["progress"],
+    "formatOptions": {
+      "snippetInterface": "async-await"
+    },
+    "publishQuiet": true
+  }
+}

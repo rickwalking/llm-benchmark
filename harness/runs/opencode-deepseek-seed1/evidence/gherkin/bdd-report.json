@@ -1,0 +1,3798 @@
+[
+  {
+    "description": "  As a librarian\n  I want to see the catalog\n  So that I can check book availability",
+    "elements": [
+      {
+        "description": "",
+        "id": "catalog-browsing;list-all-books-sorted-by-title",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "List all books sorted by title",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 10567168
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "4"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Neuromancer",
+                      "William Gibson",
+                      "978-0441569595",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 53677630
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 12,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3707749
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "the librarian requests the book catalog",
+            "match": {
+              "location": "features/step_definitions/steps.ts:240"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2624213
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the response status is 200",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 260332
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the response contains 3 books",
+            "match": {
+              "location": "features/step_definitions/steps.ts:410"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79057
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "the books are sorted by title alphabetically",
+            "match": {
+              "location": "features/step_definitions/steps.ts:415"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 549010
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 552806
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-1.1",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "catalog-browsing;get-a-single-book-with-queue-depth",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Get a single book with queue depth",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1295134
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "4"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Neuromancer",
+                      "William Gibson",
+                      "978-0441569595",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 12275200
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 12,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2493593
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "the librarian requests the book \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:244"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1376694
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "the response status is 200",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 62995
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "the book has a queue_depth field",
+            "match": {
+              "location": "features/step_definitions/steps.ts:422"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 88463
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the book has 4 available copies",
+            "match": {
+              "location": "features/step_definitions/steps.ts:426"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 85036
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 234561
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-1.2",
+            "line": 23
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "catalog-browsing;get-a-non-existent-book-returns-404",
+        "keyword": "Scenario",
+        "line": 31,
+        "name": "Get a non-existent book returns 404",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2094888
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "4"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Neuromancer",
+                      "William Gibson",
+                      "978-0441569595",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8830595
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 12,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2085933
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 32,
+            "name": "the librarian requests the book with id \"00000000-0000-0000-0000-000000000000\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:249"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1044740
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "the response status is 404",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 70745
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "the error message is \"Book not found\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 85351
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 254596
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-1.4",
+            "line": 30
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "catalog-browsing;available-copies-count-with-active-loans",
+        "keyword": "Scenario",
+        "line": 37,
+        "name": "Available copies count with active loans",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1168125
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "4"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Neuromancer",
+                      "William Gibson",
+                      "978-0441569595",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8348922
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 12,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2158198
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 38,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1496581
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 39,
+            "name": "the librarian requests the book catalog",
+            "match": {
+              "location": "features/step_definitions/steps.ts:240"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1077524
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 40,
+            "name": "the book \"Dune\" shows 3 available of 4 copies",
+            "match": {
+              "location": "features/step_definitions/steps.ts:489"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1041488
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 205682
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-1.1-ready",
+            "line": 36
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "catalog-browsing",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Catalog browsing",
+    "tags": [],
+    "uri": "features/catalog.feature"
+  },
+  {
+    "description": "  As a librarian\n  I want to collect fines\n  So that late returns are penalized",
+    "elements": [
+      {
+        "description": "",
+        "id": "collecting-fines;member-profile-shows-unpaid-fines",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "Member profile shows unpaid fines",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 956634
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3504195
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 10,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1983784
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 16,
+            "name": "Alice Johnson has an unpaid fine of $3.50",
+            "match": {
+              "location": "features/step_definitions/steps.ts:204"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2442865
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 17,
+            "name": "the librarian requests Alice's member profile",
+            "match": {
+              "location": "features/step_definitions/steps.ts:365"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1074798
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 18,
+            "name": "the response includes unpaid_fines_cents of 350",
+            "match": {
+              "location": "features/step_definitions/steps.ts:507"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 71807
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 184880
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-6.1",
+            "line": 14
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "collecting-fines;pay-a-fine",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "Pay a fine",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1186753
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3459904
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 10,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2126119
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 22,
+            "name": "Alice Johnson has an unpaid fine of $3.50",
+            "match": {
+              "location": "features/step_definitions/steps.ts:204"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2267809
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "the librarian pays the fine",
+            "match": {
+              "location": "features/step_definitions/steps.ts:393"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1140496
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 24,
+            "name": "the response status is 200",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41359
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 25,
+            "name": "the fine is marked as paid",
+            "match": {
+              "location": "features/step_definitions/steps.ts:502"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45769
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 191932
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-6.2",
+            "line": 20
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "collecting-fines;cannot-pay-an-already-paid-fine",
+        "keyword": "Scenario",
+        "line": 28,
+        "name": "Cannot pay an already paid fine",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1128793
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "2"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3184643
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 10,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1849890
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 29,
+            "name": "Alice Johnson has a fine that is already paid",
+            "match": {
+              "location": "features/step_definitions/steps.ts:218"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2361312
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "the librarian tries to pay that fine again",
+            "match": {
+              "location": "features/step_definitions/steps.ts:398"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1871111
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 31,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40086
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 32,
+            "name": "the error message is \"Fine already paid\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37086
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 170266
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-6.3",
+            "line": 27
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "collecting-fines",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Collecting fines",
+    "tags": [],
+    "uri": "features/fines.feature"
+  },
+  {
+    "description": "  As a librarian\n  I want to lend a book to a member\n  So that members can borrow library materials",
+    "elements": [
+      {
+        "description": "",
+        "id": "lending-books;successfully-borrow-a-book",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Successfully borrow a book",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1230379
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6420783
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3869616
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "Alice Johnson borrows \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:270"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1341327
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40583
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the loan has a due_date",
+            "match": {
+              "location": "features/step_definitions/steps.ts:446"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 51701
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "\"Dune\" has 0 available copies",
+            "match": {
+              "location": "features/step_definitions/steps.ts:451"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1060833
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 187563
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.1",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "lending-books;reject-borrowing-more-than-5-books",
+        "keyword": "Scenario",
+        "line": 24,
+        "name": "Reject borrowing more than 5 books",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1292689
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4876597
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3687341
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 25,
+            "name": "Alice Johnson has 5 active loans",
+            "match": {
+              "location": "features/step_definitions/steps.ts:122"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10629481
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 26,
+            "name": "Alice Johnson tries to borrow another book",
+            "match": {
+              "location": "features/step_definitions/steps.ts:289"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2090823
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 27,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45338
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the error message is \"Loan limit reached\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 63237
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 268021
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.2",
+            "line": 23
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "lending-books;reject-borrowing-when-member-is-suspended",
+        "keyword": "Scenario",
+        "line": 31,
+        "name": "Reject borrowing when member is suspended",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1097584
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6151540
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3989247
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 32,
+            "name": "a member \"Eve\" with status \"suspended\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:135"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1274105
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 33,
+            "name": "Eve tries to borrow \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:281"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1189444
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 34,
+            "name": "the response status is 403",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 38726
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "the error message is \"Member is suspended\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 51672
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 176270
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.3",
+            "line": 30
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "lending-books;reject-borrowing-when-outstanding-fines-exceed-$5",
+        "keyword": "Scenario",
+        "line": 38,
+        "name": "Reject borrowing when outstanding fines exceed $5",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 945732
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4739341
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3692835
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 39,
+            "name": "Alice Johnson has unpaid fines of $5.01",
+            "match": {
+              "location": "features/step_definitions/steps.ts:143"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2564047
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 40,
+            "name": "Alice Johnson tries to borrow \"Foundation\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:281"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1198876
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 41,
+            "name": "the response status is 402",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48078
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 42,
+            "name": "the error message is \"Outstanding fines exceed limit\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 34448
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 195312
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.4",
+            "line": 37
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "lending-books;reject-borrowing-when-no-copies-available",
+        "keyword": "Scenario",
+        "line": 45,
+        "name": "Reject borrowing when no copies available",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 906088
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4977974
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4441884
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 46,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1233649
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 47,
+            "name": "Bob Smith tries to borrow \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:281"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1199660
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 48,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41264
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 49,
+            "name": "the error message is \"No copies available — reserve instead\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45045
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 181784
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-3.5",
+            "line": 44
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "lending-books",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Lending books",
+    "tags": [],
+    "uri": "features/lending.feature"
+  },
+  {
+    "description": "  As a librarian\n  I want to add books and members\n  So that the library catalog stays up to date",
+    "elements": [
+      {
+        "description": "",
+        "id": "adding-books-and-members;create-a-new-book",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Create a new book",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 913382
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "the librarian creates a book with title \"The Hobbit\", author \"J.R.R. Tolkien\", ISBN \"978-0547928227\", and 4 copies",
+            "match": {
+              "location": "features/step_definitions/steps.ts:253"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2067882
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 44335
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "the book title is \"The Hobbit\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:436"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 78423
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 144891
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-2.1",
+            "line": 6
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "adding-books-and-members;reject-duplicate-isbn",
+        "keyword": "Scenario",
+        "line": 13,
+        "name": "Reject duplicate ISBN",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1029851
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 14,
+            "name": "a book with ISBN \"978-0441172719\" already exists",
+            "match": {
+              "location": "features/step_definitions/steps.ts:157"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3240063
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "the librarian creates a book with ISBN \"978-0441172719\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:260"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1700518
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41213
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "the error message is \"ISBN already exists\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 32699
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 154836
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-2.2",
+            "line": 12
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "adding-books-and-members;create-a-new-member",
+        "keyword": "Scenario",
+        "line": 20,
+        "name": "Create a new member",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 957760
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 21,
+            "name": "the librarian creates a member with name \"Bob Smith\" and email \"bob@example.com\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:266"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1864128
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 22,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 37247
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 23,
+            "name": "the member name is \"Bob Smith\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:441"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 62852
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 129027
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-2.3",
+            "line": 19
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "adding-books-and-members;reject-duplicate-member-email",
+        "keyword": "Scenario",
+        "line": 26,
+        "name": "Reject duplicate member email",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 951509
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 27,
+            "name": "a member with email \"carol@example.com\" already exists",
+            "match": {
+              "location": "features/step_definitions/steps.ts:163"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1836106
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 28,
+            "name": "the librarian creates a member with name \"Carol Dup\" and email \"carol@example.com\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:266"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1529069
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 29,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45734
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 30,
+            "name": "the error message is \"Email already exists\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 42644
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 171664
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-2.4",
+            "line": 25
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "adding-books-and-members",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Adding books and members",
+    "tags": [],
+    "uri": "features/manage.feature"
+  },
+  {
+    "description": "  As a librarian\n  I want members to reserve unavailable books\n  So that they are notified when copies become available",
+    "elements": [
+      {
+        "description": "",
+        "id": "reservations;reserve-an-unavailable-book",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Reserve an unavailable book",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1002465
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4862762
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3749250
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "Bob Smith reserves \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:317"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1312179
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the response status is 201",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 44345
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the reservation status is \"waiting\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:497"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 74010
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 176690
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.1",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "reservations;cannot-reserve-book-already-on-loan",
+        "keyword": "Scenario",
+        "line": 23,
+        "name": "Cannot reserve book already on loan",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 915421
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4985463
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3570362
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 24,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1240920
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 25,
+            "name": "Alice Johnson tries to reserve \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:325"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1134063
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 52542
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "the error message is \"Member already has this book on loan\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 142394
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 210303
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.2",
+            "line": 22
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "reservations;cannot-have-duplicate-reservations",
+        "keyword": "Scenario",
+        "line": 30,
+        "name": "Cannot have duplicate reservations",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1091988
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 6275756
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3620630
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 31,
+            "name": "Bob Smith has reserved \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:167"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1295525
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 32,
+            "name": "Bob Smith tries to reserve \"Dune\" again",
+            "match": {
+              "location": "features/step_definitions/steps.ts:333"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1252724
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 33,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 44031
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "the error message is \"Duplicate reservation\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 35253
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 198491
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.3",
+            "line": 29
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "reservations;notified-member-can-borrow-while-others-cannot",
+        "keyword": "Scenario",
+        "line": 37,
+        "name": "Notified member can borrow while others cannot",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 974106
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4930878
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3728717
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 38,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1359650
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 39,
+            "name": "Bob Smith has reserved \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:167"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1224307
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 40,
+            "name": "the book is returned and Bob Smith is notified",
+            "match": {
+              "location": "features/step_definitions/steps.ts:341"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1219948
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 41,
+            "name": "Bob Smith can borrow \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:375"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1605502
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 42,
+            "name": "another member cannot borrow \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:383"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2312588
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 182276
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.4",
+            "line": 36
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "reservations;expired-notifications-notify-next-in-queue",
+        "keyword": "Scenario",
+        "line": 45,
+        "name": "Expired notifications notify next in queue",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 958090
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4539015
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3335616
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 46,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1114477
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 47,
+            "name": "Bob Smith has reserved \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:167"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1070954
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 48,
+            "name": "Carol (a third member) has reserved \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:167"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3275355
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 49,
+            "name": "the book is returned and Bob Smith is notified",
+            "match": {
+              "location": "features/step_definitions/steps.ts:341"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1146066
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 50,
+            "name": "Bob Smith's notification expires",
+            "match": {
+              "location": "features/step_definitions/steps.ts:232"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 187483
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 51,
+            "name": "reservations are expired",
+            "match": {
+              "location": "features/step_definitions/steps.ts:352"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1114765
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 52,
+            "name": "Bob Smith's reservation status is \"expired\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:512"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 150350
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 53,
+            "name": "Carol's reservation status is \"notified\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:512"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 94461
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 182990
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-5.5",
+            "line": 44
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "reservations",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Reservations",
+    "tags": [],
+    "uri": "features/reservations.feature"
+  },
+  {
+    "description": "  As a librarian\n  I want to record returns and fines\n  So that overdue books are penalized",
+    "elements": [
+      {
+        "description": "",
+        "id": "returns-and-fines;return-a-book-on-time",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Return a book on time",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1132438
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "2"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 5673686
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3476024
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1128767
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 19,
+            "name": "Alice Johnson returns the loan",
+            "match": {
+              "location": "features/step_definitions/steps.ts:299"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1041533
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 20,
+            "name": "the response status is 200",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 38911
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "the loan is marked as returned",
+            "match": {
+              "location": "features/step_definitions/steps.ts:458"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 61682
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "\"Dune\" has 2 available copies",
+            "match": {
+              "location": "features/step_definitions/steps.ts:451"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 923075
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 168760
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.1",
+            "line": 16
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "returns-and-fines;return-a-book-late-creates-a-fine",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Return a book late creates a fine",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1111283
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "2"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4488227
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3469761
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 26,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1148568
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 27,
+            "name": "the loan is 3 days overdue",
+            "match": {
+              "location": "features/step_definitions/steps.ts:192"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 213405
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 28,
+            "name": "Alice Johnson returns the loan",
+            "match": {
+              "location": "features/step_definitions/steps.ts:299"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1018895
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 29,
+            "name": "a fine of $1.50 is created for the loan",
+            "match": {
+              "location": "features/step_definitions/steps.ts:463"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 147971
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 185705
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.2",
+            "line": 24
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "returns-and-fines;reject-returning-an-already-returned-loan",
+        "keyword": "Scenario",
+        "line": 32,
+        "name": "Reject returning an already returned loan",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 972585
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "2"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4408371
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3243875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 33,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1209772
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 34,
+            "name": "Alice Johnson has already returned the loan",
+            "match": {
+              "location": "features/step_definitions/steps.ts:181"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2444352
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 35,
+            "name": "Alice Johnson tries to return the same loan again",
+            "match": {
+              "location": "features/step_definitions/steps.ts:312"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1208662
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 36,
+            "name": "the response status is 409",
+            "match": {
+              "location": "features/step_definitions/steps.ts:406"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50927
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 37,
+            "name": "the error message is \"Loan already returned\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:431"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40021
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 166909
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.3",
+            "line": 31
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "returns-and-fines;return-notifies-next-waiting-reservation",
+        "keyword": "Scenario",
+        "line": 40,
+        "name": "Return notifies next waiting reservation",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 887393
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "title",
+                      "author",
+                      "isbn",
+                      "copies"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Dune",
+                      "Frank Herbert",
+                      "978-0441172719",
+                      "2"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Foundation",
+                      "Isaac Asimov",
+                      "978-0553293357",
+                      "3"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "the following books exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:96"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4405872
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "name",
+                      "email"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Alice Johnson",
+                      "alice@example.com"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "Bob Smith",
+                      "bob@example.com"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 11,
+            "name": "the following members exist:",
+            "match": {
+              "location": "features/step_definitions/steps.ts:107"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3273596
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 41,
+            "name": "Alice Johnson has borrowed \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:116"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1115590
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 42,
+            "name": "Bob Smith has reserved \"Dune\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:167"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1061007
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 43,
+            "name": "Alice Johnson returns the loan",
+            "match": {
+              "location": "features/step_definitions/steps.ts:299"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1006265
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 44,
+            "name": "Bob Smith's reservation status becomes \"notified\"",
+            "match": {
+              "location": "features/step_definitions/steps.ts:472"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 169534
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 45,
+            "name": "\"Dune\" has 1 available copies after return",
+            "match": {
+              "location": "features/step_definitions/steps.ts:482"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 944603
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 174920
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AC-4.4",
+            "line": 39
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "returns-and-fines",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Returns and fines",
+    "tags": [],
+    "uri": "features/returns.feature"
+  }
+]

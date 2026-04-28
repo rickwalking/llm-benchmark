@@ -1,0 +1,14 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "claude-opus47",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"score\": 3,\n  \"anchor\": \"Clean enough\",\n  \"rationale\": \"Backend has clear layering: policy/ (pure, 84 lines, all business constants single-sourced), services/ (imports policy + errors, handles DB + business rules), http/ (routes, middleware, schemas). Domain errors are a small named hierarchy (ConflictError, ForbiddenError, NotFoundError, PaymentRequiredError) used consistently. Frontend has clear pages/, components/, api/ split with API types in api/types.ts. Madge reports zero cycles and zero orphans. No source file exceeds 300 lines (largest: MemberDetailPage.tsx at 272 lines). No god-files. However, Level 4 is not met because: (1) services call raw db.prepare() directly with inline SQL rather than using a thin DB-access typed query abstraction, (2) frontend is organized by technical role (components/, pages/, api/) not by feature (e.g., checkout/, members/), and (3) frontend and backend maintain separate types.ts files with no shared workspace or generated client, meaning types are not in a single source of truth.\"\n}\n```\n",
+  "parsed": {
+    "score": 3,
+    "anchor": "Clean enough",
+    "rationale": "Backend has clear layering: policy/ (pure, 84 lines, all business constants single-sourced), services/ (imports policy + errors, handles DB + business rules), http/ (routes, middleware, schemas). Domain errors are a small named hierarchy (ConflictError, ForbiddenError, NotFoundError, PaymentRequiredError) used consistently. Frontend has clear pages/, components/, api/ split with API types in api/types.ts. Madge reports zero cycles and zero orphans. No source file exceeds 300 lines (largest: MemberDetailPage.tsx at 272 lines). No god-files. However, Level 4 is not met because: (1) services call raw db.prepare() directly with inline SQL rather than using a thin DB-access typed query abstraction, (2) frontend is organized by technical role (components/, pages/, api/) not by feature (e.g., checkout/, members/), and (3) frontend and backend maintain separate types.ts files with no shared workspace or generated client, meaning types are not in a single source of truth."
+  },
+  "parse_failed": false
+}

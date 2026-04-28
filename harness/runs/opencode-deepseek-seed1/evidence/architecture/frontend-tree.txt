@@ -1,0 +1,18 @@
+src/
+├── components/
+│   ├── CreateBookModal.tsx
+│   ├── CreateMemberModal.tsx
+│   ├── Layout.tsx
+│   └── Modal.tsx
+├── pages/
+│   ├── BookDetailPage.tsx
+│   ├── BooksPage.tsx
+│   ├── CheckoutPage.tsx
+│   ├── MemberProfilePage.tsx
+│   └── MembersPage.tsx
+├── api.ts
+├── App.tsx
+├── context.tsx
+├── main.tsx
+├── styles.css
+└── test-setup.ts

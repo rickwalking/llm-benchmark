@@ -1,0 +1,16 @@
+
+> library-lending@1.0.0 test:bdd
+> cucumber-js --config features/cucumber.json --format json:/runs/opencode-kimi-seed1/objective/bdd.json
+
+`publishQuiet` option is no longer needed, you can remove it from your configuration; see https://github.com/cucumber/cucumber-js/blob/main/docs/deprecations.md
+SyntaxError: The requested module '@playwright/test' does not provide an export named 'APIRequestContext'
+    at ModuleJobSync.runSync (node:internal/modules/esm/module_job:440:37)
+    at ModuleLoader.importSyncForRequire (node:internal/modules/esm/loader:435:47)
+    at loadESMFromCJS (node:internal/modules/cjs/loader:1536:24)
+    at Module._compile (node:internal/modules/cjs/loader:1687:5)
+    at Object..js (node:internal/modules/cjs/loader:1838:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+    at Module.require (node:internal/modules/cjs/loader:1463:12)

@@ -1,0 +1,9 @@
+generator: codex-gpt55
+run_id:    codex-gpt55-seed1
+started:   2026-04-27T01:35:04-03:00
+cmd:       codex exec --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check --cd /home/pmarins/projects/llm-benchmark-library/harness/runs/codex-gpt55-seed1/candidate -m gpt-5.5
+prompt_input: stdin
+timeout:   5400s
+exit_code: 0
+ended:     2026-04-27T02:05:54-03:00
+wall_seconds: 1850

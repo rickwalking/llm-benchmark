@@ -1,0 +1,9 @@
+generator: opencode-kimi
+run_id:    opencode-kimi-seed1
+started:   2026-04-27T09:27:24-03:00
+cmd:       opencode run --dangerously-skip-permissions --dir /home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-kimi-seed1/candidate -m opencode-go/kimi-k2.5
+prompt_input: arg
+timeout:   5400s
+exit_code: 0
+ended:     2026-04-27T09:57:55-03:00
+wall_seconds: 1831

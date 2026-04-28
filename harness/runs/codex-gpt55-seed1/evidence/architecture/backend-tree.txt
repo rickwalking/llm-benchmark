@@ -1,0 +1,17 @@
+src/
+├── policy/
+│   └── index.ts
+├── routes/
+├── services/
+│   ├── bookService.ts
+│   ├── dbTypes.ts
+│   ├── fineService.ts
+│   ├── loanService.ts
+│   ├── memberService.ts
+│   ├── reservationService.ts
+│   ├── serviceHelpers.ts
+│   └── types.ts
+├── app.ts
+├── db.ts
+├── errors.ts
+└── server.ts

@@ -1,0 +1,41 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-deepseek",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 3,\n    \"alignment\": 4,\n    \"declarative\": 2,\n    \"atomic\": 3\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"Covered AC IDs: AC-1.1, AC-1.2, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-6.1, AC-6.2, AC-6.3 (24/29 = 82.8%)\",\n      \"Missing AC IDs: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4 (5 ACs with no scenario)\"\n    ],\n    \"alignment\": [\n      \"features/lending.feature:16 '@AC-3.1' tags 'Scenario: Successfully borrow a book' \u2014 tag present + name restates AC\",\n      \"features/catalog.feature:36 '@AC-1.1-ready' \u2014 non-standard AC tag format, not matching any AC ID from ac-ids.txt\",\n      \"features/catalog.feature:6 'Background:' \u2014 Background removes duplicate book/member setup in 5 of 6 feature files\"\n    ],\n    \"declarative\": [\n      \"features/lending.feature:18 'When Alice Johnson borrows \\\"Dune\\\"' \u2014 good: business-level domain language\",\n      \"features/fines.feature:22 'Given Alice Johnson has an unpaid fine of $3.50' \u2014 good: declarative domain concept\",\n      \"features/catalog.feature:19 'Then the response status is 200' \u2014 bad: HTTP status code, implementation detail pervasive across all feature files\",\n      \"features/fines.feature:18 'Then the response includes unpaid_fines_cents of 350' \u2014 bad: exposes internal field name 'unpaid_fines_cents'\"\n    ],\n    \"atomic\": [\n      \"features/lending.feature:18 'When Alice Johnson borrows \\\"Dune\\\"' \u2014 atomic: single action per step\",\n      \"features/reservations.feature:40 'When the book is returned and Bob Smith is notified' \u2014 compound: two actions (return + notify) bundled in one step\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"medium\"\n}\n```\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 3,
+      "alignment": 4,
+      "declarative": 2,
+      "atomic": 3
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "Covered AC IDs: AC-1.1, AC-1.2, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-6.1, AC-6.2, AC-6.3 (24/29 = 82.8%)",
+        "Missing AC IDs: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4 (5 ACs with no scenario)"
+      ],
+      "alignment": [
+        "features/lending.feature:16 '@AC-3.1' tags 'Scenario: Successfully borrow a book' \u2014 tag present + name restates AC",
+        "features/catalog.feature:36 '@AC-1.1-ready' \u2014 non-standard AC tag format, not matching any AC ID from ac-ids.txt",
+        "features/catalog.feature:6 'Background:' \u2014 Background removes duplicate book/member setup in 5 of 6 feature files"
+      ],
+      "declarative": [
+        "features/lending.feature:18 'When Alice Johnson borrows \"Dune\"' \u2014 good: business-level domain language",
+        "features/fines.feature:22 'Given Alice Johnson has an unpaid fine of $3.50' \u2014 good: declarative domain concept",
+        "features/catalog.feature:19 'Then the response status is 200' \u2014 bad: HTTP status code, implementation detail pervasive across all feature files",
+        "features/fines.feature:18 'Then the response includes unpaid_fines_cents of 350' \u2014 bad: exposes internal field name 'unpaid_fines_cents'"
+      ],
+      "atomic": [
+        "features/lending.feature:18 'When Alice Johnson borrows \"Dune\"' \u2014 atomic: single action per step",
+        "features/reservations.feature:40 'When the book is returned and Bob Smith is notified' \u2014 compound: two actions (return + notify) bundled in one step"
+      ]
+    },
+    "final_score": 3,
+    "confidence": "medium"
+  },
+  "parse_failed": false
+}

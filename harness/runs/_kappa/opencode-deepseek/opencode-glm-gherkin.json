@@ -1,0 +1,39 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-glm",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 3,\n    \"alignment\": 3,\n    \"declarative\": 2,\n    \"atomic\": 4\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"AC-1.1 AC-1.2 AC-1.3 AC-1.4 AC-2.1 AC-2.2 AC-2.3 AC-2.4 AC-3.1 AC-3.2 AC-3.3 AC-3.4 AC-3.5 AC-3.6 AC-4.1 AC-4.2 AC-4.3 AC-4.4 AC-4.5 AC-5.1 AC-5.2 AC-5.3 AC-5.4 AC-5.5 AC-5.6 AC-6.1 AC-6.2 AC-6.3 AC-6.4 (from ac-ids.txt, 29 total)\",\n      \"@AC-1.3  @AC-3.6  @AC-5.6  @AC-6.4 (missing \u2014 no scenario tagged with these, 4/29 uncovered = 86.2% covered)\"\n    ],\n    \"alignment\": [\n      \"@AC-3.1 on 'Successfully borrow a book' (lending.feature:13-14) \u2014 tag present, name is a human-readable restatement\",\n      \"@AC-3.5b on 'Notified member can borrow a reserved book' (lending.feature:48) \u2014 non-standard tag not in the AC list\",\n      \"@AC-5.4 on 'Non-notified member cannot borrow reserved book' (lending.feature:57) \u2014 cross-feature tag, belongs in reservations.feature but appears in lending.feature\"\n    ],\n    \"declarative\": [\n      \"\\\"When the librarian lends 'Dune' to 'Alice'\\\" (lending.feature:15) \u2014 business-level, domain language, readable by a librarian\",\n      \"\\\"Then the response status is 201\\\" (lending.feature:16), \\\"Then the response contains error 'ISBN already exists'\\\" (add_resources.feature:18), \\\"Then the profile shows unpaid_fines_cents of 350\\\" (fines.feature:14) \u2014 HTTP status codes, response structure language, and internal field names throughout all Then assertions\"\n    ],\n    \"atomic\": [\n      \"\\\"When the librarian lends 'Dune' to 'Alice'\\\" (lending.feature:15) \u2014 single action per step, And chains separate steps properly\",\n      \"\\\"Then the response status is 201\\\" (add_resources.feature:10) \u2014 one assertion per step, no compound multi-action steps observed\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n```\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 3,
+      "alignment": 3,
+      "declarative": 2,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "AC-1.1 AC-1.2 AC-1.3 AC-1.4 AC-2.1 AC-2.2 AC-2.3 AC-2.4 AC-3.1 AC-3.2 AC-3.3 AC-3.4 AC-3.5 AC-3.6 AC-4.1 AC-4.2 AC-4.3 AC-4.4 AC-4.5 AC-5.1 AC-5.2 AC-5.3 AC-5.4 AC-5.5 AC-5.6 AC-6.1 AC-6.2 AC-6.3 AC-6.4 (from ac-ids.txt, 29 total)",
+        "@AC-1.3  @AC-3.6  @AC-5.6  @AC-6.4 (missing \u2014 no scenario tagged with these, 4/29 uncovered = 86.2% covered)"
+      ],
+      "alignment": [
+        "@AC-3.1 on 'Successfully borrow a book' (lending.feature:13-14) \u2014 tag present, name is a human-readable restatement",
+        "@AC-3.5b on 'Notified member can borrow a reserved book' (lending.feature:48) \u2014 non-standard tag not in the AC list",
+        "@AC-5.4 on 'Non-notified member cannot borrow reserved book' (lending.feature:57) \u2014 cross-feature tag, belongs in reservations.feature but appears in lending.feature"
+      ],
+      "declarative": [
+        "\"When the librarian lends 'Dune' to 'Alice'\" (lending.feature:15) \u2014 business-level, domain language, readable by a librarian",
+        "\"Then the response status is 201\" (lending.feature:16), \"Then the response contains error 'ISBN already exists'\" (add_resources.feature:18), \"Then the profile shows unpaid_fines_cents of 350\" (fines.feature:14) \u2014 HTTP status codes, response structure language, and internal field names throughout all Then assertions"
+      ],
+      "atomic": [
+        "\"When the librarian lends 'Dune' to 'Alice'\" (lending.feature:15) \u2014 single action per step, And chains separate steps properly",
+        "\"Then the response status is 201\" (add_resources.feature:10) \u2014 one assertion per step, no compound multi-action steps observed"
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

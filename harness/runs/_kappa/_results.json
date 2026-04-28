@@ -1,0 +1,159 @@
+{
+  "complete_vendors": [
+    "claude-opus47",
+    "codex-gpt55",
+    "opencode-deepseek"
+  ],
+  "incomplete_vendors": [],
+  "per_pair_kappa": {
+    "claude-opus47\u2194codex-gpt55": {
+      "ui_ux": 0.0,
+      "api_design": 0.0,
+      "architecture": 0.0,
+      "gherkin": 1.0,
+      "_overall": 0.2248062015503876
+    },
+    "claude-opus47\u2194opencode-deepseek": {
+      "ui_ux": 0.0,
+      "api_design": 0.0,
+      "architecture": 0.0,
+      "gherkin": 1.0,
+      "_overall": 0.39655172413793105
+    },
+    "codex-gpt55\u2194opencode-deepseek": {
+      "ui_ux": 1.0,
+      "api_design": 0.2857142857142856,
+      "architecture": -0.15384615384615377,
+      "gherkin": 1.0,
+      "_overall": 0.635036496350365
+    }
+  },
+  "avg_per_candidate_per_vendor": {
+    "claude-opus47": {
+      "opencode-deepseek": 2.75,
+      "codex-gpt55": 3.0,
+      "claude-opus47": 2.75,
+      "opencode-glm": 2.5,
+      "opencode-kimi": 2.75
+    },
+    "codex-gpt55": {
+      "opencode-deepseek": 2.0,
+      "codex-gpt55": 2.5,
+      "claude-opus47": 2.25,
+      "opencode-glm": 2.25,
+      "opencode-kimi": 2.25
+    },
+    "opencode-deepseek": {
+      "opencode-deepseek": 2.5,
+      "codex-gpt55": 2.33,
+      "claude-opus47": 2.5,
+      "opencode-glm": 2.25,
+      "opencode-kimi": 2.5
+    }
+  },
+  "consensus_per_candidate": {
+    "opencode-deepseek": 2.42,
+    "codex-gpt55": 2.64,
+    "claude-opus47": 2.5,
+    "opencode-glm": 2.33,
+    "opencode-kimi": 2.5
+  },
+  "data": {
+    "claude-opus47": {
+      "opencode-deepseek": {
+        "ui_ux": 2,
+        "api_design": 3,
+        "architecture": 3,
+        "gherkin": 3
+      },
+      "codex-gpt55": {
+        "ui_ux": 2,
+        "api_design": 3,
+        "architecture": 3,
+        "gherkin": 4
+      },
+      "claude-opus47": {
+        "ui_ux": 2,
+        "api_design": 3,
+        "architecture": 3,
+        "gherkin": 3
+      },
+      "opencode-glm": {
+        "ui_ux": 1,
+        "api_design": 3,
+        "architecture": 3,
+        "gherkin": 3
+      },
+      "opencode-kimi": {
+        "ui_ux": 2,
+        "api_design": 3,
+        "architecture": 3,
+        "gherkin": 3
+      }
+    },
+    "codex-gpt55": {
+      "opencode-deepseek": {
+        "ui_ux": 1,
+        "api_design": 2,
+        "architecture": 2,
+        "gherkin": 3
+      },
+      "codex-gpt55": {
+        "ui_ux": 1,
+        "api_design": 2,
+        "architecture": 3,
+        "gherkin": 4
+      },
+      "claude-opus47": {
+        "ui_ux": 1,
+        "api_design": 3,
+        "architecture": 2,
+        "gherkin": 3
+      },
+      "opencode-glm": {
+        "ui_ux": 1,
+        "api_design": 2,
+        "architecture": 3,
+        "gherkin": 3
+      },
+      "opencode-kimi": {
+        "ui_ux": 1,
+        "api_design": 2,
+        "architecture": 3,
+        "gherkin": 3
+      }
+    },
+    "opencode-deepseek": {
+      "opencode-deepseek": {
+        "ui_ux": 1,
+        "api_design": 3,
+        "architecture": 3,
+        "gherkin": 3
+      },
+      "codex-gpt55": {
+        "ui_ux": 1,
+        "api_design": 2,
+        "architecture": null,
+        "gherkin": 4
+      },
+      "claude-opus47": {
+        "ui_ux": 1,
+        "api_design": 3,
+        "architecture": 3,
+        "gherkin": 3
+      },
+      "opencode-glm": {
+        "ui_ux": 1,
+        "api_design": 2,
+        "architecture": 3,
+        "gherkin": 3
+      },
+      "opencode-kimi": {
+        "ui_ux": 1,
+        "api_design": 3,
+        "architecture": 3,
+        "gherkin": 3
+      }
+    }
+  }
+}

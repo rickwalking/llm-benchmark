@@ -1,0 +1,27 @@
+{
+  "criterion": "ui_ux",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 3,
+    "anchor_match": "Competent",
+    "evidence_quotes": [
+      "frontend/src/components/Modal.tsx:26-54 \u2014 `if (e.key === 'Escape') { e.preventDefault(); onClose(); }` plus Tab cycle logic and `previouslyFocused?.focus?.();` in cleanup (focus trap + ESC + focus restore + overlay-click close at line 63-65).",
+      "frontend/src/pages/BooksPage.tsx:39-49 \u2014 `<EmptyState title=\"The catalog is empty\" description=\"Add your first book to get started.\" action={<button \u2026 >Add a book</button>} />` (empty state with CTA).",
+      "frontend/src/pages/CheckoutPage.tsx:115-127 \u2014 `<ol className=\"steps\" aria-label=\"Checkout progress\">` with `steps__item--active` / `steps__item--done`, plus `<button \u2026 onClick={back} disabled={step === 1}>Back</button>` (line 236) and a 'Confirm' summary step.",
+      "frontend/src/components/Spinner.tsx:1-5 \u2014 `<div role=\"status\" aria-live=\"polite\" \u2026>{label}</div>` used as `<Spinner label=\"Loading catalog\u2026\" />`, `\"Preparing checkout\u2026\"`, `\"Loading member\u2026\"` across pages.",
+      "frontend/src/utils/format.ts:32-41 \u2014 `countdownTo` returns `HH:MM:SS`, paired with `setInterval(() => setNow(new Date()), 1000)` in MemberDetailPage.tsx:30-33 and BookDetailPage.tsx:46-49 (live countdown).",
+      "frontend/src/pages/CheckoutPage.tsx:75-78,212-214 \u2014 `willBeFifth = memberDetail.active_loans.length === 4 ? 'This will be the member's 5th and final loan.' : null` rendered as a warning banner at the confirm step.",
+      "frontend/src/styles/global.css:166-172 \u2014 `.btn--danger { background-color: var(--color-danger); }` is defined but never applied: ConfirmReturnModal/ConfirmPayModal use `<button \u2026 className=\"btn\" \u2026>Confirm return</button>` / `Confirm payment` (MemberDetailPage.tsx:215, 266).",
+      "frontend/src/pages/BooksPage.tsx:51-66 \u2014 catalog renders `<ul className=\"book-grid\">` with no sort/filter control; the toolbar only contains the page heading and an `Add book` button.",
+      "frontend/src/pages/MemberDetailPage.tsx:46-52,68-72 \u2014 Suspended/Overdue/Notified are conveyed via `<span className=\"badge badge--unavailable\">Suspended</span>` and `<span className=\"badge badge--overdue\">Overdue</span>` \u2014 color + text only, no icon.",
+      "frontend/src/pages/BooksPage.tsx:146-184 \u2014 every input has `<label htmlFor=\u2026>` paired with `<input id=\u2026>` (Title, Author, ISBN, Total copies); however errors come from `err instanceof HttpError ? err.message : 'Could not create book'` (no client-side specific validation messages like 'ISBN must be 10 or 13 digits').",
+      "evidence/ui-ux/lighthouse-summary.json \u2014 accessibility 0.98\u20131.00 across /books, /checkout, /members (confirms semantic structure renders cleanly)."
+    ],
+    "anchor_rejected_above": "Level 4 (Polished) requires ALL of: color+icon emphasis for overdue/notified/unpaid (the app uses color-only badges, no icons), distinct 'danger' treatment for destructive confirms (`.btn--danger` exists in CSS but the Return and Pay confirm buttons use the plain `.btn` primary style), AND at least one catalog secondary affordance like sort or filter (BooksPage has none \u2014 only an Add-book button). The live HH:MM:SS countdown and 5th-loan warning are level-4-flavored, but three of the five level-4 markers are absent, so the app cannot be 4.",
+    "confidence": "medium"
+  },
+  "parse_failed": false
+}

@@ -1,0 +1,21 @@
+
+> library-lending@1.0.0 mutation
+> stryker run
+
+[32m13:10:42 (2200) INFO ConfigReader[39m No config file specified. Running with command line arguments.
+[32m13:10:42 (2200) INFO ConfigReader[39m Use `stryker init` command to generate your config file.
+[33m13:10:42 (2200) WARN ProjectReader[39m Warning: No files found for mutation with the given glob expressions. As a result, a dry-run will be performed without actually modifying anything. If you intended to mutate files, please check and adjust the configuration. Current glob pattern(s) used: "{src,lib}/**/!(*.+(s|S)pec|*.+(t|T)est).+(cjs|mjs|js|ts|mts|cts|jsx|tsx|html|vue|svelte)", "!{src,lib}/**/__tests__/**/*.+(cjs|mjs|js|ts|mts|cts|jsx|tsx|html|vue|svelte)". To enable file mutation, consider configuring the `mutate` property in your configuration file or using the --mutate option via the command line.
+[32m13:10:42 (2200) INFO Instrumenter[39m Instrumented 0 source file(s) with 0 mutant(s)
+[32m13:10:42 (2200) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m13:10:43 (2200) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m13:10:43 (2200) INFO DryRunExecutor[39m Starting initial test run (command test runner with "perTest" coverage analysis). This may take a while.
+[91m13:10:43 (2200) ERROR DryRunExecutor[39m One or more tests failed in the initial test run:
+	All tests
+		npm error Missing script: "test"
+npm error
+npm error To see a list of scripts, run:
+npm error   npm run
+
+npm error A complete log of this run can be found in: /tmp/.npm/_logs/2026-04-27T13_10_43_483Z-debug-0.log
+
+[91m13:10:43 (2200) ERROR Stryker[39m There were failed tests in the initial test run.

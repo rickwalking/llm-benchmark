@@ -1,0 +1,9 @@
+generator: cursor-gemini
+run_id:    cursor-gemini-seed1
+started:   2026-04-27T01:39:57-03:00
+cmd:       cursor-agent --print --yolo --trust --sandbox disabled --model gemini-3.1-pro --workspace /home/pmarins/projects/llm-benchmark-library/harness/runs/cursor-gemini-seed1/candidate
+prompt_input: arg
+timeout:   5400s
+exit_code: 1
+ended:     2026-04-27T01:40:02-03:00
+wall_seconds: 5

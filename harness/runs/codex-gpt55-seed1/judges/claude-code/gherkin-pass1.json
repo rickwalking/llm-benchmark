@@ -1,0 +1,37 @@
+{
+  "criterion": "gherkin",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 4,
+      "alignment": 5,
+      "declarative": 3,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "AC-1.1 AC-1.2 AC-1.3 AC-1.4 AC-2.1 AC-2.2 AC-2.3 AC-2.4 AC-3.1 AC-3.2 AC-3.3 AC-3.4 AC-3.5 AC-3.6 AC-4.1 AC-4.2 AC-4.3 AC-4.4 AC-4.5 AC-5.1 AC-5.2 AC-5.3 AC-5.4 AC-5.5 AC-5.6 AC-6.1 AC-6.2 AC-6.3 AC-6.4 \u2014 all 29 AC tags present (one scenario per AC, all 29 scenarios pass per bdd-report.json)",
+        "No `Scenario Outline` / `Examples` blocks anywhere in features/*.feature \u2014 boundary tables (e.g., 4 vs 5 vs 6 loans, fine at 19 vs 20 days late) absent. AC-3.2 'Given Alice has borrowed five books' and AC-3.6 'Given Alice has borrowed four books' are separate scenarios rather than an outline; AC-4.2 uses a single magic value 'is 3 days overdue' / 'fine total is 150 cents'."
+      ],
+      "alignment": [
+        "us-3-lending.feature:22 `@AC-3.2\\n  Scenario: Members cannot exceed five active loans`",
+        "us-4-returns.feature:25 `@AC-4.3\\n  Scenario: Returned loans cannot be returned again`",
+        "us-5-reservations.feature:41 `@AC-5.5\\n  Scenario: Stale notifications expire and the next member is notified` \u2014 every scenario carries exactly one AC tag and the scenario title restates the AC; 29 ACs \u2194 29 scenarios (bidirectional). `Background:` blocks consolidate catalog/member setup in every feature (e.g., us-1-catalog.feature:2-10)."
+      ],
+      "declarative": [
+        "us-3-lending.feature:18 `When the librarian lends \"Dune\" to Alice`  /  us-1-catalog.feature:14 `When the librarian lists the catalog`  /  us-4-returns.feature:38 `Then Bob's reservation for \"Dune\" is \"notified\"` \u2014 domain language",
+        "us-1-catalog.feature:33 `Then the response status is 404`; us-3-lending.feature:26 `Then the response status is 409`; us-3-lending.feature:33 `Then the response status is 403`; us-3-lending.feature:40 `Then the response status is 402`; us-3-lending.feature:38 `Given Alice has unpaid fines of 501 cents`; us-4-returns.feature:21 `And Alice's loan for \"Dune\" is 3 days overdue` \u2014 HTTP status codes and magic numbers appear throughout, not abstracted to business outcomes or named constants."
+      ],
+      "atomic": [
+        "us-5-reservations.feature:43-46 `Given Alice has borrowed \"Dune\"\\n    And Bob reserves \"Dune\"\\n    And Chen reserves \"Dune\"\\n    And the librarian returns Alice's loan for \"Dune\"` \u2014 each `And` chains a separate atomic step rather than concatenating actions inside one step",
+        "us-3-lending.feature:24 `Given Alice has borrowed five books` \u2014 composed at the right granularity (not decomposed into five separate borrow steps)"
+      ]
+    },
+    "final_score": 4,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

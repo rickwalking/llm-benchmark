@@ -1,0 +1,29 @@
+{
+  "criterion": "ui_ux",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 3,
+    "anchor_match": "Competent",
+    "evidence_quotes": [
+      "frontend/src/components/Modal.tsx:23-43: \"if (e.key === 'Escape') { onClose(); return; } if (e.key === 'Tab') { ... if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }\" \u2014 modal traps focus, ESC closes",
+      "frontend/src/components/Modal.tsx:59-61: \"onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}\" \u2014 overlay click closes",
+      "frontend/src/components/Modal.tsx:48: \"previousFocus.current?.focus();\" \u2014 focus returns to trigger on close",
+      "frontend/src/pages/CheckoutPage.tsx:117-127: 3-step indicator with active/completed visual states (\"<div className={`step ${step === 'member' ? 'active' : ''} ${(step === 'book' || step === 'confirm') ? 'completed' : ''}`}\") and back navigation (\"onClick={() => { if (step === 'book') goToStep('member'); else if (step === 'confirm') goToStep('book'); }}\")",
+      "frontend/src/pages/CheckoutPage.tsx:181-205: Confirmation step shows Member, Book, Due Date, Availability After before submitting",
+      "frontend/src/components/CreateBookModal.tsx:42-55: Form labels via htmlFor (\"<label htmlFor=\\\"book-title\\\">Title *</label>\") and specific error \"Title is required\" rendered as inline alert (screenshot add-book-error.png)",
+      "frontend/src/pages/BooksPage.tsx:38-42: Empty state with CTA copy: \"<h3>No books in catalog</h3><p>Add books to get started with your library.</p>\"",
+      "frontend/src/pages/BooksPage.tsx:23-24: Loading indication: \"<div className=\\\"loading\\\"><span className=\\\"spinner\\\" /> Loading catalog...</div>\"",
+      "frontend/src/styles.css:7-22: Consistent design tokens (CSS variables for colors, radius, shadow) used across all pages",
+      "frontend/src/pages/MemberProfilePage.tsx:245-251: Reservation countdown rendered as HH:MM:SS via formatDuration but no setInterval \u2014 countdown does NOT update live (Grep for setInterval/requestAnimationFrame returned 'No matches found')",
+      "frontend/src/pages/BookDetailPage.tsx:99-119: Renders \"Queue position:\" UI whenever the API returns a queue_position object, even when position is null \u2014 visible bug in book-detail.png screenshot showing empty 'Queue position:' badge with 'of 0 waiting' for a user not in queue",
+      "Grep across frontend/src for sort|filter|search returned 'No matches found' \u2014 catalog has no secondary affordance (sort or filter)",
+      "frontend/src/pages/MemberProfilePage.tsx:90-226: Member with zero loans/reservations/fines gets identical three-card layout as a member with full data (alice-profile.png shows three identical empty 'No active loans / No active reservations / No fines on record' cards) \u2014 layout does not adapt to data"
+    ],
+    "anchor_rejected_above": "Polished (4) requires a live HH:MM:SS countdown that updates without page reload, color+icon (not just color) emphasis, and at least one catalog sort/filter affordance. Countdown is computed once at render with no setInterval; status indicators use color-only badges (no icons); catalog has no sort or filter. Additionally, BookDetailPage shows a broken empty 'Queue position:' badge for users not in queue \u2014 visible jank that the rubric notes 'caps the score at 3'.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

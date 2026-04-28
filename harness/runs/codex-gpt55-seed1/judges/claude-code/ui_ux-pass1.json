@@ -1,0 +1,28 @@
+{
+  "criterion": "ui_ux",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 3,
+    "anchor_match": "Competent",
+    "evidence_quotes": [
+      "frontend/src/utils.ts:25-26 \u2014 `if (available === 0) { return \\`All copies on loan \u2014 ${queueDepth} waiting\\`; } return \\`${available} of ${total} available\\`;` (thoughtful microcopy)",
+      "frontend/src/App.tsx:13-29 \u2014 consistent topbar/nav across pages with `eyebrow` + `h1` + `NavLink` items; page-level pattern repeated in BooksPage:53-55, MembersPage:53-55, CheckoutPage:79-82",
+      "frontend/src/components/Modal.tsx:17-44 \u2014 focus trap, `if (event.key === \"Escape\") { onClose(); }`, and overlay-click close via `<div className=\"modal-overlay\" onMouseDown={onClose}>`",
+      "frontend/src/pages/CheckoutPage.tsx:84-88 \u2014 step indicator `<ol className=\"steps\">{[1,2,3].map((item) => (<li className={item === step ? \"current\" : \"\"} key={item}>Step {item}</li>))}</ol>`; back-navigation at lines 145-147 and confirm summary at 128-143",
+      "frontend/src/pages/BooksPage.tsx:82-89 \u2014 labelled form input `<label>Title<input required value={form.title} ...></label>` (real labels, not placeholder)",
+      "frontend/src/pages/CheckoutPage.tsx:49-56 \u2014 specific inline error 'Choose a member to continue.' / 'Choose a book to continue.' rendered via `<Message kind=\"error\">`",
+      "frontend/src/pages/BooksPage.tsx:63 \u2014 empty state `<p className=\"empty-state\">No books are in the catalog yet.</p>` with no CTA button",
+      "frontend/src/pages/MemberProfilePage.tsx:94 \u2014 empty state `<p className=\"empty-state\">No active loans.</p>` (perfunctory, no helpful next-step copy)",
+      "frontend/src/pages/MemberProfilePage.tsx:101 \u2014 overdue indicator `<small>Due {formatDate(loan.due_at)} {overdue ? \"\u00b7 overdue\" : \"\"}</small>` is plain text, no icon and no color emphasis",
+      "frontend/src/pages/MemberProfilePage.tsx:152-155 \u2014 destructive confirm modal uses default primary green button: `<button onClick={() => void confirm()} type=\"button\">Confirm</button>` (no distinct danger treatment)",
+      "frontend/src/pages/BooksPage.tsx:57-59 \u2014 only secondary affordance on the catalog is `<RefreshCw \u2026/> Refresh`; no sort or filter is wired",
+      "frontend/src/utils.ts:16-22 \u2014 live HH:MM:SS countdown via `formatCountdown` and MemberProfilePage.tsx:43-49 `setInterval(...,1000)` updating notified reservation"
+    ],
+    "anchor_rejected_above": "Anchor 4 ('Polished') requires multiple specific bullets that are not satisfied: (a) overdue loans / unpaid fines are not visually emphasized with color+icon \u2014 overdue is just the text '\u00b7 overdue' (MemberProfilePage.tsx:101) and the unpaid pill uses color only; (b) the confirm-destructive modal uses the default primary green confirm button (MemberProfilePage.tsx:154), not a distinct danger treatment; (c) the catalog has no sort or filter affordance \u2014 BooksPage.tsx exposes only a Refresh button. The live HH:MM:SS countdown and the 'All copies on loan \u2014 N waiting' microcopy match anchor 4 examples, but the unmet bullets prevent the score; per the rubric note 'Score what is there, not what could be there', so this lands at 3.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

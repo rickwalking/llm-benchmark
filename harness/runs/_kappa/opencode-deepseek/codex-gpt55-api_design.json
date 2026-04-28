@@ -1,0 +1,13 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "codex-gpt55",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"score\": 2,\n  \"reason\": \"OpenAPI is valid (swagger-cli passes) and all endpoints are present, but the spec doesn't fully match the implementation. Multiple status codes are missing from the OpenAPI: 400 on POST /api/books, /api/members, /api/loans, and /api/reservations (all have zod validation that returns 400); 404 on POST /api/loans/{id}/return (getLoan can throw NotFoundError) and /api/fines/{id}/pay. Response schemas are absent for /api/loans/{id}/return (200 returns {loan, fine, notified_reservation}) and /api/reservations/expire (200 returns {expired, notified}). Reservation POST reuses the LoanCreate schema instead of its own. Zod validation returns generic 'Invalid request' without field-level error info. No stable code field in errors, no examples in OpenAPI. Positives: consistent RESTful URLs, single error class hierarchy with middleware, correct domain-specific status codes (402/403/409) at the implementation level, and expire-stale-reservations properly triggered from reads + explicit POST.\"\n}\n```\n",
+  "parsed": {
+    "score": 2,
+    "reason": "OpenAPI is valid (swagger-cli passes) and all endpoints are present, but the spec doesn't fully match the implementation. Multiple status codes are missing from the OpenAPI: 400 on POST /api/books, /api/members, /api/loans, and /api/reservations (all have zod validation that returns 400); 404 on POST /api/loans/{id}/return (getLoan can throw NotFoundError) and /api/fines/{id}/pay. Response schemas are absent for /api/loans/{id}/return (200 returns {loan, fine, notified_reservation}) and /api/reservations/expire (200 returns {expired, notified}). Reservation POST reuses the LoanCreate schema instead of its own. Zod validation returns generic 'Invalid request' without field-level error info. No stable code field in errors, no examples in OpenAPI. Positives: consistent RESTful URLs, single error class hierarchy with middleware, correct domain-specific status codes (402/403/409) at the implementation level, and expire-stale-reservations properly triggered from reads + explicit POST."
+  },
+  "parse_failed": false
+}

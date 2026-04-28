@@ -1,0 +1,127 @@
+{
+  "judge": "claude-code",
+  "passes": 1,
+  "results": {
+    "ui_ux": [
+      {
+        "criterion": "ui_ux",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "ui_ux",
+          "score": 3,
+          "anchor_match": "Competent",
+          "evidence_quotes": [
+            "frontend/src/components/Modal.tsx:23-43: \"if (e.key === 'Escape') { onClose(); return; } if (e.key === 'Tab') { ... if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }\" \u2014 modal traps focus, ESC closes",
+            "frontend/src/components/Modal.tsx:59-61: \"onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}\" \u2014 overlay click closes",
+            "frontend/src/components/Modal.tsx:48: \"previousFocus.current?.focus();\" \u2014 focus returns to trigger on close",
+            "frontend/src/pages/CheckoutPage.tsx:117-127: 3-step indicator with active/completed visual states (\"<div className={`step ${step === 'member' ? 'active' : ''} ${(step === 'book' || step === 'confirm') ? 'completed' : ''}`}\") and back navigation (\"onClick={() => { if (step === 'book') goToStep('member'); else if (step === 'confirm') goToStep('book'); }}\")",
+            "frontend/src/pages/CheckoutPage.tsx:181-205: Confirmation step shows Member, Book, Due Date, Availability After before submitting",
+            "frontend/src/components/CreateBookModal.tsx:42-55: Form labels via htmlFor (\"<label htmlFor=\\\"book-title\\\">Title *</label>\") and specific error \"Title is required\" rendered as inline alert (screenshot add-book-error.png)",
+            "frontend/src/pages/BooksPage.tsx:38-42: Empty state with CTA copy: \"<h3>No books in catalog</h3><p>Add books to get started with your library.</p>\"",
+            "frontend/src/pages/BooksPage.tsx:23-24: Loading indication: \"<div className=\\\"loading\\\"><span className=\\\"spinner\\\" /> Loading catalog...</div>\"",
+            "frontend/src/styles.css:7-22: Consistent design tokens (CSS variables for colors, radius, shadow) used across all pages",
+            "frontend/src/pages/MemberProfilePage.tsx:245-251: Reservation countdown rendered as HH:MM:SS via formatDuration but no setInterval \u2014 countdown does NOT update live (Grep for setInterval/requestAnimationFrame returned 'No matches found')",
+            "frontend/src/pages/BookDetailPage.tsx:99-119: Renders \"Queue position:\" UI whenever the API returns a queue_position object, even when position is null \u2014 visible bug in book-detail.png screenshot showing empty 'Queue position:' badge with 'of 0 waiting' for a user not in queue",
+            "Grep across frontend/src for sort|filter|search returned 'No matches found' \u2014 catalog has no secondary affordance (sort or filter)",
+            "frontend/src/pages/MemberProfilePage.tsx:90-226: Member with zero loans/reservations/fines gets identical three-card layout as a member with full data (alice-profile.png shows three identical empty 'No active loans / No active reservations / No fines on record' cards) \u2014 layout does not adapt to data"
+          ],
+          "anchor_rejected_above": "Polished (4) requires a live HH:MM:SS countdown that updates without page reload, color+icon (not just color) emphasis, and at least one catalog sort/filter affordance. Countdown is computed once at render with no setInterval; status indicators use color-only badges (no icons); catalog has no sort or filter. Additionally, BookDetailPage shows a broken empty 'Queue position:' badge for users not in queue \u2014 visible jank that the rubric notes 'caps the score at 3'.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "api_design": [
+      {
+        "criterion": "api_design",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "api_design",
+          "score": 3,
+          "anchor_match": "Reasonable: valid OpenAPI, every endpoint present, consistent error shape, status codes match",
+          "evidence_quotes": [
+            "/runs/opencode-deepseek-seed1/candidate/backend/openapi.yaml is valid",
+            "{\"method\":\"GET\",\"path\":\"/api/books/00000000-0000-0000-0000-000000000000\",\"status\":404,\"body\":\"{\\\"error\\\":\\\"Book not found\\\"}\"}",
+            "{\"method\":\"POST\",\"path\":\"/api/loans\",\"status\":400,\"body\":\"{\\\"error\\\":\\\"Invalid member ID\\\"}\"}",
+            "Error:\n      type: object\n      properties:\n        error:\n          type: string\n      required:\n        - error",
+            "export class DomainError extends Error {\n  constructor(\n    message: string,\n    public statusCode: number,\n  )",
+            "app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {\n    if (err instanceof DomainError) {\n      res.status(err.statusCode).json({ error: err.message });",
+            "router.post('/expire', (_req: Request, res: Response) => {\n  const db = getDb();\n  const count = reservationService.expireStaleReservations(db);\n  res.json({ expired_count: count });\n});",
+            "reservationService.expireStaleReservations(db);\n  const books = bookService.listBooks(db);",
+            "\"402\":\n          description: Outstanding fines exceed limit",
+            "\"403\":\n          description: Member is suspended",
+            "\"409\":\n          description: Loan limit reached, no copies available, or duplicate loan"
+          ],
+          "anchor_rejected_above": "Anchor 4 requires error responses with a stable `code` field for programmatic handling and OpenAPI examples for negative ACs \u2014 neither is present. Errors are emitted only as `{ error: err.message }` (loan-handler.ts: `res.status(err.statusCode).json({ error: err.message })`) with no `code`, and the openapi.yaml has zero `examples:` blocks. Additionally, validation 400 responses returned by the implementation (e.g. POST /api/loans returning `{\"error\":\"Invalid member ID\"}`) are not documented at all in the OpenAPI's `responses:` for those endpoints, so the spec doesn't fully match the implementation as anchor 4 demands.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "architecture": [
+      {
+        "criterion": "architecture",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "architecture",
+          "score": 3,
+          "anchor_match": "Clean enough",
+          "evidence_quotes": [
+            "src/\n\u251c\u2500\u2500 policy/\n\u2502   \u251c\u2500\u2500 index.test.ts\n\u2502   \u2514\u2500\u2500 index.ts\n\u251c\u2500\u2500 routes/\n\u2502   \u251c\u2500\u2500 books.ts\n\u2502   \u251c\u2500\u2500 fines.ts\n\u2502   \u251c\u2500\u2500 loans.ts\n\u2502   \u251c\u2500\u2500 members.ts\n\u2502   \u2514\u2500\u2500 reservations.ts\n\u251c\u2500\u2500 services/\n\u2502   \u251c\u2500\u2500 bookService.ts\n\u2502   \u251c\u2500\u2500 fineService.ts\n\u2502   \u251c\u2500\u2500 index.test.ts\n\u2502   \u251c\u2500\u2500 loanService.ts\n\u2502   \u251c\u2500\u2500 memberService.ts\n\u2502   \u2514\u2500\u2500 reservationService.ts\n\u251c\u2500\u2500 db.ts\n\u251c\u2500\u2500 errors.ts\n\u251c\u2500\u2500 index.ts\n\u251c\u2500\u2500 types.ts\n\u2514\u2500\u2500 validators.ts",
+            "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+            "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50;\nexport const LATE_FINE_CAP_CENTS = 1000;\nexport const RESERVATION_NOTIFICATION_HOURS = 48;\nexport const FINE_BORROW_BLOCK_THRESHOLD_CENTS = 500;",
+            "import { ConflictError, ForbiddenError, NotFoundError, PaymentRequiredError } from '../errors.js';\nimport { canBorrow, computeFineCents, nextReservationToNotify, RESERVATION_NOTIFICATION_HOURS } from '../policy/index.js';",
+            "backend/src/services/index.test.ts,493\nfrontend/src/pages/MemberProfilePage.tsx,251\nfrontend/src/pages/CheckoutPage.tsx,237\nbackend/src/policy/index.test.ts,185\nfrontend/src/pages/BookDetailPage.tsx,167\nfrontend/src/api.ts,153\nbackend/src/services/loanService.ts,153",
+            "src/\n\u251c\u2500\u2500 components/\n\u2502   \u251c\u2500\u2500 CreateBookModal.tsx\n\u2502   \u251c\u2500\u2500 CreateMemberModal.tsx\n\u2502   \u251c\u2500\u2500 Layout.tsx\n\u2502   \u2514\u2500\u2500 Modal.tsx\n\u251c\u2500\u2500 pages/\n\u2502   \u251c\u2500\u2500 BookDetailPage.tsx\n\u2502   \u251c\u2500\u2500 BooksPage.tsx\n\u2502   \u251c\u2500\u2500 CheckoutPage.tsx\n\u2502   \u251c\u2500\u2500 MemberProfilePage.tsx\n\u2502   \u2514\u2500\u2500 MembersPage.tsx\n\u251c\u2500\u2500 api.ts",
+            "const member = db.prepare('SELECT id, status FROM members WHERE id = ?').get(input.memberId) as { id: string; status: string } | undefined;"
+          ],
+          "anchor_rejected_above": "Level 4 requires (a) services depending on a thin DB-access abstraction rather than raw db.prepare \u2014 but loanService.ts is full of inline raw SQL like `db.prepare('SELECT id, status FROM members WHERE id = ?').get(...)`; (b) frontend organized by feature \u2014 but frontend uses technical-role folders (`components/`, `pages/`, single `api.ts`) with no `checkout/`, `members/`, `books/` feature directories; (c) shared types in a single source \u2014 backend has its own `types.ts` and frontend has its own types in `api.ts` with no shared package or generated client. Multiple level-4 conditions fail.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "gherkin": [
+      {
+        "criterion": "gherkin",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "gherkin",
+          "sub_scores": {
+            "completeness": 3,
+            "alignment": 4,
+            "declarative": 3,
+            "atomic": 3
+          },
+          "evidence_quotes": {
+            "completeness": [
+              "AC IDs covered (24/29): @AC-1.1, @AC-1.2, @AC-1.4, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-6.1, @AC-6.2, @AC-6.3",
+              "AC IDs missing scenarios: AC-1.3 (UI /books page), AC-3.6 (UI checkout flow), AC-4.5 (UI member profile), AC-5.6 (UI book detail queue position), AC-6.4 (UI Pay button) \u2014 no Scenario Outline used for boundaries (e.g. AC-3.2 limit at 4/5/6 or AC-4.2 fine at 19/20 days late)"
+            ],
+            "alignment": [
+              "Every scenario in catalog.feature/lending.feature/manage.feature/returns.feature/reservations.feature/fines.feature has a single `@AC-x.y` tag (e.g. `@AC-3.2\\n  Scenario: Reject borrowing more than 5 books`); names like 'Reject duplicate ISBN', 'Cannot pay an already paid fine', 'Notified member can borrow while others cannot' restate the AC. Counter-evidence to score 5: `@AC-1.1-ready` is not a real AC ID, and 5 ACs are untraced (no bidirectional traceability)."
+            ],
+            "declarative": [
+              "Good (declarative): 'When Alice Johnson borrows \"Dune\"' / 'Given Alice Johnson has 5 active loans' / 'Then Bob Smith\\'s reservation status becomes \"notified\"'",
+              "Bad (technical leakage): 'Then the response status is 201' / 'And the book has a queue_depth field' / 'Then the response includes unpaid_fines_cents of 350' \u2014 HTTP status codes and JSON field names appear pervasively, blocking score \u22654"
+            ],
+            "atomic": [
+              "Compound step (reservations.feature:40, 49): 'When the book is returned and Bob Smith is notified' \u2014 two actions chained inside one When using 'and' as a comma; otherwise most steps are atomic (e.g. 'Given Alice Johnson has borrowed \"Dune\"' / 'And the loan is 3 days overdue')"
+            ]
+          },
+          "final_score": 3,
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ]
+  }
+}

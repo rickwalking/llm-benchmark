@@ -1,0 +1,119 @@
+{
+  "judge": "claude-code",
+  "passes": 1,
+  "results": {
+    "ui_ux": [
+      {
+        "criterion": "ui_ux",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "ui_ux",
+          "score": 3,
+          "anchor_match": "Competent",
+          "evidence_quotes": [
+            "global.css: '.steps' / '.step.active' / '.step.completed' \u2014 Checkout.tsx renders <div className={`step${step >= 1 ? ' active' : ''}${step > 1 ? ' completed' : ''}`}>1. Select Member</div> ... 2. Select Book ... 3. Confirm, with Back buttons ('<button className=\"btn\" onClick={() => setStep(2)}>Back</button>') and a confirm step before handleSubmit",
+            "BookList.tsx:86-90: 'No books in the catalog yet.' / 'Click \"Add Book\" to add the first one.' inside .empty-state \u2014 empty state explains the page and points to primary action",
+            "Modal.tsx:13-18 + 26-28: ESC handler ('if (e.key === \"Escape\") onCancel();') and overlay click close ('if (e.target === overlayRef.current) onCancel();'); useEffect autofocuses '[data-autofocus]' but no focus trap and no focus return to trigger",
+            "global.css: '.form-group label { display: block; ... font-weight: 500 }' and BookList.tsx forms use '<label htmlFor=\"book-title\">Title</label><input id=\"book-title\" name=\"title\" required />' \u2014 every input has a real label",
+            "Checkout.tsx:149-158: specific inline messages 'Member is suspended.', 'Outstanding fines exceed $5.00 limit.', 'Loan limit reached (5 active loans maximum).' \u2014 not generic",
+            "Layout.tsx: <nav> with brand + Books / Members / Checkout NavLinks; consistent header on every page; global.css sets a single primary green token (--color-primary: #1a5632) and one type scale (h1 1.75rem, h2 1.35rem)",
+            "BookDetail.tsx:63-66: '<span className=\"badge badge-danger\">All copies on loan{book.reservation_queue_depth > 0 && ` \u2014 ${book.reservation_queue_depth} waiting`}</span>' \u2014 one polished microcopy moment",
+            "Checkout.tsx:155: '{maxLoans && <div className=\"alert alert-warning\">This is the member&apos;s 5th active loan.</div>}' \u2014 surfaces non-obvious info at confirm step"
+          ],
+          "anchor_rejected_above": "Level 4 ('Polished') requires multiple specific upgrades on top of level 3, and most are missing: (a) Reservation countdown is rendered as a raw timestamp \u2014 MemberDetail.tsx:164 'Notification expires {new Date(res.expires_at).toLocaleString()}' \u2014 not a live HH:MM:SS countdown; no setInterval/countdown logic exists in the frontend. (b) No secondary affordance (sort/filter/search) on the catalog \u2014 BookList.tsx contains only a 'highlight' query param and an Add Book toggle, no filter/sort UI. (c) Confirm-destructive actions do not use a distinct danger treatment \u2014 ConfirmReturnModal.tsx:16 uses '<button className=\"btn btn-primary\" data-autofocus onClick={onConfirm}>Confirm Return</button>' (same primary green as non-destructive confirms). (d) Overdue/notified/unpaid states are emphasized only via colored badges, no icons (e.g., MemberDetail.tsx:124 just '<span className=\"badge badge-danger\">Overdue</span>'). One polished microcopy line and one 5th-loan warning are present, but the bulk of level-4 anchors are not met, so the project sits at competent.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "api_design": [
+      {
+        "criterion": "api_design",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "api_design",
+          "score": 3,
+          "anchor_match": "Reasonable",
+          "evidence_quotes": [
+            "/runs/opencode-glm-seed1/candidate/backend/openapi.yaml is valid",
+            "{\"method\":\"POST\",\"path\":\"/api/reservations/expire\",\"status\":200,\"body\":\"{\\\"expired\\\":0}\"}",
+            "{\"method\":\"GET\",\"path\":\"/api/books/00000000-0000-0000-0000-000000000000\",\"status\":404,\"body\":\"{\\\"error\\\":\\\"Book not found\\\"}\"}",
+            "router.post('/api/loans', (req: Request, res: Response) => {\n    const parsed = createLoanSchema.safeParse(req.body);\n    if (!parsed.success) {\n      res.status(400).json({ error: parsed.error.issues });",
+            "if (err instanceof ConflictError) {\n        res.status(409).json({ error: err.message });\n        return;\n      }\n      if (err instanceof ForbiddenError) {\n        res.status(403).json({ error: err.message });\n        return;\n      }\n      if (err instanceof PaymentRequiredError) {\n        res.status(402).json({ error: err.message });",
+            "Error:\n      type: object\n      properties:\n        error:\n          type: string",
+            "/api/loans/{id}/return:\n    post:\n      ...\n      responses:\n        '200':\n          description: Loan returned\n        '409':\n          description: Loan already returned",
+            "router.post('/api/loans/:id/return', ...) { ... if (err instanceof Error && err.message === 'Loan not found') { res.status(404).json({ error: err.message });"
+          ],
+          "anchor_rejected_above": "Anchor 4 (Well-designed) does not apply: error responses contain only a human message \u2014 no stable `code` field for programmatic handling (handlers do `res.status(409).json({ error: err.message })`); the OpenAPI provides no examples for negative ACs; domain-error\u2192HTTP mapping is duplicated in each handler via instanceof checks rather than centralized in a single middleware; and response schemas have mismatches with implementation (Error schema declares `error: string` but validation errors actually return `error: array of zod issues`; POST endpoints like /api/books, /api/members, /api/loans, /api/reservations omit the 400 response in the spec; POST /api/loans/{id}/return omits 404 in the spec despite the handler returning it).",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "architecture": [
+      {
+        "criterion": "architecture",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "architecture",
+          "score": 3,
+          "anchor_match": "Clean enough",
+          "evidence_quotes": [
+            "src/\n\u251c\u2500\u2500 db/\n\u251c\u2500\u2500 middleware/\n\u251c\u2500\u2500 policy/\n\u2502   \u251c\u2500\u2500 constants.ts\n\u2502   \u251c\u2500\u2500 index.ts\n\u2502   \u2514\u2500\u2500 policy.test.ts\n\u251c\u2500\u2500 routes/\n\u251c\u2500\u2500 services/\n\u251c\u2500\u2500 app.ts\n\u251c\u2500\u2500 errors.ts\n\u2514\u2500\u2500 index.ts",
+            "{\n  \"circular\": []\n,\n  \"orphans\": []\n}",
+            "export const MAX_ACTIVE_LOANS = 5;\nexport const LOAN_PERIOD_DAYS = 14;\nexport const LATE_FINE_RATE_CENTS_PER_DAY = 50;",
+            "import { canBorrow, computeDueAt, computeFineCents, computeNotificationExpiry } from '../policy/index.js';\nimport { ConflictError, NotFoundError, ForbiddenError, PaymentRequiredError } from '../errors.js';",
+            "const member = db.prepare('SELECT * FROM members WHERE id = ?').get(memberId) as {",
+            "src/\n\u251c\u2500\u2500 api/\n\u2502   \u2514\u2500\u2500 index.ts\n\u251c\u2500\u2500 components/\n\u251c\u2500\u2500 features/\n\u251c\u2500\u2500 hooks/\n\u251c\u2500\u2500 pages/",
+            "backend/src/services/api.test.ts,355\nbackend/src/policy/policy.test.ts,230\nfrontend/src/pages/MemberDetail.tsx,219"
+          ],
+          "anchor_rejected_above": "Anchor 4 requires (a) services to depend on a thin DB-access abstraction rather than calling raw db.prepare directly \u2014 but services/loan.ts calls db.prepare('SELECT * FROM members WHERE id = ?') and 7+ other raw SQL statements directly; (b) frontend organized by feature (checkout/, members/, books/) \u2014 but the frontend uses technical-role folders (pages/, components/, api/, hooks/) with empty features/ and hooks/ directories; (c) shared types between frontend and backend in a single source \u2014 no shared/ workspace exists, the LoanRow interface lives in services/loan.ts and frontend api/index.ts (119 lines) defines its own types separately.",
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ],
+    "gherkin": [
+      {
+        "criterion": "gherkin",
+        "pass": 1,
+        "judge": "claude-code",
+        "exit_code": 0,
+        "parsed": {
+          "criterion": "gherkin",
+          "sub_scores": {
+            "completeness": 3,
+            "alignment": 4,
+            "declarative": 3,
+            "atomic": 4
+          },
+          "evidence_quotes": {
+            "completeness": [
+              "AC tags found: @AC-1.1 @AC-1.2 @AC-1.4 @AC-2.1 @AC-2.2 @AC-2.3 @AC-2.4 @AC-3.1 @AC-3.2 @AC-3.3 @AC-3.4 @AC-3.5 @AC-3.5b @AC-4.1 @AC-4.2 @AC-4.3 @AC-4.4 @AC-4.5 @AC-5.1 @AC-5.2 @AC-5.3 @AC-5.4 @AC-5.5 @AC-6.1 @AC-6.2 @AC-6.3",
+              "Missing from features: AC-1.3 (UI books page), AC-3.6 (UI checkout flow), AC-5.6 (UI book detail page), AC-6.4 (UI member profile pay button) \u2014 25/29 = 86% coverage; negatives covered for every user story (AC-1.4, AC-2.2, AC-2.4, AC-3.2-3.5, AC-4.3, AC-5.2, AC-5.3, AC-6.3); AC-4.2 uses Scenario Outline with boundary examples | days_late | 0 | 1 | 10 | 20 | 21 |"
+            ],
+            "alignment": [
+              "Every scenario has exactly one @AC-x.y tag (e.g., '@AC-3.2 Scenario: Reject loan when member has 5 active loans', '@AC-6.3 Scenario: Pay an already-paid fine', '@AC-4.4 Scenario: Return triggers reservation notification') \u2014 scenario names are human-readable restatements of ACs; Background blocks remove setup duplication in 5 of 6 features; 4 of 29 ACs lack a scenario, so bidirectional traceability is not complete"
+            ],
+            "declarative": [
+              "Good: 'When the librarian lends \"Dune\" to \"Alice\"' / 'Then the loan has a due date 14 days from now' / 'Then the member \"Alice\" has a fine of <expected_fine_cents> cents'",
+              "Bad (HTTP/JSON-leaking): 'Then the response status is 201' / 'Then the response status is 409' / 'And the response contains error \"ISBN already exists\"' / 'Then the profile shows unpaid_fines_cents of 350' / 'And the book includes reservation_queue_depth of 1'"
+            ],
+            "atomic": [
+              "Single-action steps throughout: 'Given the member \"Alice\" is suspended' / 'When the librarian returns the loan for \"Dune\"' / 'And the reservation status is \"waiting\"' \u2014 no compound 'and ... and ...' chains inside a single Given/When/Then; Background uses separate And-chained steps rather than packing multiple actions into one"
+            ]
+          },
+          "final_score": 3,
+          "confidence": "high"
+        },
+        "parse_failed": false
+      }
+    ]
+  }
+}

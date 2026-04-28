@@ -1,0 +1,17 @@
+[
+  {
+    "url": "http://localhost:5173/books",
+    "performance": 0.76,
+    "accessibility": 0.92
+  },
+  {
+    "url": "http://localhost:5173/checkout",
+    "performance": 0.86,
+    "accessibility": 0.95
+  },
+  {
+    "url": "http://localhost:5173/members",
+    "performance": 0.8,
+    "accessibility": 0.95
+  }
+]

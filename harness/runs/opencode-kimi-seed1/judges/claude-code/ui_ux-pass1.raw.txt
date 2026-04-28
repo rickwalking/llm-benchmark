@@ -1,0 +1,17 @@
+```json
+{
+  "criterion": "ui_ux",
+  "score": 3,
+  "anchor_match": "Competent — clear hierarchy, consistent layout, working loading/empty/error states, focus-trapped modals, step indicator with back-nav",
+  "evidence_quotes": [
+    "frontend/src/components/Modal.tsx:14-71 — `useEffect(() => { ... if (e.key === 'Escape') onClose(); ... if (e.target === overlayRef.current) onClose(); ... const handleTabKey = (e) => { if (e.key !== 'Tab') return; ... } ... firstElement?.focus();` (focus trap, ESC, overlay-click close, autofocus)",
+    "frontend/src/pages/CheckoutPage.tsx:9 `const STEPS = ['Select Member', 'Select Book', 'Confirm']` and lines 59-75 render `<div className=\"step-indicator\" role=\"tablist\">` with `index < currentStep ? 'completed' : ''` — visible step indicator with back nav at lines 207-213 (`<Button variant=\"secondary\" onClick={() => setCurrentStep(prev => prev - 1)} disabled={currentStep === 0}>Back</Button>`)",
+    "frontend/src/pages/MembersPage.tsx:74-78 `<EmptyState message=\"No members yet.\" action={<Button onClick={() => setShowAddModal(true)}>Add First Member</Button>} />` — empty state with primary CTA",
+    "frontend/src/pages/BooksPage.tsx:16-22 `{isAllOnLoan ? (<span className=\"unavailable\">All copies on loan</span>) : (<span ...>{book.available_copies} of {book.total_copies} available</span>)}` — microcopy upgrade vs. '0 available'",
+    "frontend/src/components/Status.tsx:1-8 `<div className=\"loading\" role=\"status\" aria-label=\"Loading\"><div className=\"loading-spinner\"></div><p>Loading...</p></div>` — loading indicator",
+    "frontend/src/pages/MembersPage.tsx:99-106 `<label htmlFor=\"member-name\">Name *</label><input id=\"member-name\" type=\"text\" ... required />` — labeled inputs, but only HTML `required`; error path is generic server-mirrored `formError` shown via `<p className=\"error-text\">{formError}</p>` (no field-specific inline messages like 'ISBN must be 10 or 13 digits')"
+  ],
+  "anchor_rejected_above": "Level 4 fails on multiple required anchors. (a) The reservation countdown is computed once per render with no setInterval/state tick — `BookDetailPage.tsx:10-22 formatTimeRemaining` is called inline at line 103 inside JSX with no useEffect to re-render, so the HH:MM:SS does NOT 'update without page reload'. (b) The catalog has no secondary affordance: `BooksPage.tsx:42-51` renders `<div className=\"books-grid\">{books.map(book => <BookCard.../>)}</div>` with zero sort, filter, or search controls. (c) Confirm-destructive actions lack a distinct danger treatment — `MemberDetailPage.tsx:130-139` uses default-primary `<Button onClick={...}>Confirm Payment</Button>` (a `.btn-danger` class exists in `index.css:200-207` but is unused in any flow). (d) Visual emphasis is mostly color, not 'color + icon': the overdue badge `index.css:484-491` and `MemberDetailPage.tsx:38 <span className=\"overdue-badge\">{loan.days_overdue} days overdue</span>` is text+color only with no icon.",
+  "confidence": "high"
+}
+```

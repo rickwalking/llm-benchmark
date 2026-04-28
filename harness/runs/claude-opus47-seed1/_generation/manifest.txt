@@ -1,0 +1,9 @@
+generator: claude-opus47
+run_id:    claude-opus47-seed1
+started:   2026-04-27T02:04:23-03:00
+cmd:       bash -c cd "/home/pmarins/projects/llm-benchmark-library/harness/runs/claude-opus47-seed1/candidate" && exec claude --print --dangerously-skip-permissions --model claude-opus-4-7 --add-dir "/home/pmarins/projects/llm-benchmark-library/harness/runs/claude-opus47-seed1/candidate"
+prompt_input: stdin
+timeout:   5400s
+exit_code: 0
+ended:     2026-04-27T02:39:05-03:00
+wall_seconds: 2082

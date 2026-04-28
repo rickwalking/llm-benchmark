@@ -1,0 +1,72 @@
+
+Running 4 tests using 4 workers
+
+[1A[2K[1/4] [chromium] › tests/e2e/_screenshots.spec.ts:36:3 › UI/UX screenshot capture › populated state
+[1A[2K[2/4] [chromium] › tests/e2e/_screenshots.spec.ts:55:3 › UI/UX screenshot capture › error state — non-existent IDs
+[1A[2K  1) [chromium] › tests/e2e/_screenshots.spec.ts:55:3 › UI/UX screenshot capture › error state — non-existent IDs 
+
+    Error: browserType.launch: Executable doesn't exist at /opt/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/_screenshots-UI-UX-screens-4ff05-or-state-—-non-existent-IDs-chromium/error-context.md
+
+
+[1A[2K[3/4] [chromium] › tests/e2e/_screenshots.spec.ts:78:3 › UI/UX screenshot capture › empty state (best-effort)
+[1A[2K  2) [chromium] › tests/e2e/_screenshots.spec.ts:36:3 › UI/UX screenshot capture › populated state ─
+
+    Error: browserType.launch: Executable doesn't exist at /opt/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/_screenshots-UI-UX-screenshot-capture-populated-state-chromium/error-context.md
+
+
+[1A[2K  3) [chromium] › tests/e2e/_screenshots.spec.ts:78:3 › UI/UX screenshot capture › empty state (best-effort) 
+
+    Error: browserType.launch: Executable doesn't exist at /opt/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/_screenshots-UI-UX-screens-465a0-re-empty-state-best-effort--chromium/error-context.md
+
+
+[1A[2K[4/4] [chromium] › tests/e2e/_screenshots.spec.ts:66:3 › UI/UX screenshot capture › checkout flow — three steps
+[1A[2K  4) [chromium] › tests/e2e/_screenshots.spec.ts:66:3 › UI/UX screenshot capture › checkout flow — three steps 
+
+    Error: browserType.launch: Executable doesn't exist at /opt/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/_screenshots-UI-UX-screens-2d57c-checkout-flow-—-three-steps-chromium/error-context.md
+
+
+[1A[2K  4 failed
+    [chromium] › tests/e2e/_screenshots.spec.ts:36:3 › UI/UX screenshot capture › populated state ──
+    [chromium] › tests/e2e/_screenshots.spec.ts:55:3 › UI/UX screenshot capture › error state — non-existent IDs 
+    [chromium] › tests/e2e/_screenshots.spec.ts:66:3 › UI/UX screenshot capture › checkout flow — three steps 
+    [chromium] › tests/e2e/_screenshots.spec.ts:78:3 › UI/UX screenshot capture › empty state (best-effort) 

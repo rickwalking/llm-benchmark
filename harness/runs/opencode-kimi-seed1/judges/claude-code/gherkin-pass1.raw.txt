@@ -1,0 +1,37 @@
+```json
+{
+  "criterion": "gherkin",
+  "sub_scores": {
+    "completeness": 2,
+    "alignment": 4,
+    "declarative": 3,
+    "atomic": 4
+  },
+  "evidence_quotes": {
+    "completeness": [
+      "AC IDs from REQUIREMENTS: AC-1.1..AC-1.4, AC-2.1..AC-2.4, AC-3.1..AC-3.6, AC-4.1..AC-4.5, AC-5.1..AC-5.6, AC-6.1..AC-6.4 (29 total). Tagged in features: AC-1.1, AC-1.2, AC-1.4, AC-2.1-2.4, AC-3.1-3.5, AC-4.1-4.4, AC-5.1-5.5, AC-6.1-6.3 (24/29 = ~83%). Missing: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4.",
+      "Running `npm run test:bdd` fails to load step definitions: `SyntaxError: The requested module '@playwright/test' does not provide an export named 'APIRequestContext' at ModuleJobSync.runSync` — and steps.ts contains zero step bindings for lending/returns/reservations/fines scenarios (e.g., no Given for `a member \"Alice\" with ID \"m1\" is active`, no When for `the librarian lends the book to the member`, no Then for `a fine of $3.00 is created`). Per rubric note, this caps completeness at 2."
+    ],
+    "alignment": [
+      "@AC-3.2\\n  Scenario: Reject loan when member has reached loan limit",
+      "@AC-4.2\\n  Scenario: Return a book very late with fine cap",
+      "Every scenario across all 6 feature files carries exactly one @AC-x.y tag, and scenario titles are human-readable restatements of the AC. However, AC-1.3, AC-3.6, AC-4.5, AC-5.6, and AC-6.4 have no scenarios — bidirectional traceability fails."
+    ],
+    "declarative": [
+      "Good: `When the librarian lends the book to the member` / `Then the loan is created` / `And sets the due date to 14 days from now` (lending.feature:13-15)",
+      "Bad (HTTP status leakage throughout): `Then the system returns a 409 error` (lending.feature:22), `Then the system returns a 402 error` (lending.feature:36), `Then the system returns a 404 error` (catalog.feature:25) — implementation-leaky terms in business specs prevent score 4."
+    ],
+    "atomic": [
+      "Given a member \"Alice\" with ID \"m1\" is active",
+      "And a book \"The Hobbit\" with ID \"b1\" has available copies",
+      "When the librarian lends the book to the member",
+      "Then the system creates a loan",
+      "And sets the due date to 14 days from now",
+      "And decreases the available copies by 1",
+      "Slight compound exception: `And each book shows title, author, ISBN, total copies, and available copies` (catalog.feature:13)"
+    ]
+  },
+  "final_score": 3,
+  "confidence": "high"
+}
+```

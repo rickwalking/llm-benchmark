@@ -1,0 +1,19 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-deepseek",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "{\"criterion\":\"ui_ux\",\"score\":1,\"evidence\":[\"axe-summary.json contains {\\\"skipped\\\":true,\\\"reason\\\":\\\"no axe spec in candidate\\\"}, so there is no axe detail to contextualize UI state quality.\",\"lighthouse-summary.json only reports three URLs with performance/accessibility scores: /books 0.85/0.96, /checkout 0.86/0.96, /members 0.86/0.96.\",\"The evidence directory contains no screenshots, no checkout-flow capture, no modal interaction capture, and no rendered HTML for catalog or member profile, so the required UI/UX evidence is absent.\"],\"rationale\":\"The available evidence does not show visual hierarchy, scannability, form behavior, async feedback, empty/error states, modal behavior, checkout step clarity, or consistency across pages. Lighthouse summaries indicate pages responded, but the rubric says objective summaries are context only and have separate weight. With the qualitative UI evidence missing, the work shown cannot be credited beyond an unusable/unsupported score.\"}\n",
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 1,
+    "evidence": [
+      "axe-summary.json contains {\"skipped\":true,\"reason\":\"no axe spec in candidate\"}, so there is no axe detail to contextualize UI state quality.",
+      "lighthouse-summary.json only reports three URLs with performance/accessibility scores: /books 0.85/0.96, /checkout 0.86/0.96, /members 0.86/0.96.",
+      "The evidence directory contains no screenshots, no checkout-flow capture, no modal interaction capture, and no rendered HTML for catalog or member profile, so the required UI/UX evidence is absent."
+    ],
+    "rationale": "The available evidence does not show visual hierarchy, scannability, form behavior, async feedback, empty/error states, modal behavior, checkout step clarity, or consistency across pages. Lighthouse summaries indicate pages responded, but the rubric says objective summaries are context only and have separate weight. With the qualitative UI evidence missing, the work shown cannot be credited beyond an unusable/unsupported score."
+  },
+  "parse_failed": false
+}

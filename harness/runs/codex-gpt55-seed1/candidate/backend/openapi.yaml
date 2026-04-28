@@ -1,0 +1,359 @@
+openapi: 3.1.0
+info:
+  title: Library Lending API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+paths:
+  /api/health:
+    get:
+      responses:
+        "200":
+          description: Service health
+  /api/books:
+    get:
+      responses:
+        "200":
+          description: Sorted book catalog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookCreate"
+      responses:
+        "201":
+          description: Created book
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        "409":
+          $ref: "#/components/responses/Error"
+  /api/books/{id}:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/Id"
+        - name: member_id
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Book detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookDetail"
+        "404":
+          $ref: "#/components/responses/Error"
+  /api/members:
+    get:
+      responses:
+        "200":
+          description: Member list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Member"
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemberCreate"
+      responses:
+        "201":
+          description: Created member
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Member"
+        "409":
+          $ref: "#/components/responses/Error"
+  /api/members/{id}:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Member profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemberDetail"
+        "404":
+          $ref: "#/components/responses/Error"
+  /api/loans:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoanCreate"
+      responses:
+        "201":
+          description: Created loan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Loan"
+        "402":
+          $ref: "#/components/responses/Error"
+        "403":
+          $ref: "#/components/responses/Error"
+        "409":
+          $ref: "#/components/responses/Error"
+  /api/loans/{id}/return:
+    post:
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Returned loan and optional fine
+        "409":
+          $ref: "#/components/responses/Error"
+  /api/reservations:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoanCreate"
+      responses:
+        "201":
+          description: Created reservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+        "409":
+          $ref: "#/components/responses/Error"
+  /api/reservations/expire:
+    post:
+      responses:
+        "200":
+          description: Expiry summary
+  /api/fines/{id}/pay:
+    post:
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Paid fine
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fine"
+        "409":
+          $ref: "#/components/responses/Error"
+components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+    BookCreate:
+      type: object
+      required: [title, author, isbn, total_copies]
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        isbn:
+          type: string
+        total_copies:
+          type: integer
+          minimum: 1
+    MemberCreate:
+      type: object
+      required: [name, email]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+    LoanCreate:
+      type: object
+      required: [member_id, book_id]
+      properties:
+        member_id:
+          type: string
+          format: uuid
+        book_id:
+          type: string
+          format: uuid
+    Book:
+      type: object
+      required: [id, title, author, isbn, total_copies, available_copies, reservation_queue_depth]
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        author:
+          type: string
+        isbn:
+          type: string
+        total_copies:
+          type: integer
+        available_copies:
+          type: integer
+        reservation_queue_depth:
+          type: integer
+    BookDetail:
+      allOf:
+        - $ref: "#/components/schemas/Book"
+        - type: object
+          properties:
+            selected_member_reservation:
+              anyOf:
+                - $ref: "#/components/schemas/Reservation"
+                - type: "null"
+    Member:
+      type: object
+      required: [id, name, email, member_since, status]
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+        member_since:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [active, suspended]
+    MemberDetail:
+      allOf:
+        - $ref: "#/components/schemas/Member"
+        - type: object
+          properties:
+            unpaid_fines_cents:
+              type: integer
+            active_loans:
+              type: array
+              items:
+                $ref: "#/components/schemas/Loan"
+            reservations:
+              type: array
+              items:
+                $ref: "#/components/schemas/Reservation"
+            unpaid_fines:
+              type: array
+              items:
+                $ref: "#/components/schemas/Fine"
+    Loan:
+      type: object
+      required: [id, book_id, member_id, borrowed_at, due_at]
+      properties:
+        id:
+          type: string
+          format: uuid
+        book_id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        borrowed_at:
+          type: string
+          format: date-time
+        due_at:
+          type: string
+          format: date-time
+        returned_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+    Reservation:
+      type: object
+      required: [id, book_id, member_id, queued_at, status]
+      properties:
+        id:
+          type: string
+          format: uuid
+        book_id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        queued_at:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum: [waiting, notified, expired, fulfilled, cancelled]
+        notified_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        expires_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"
+        queue_position:
+          anyOf:
+            - type: integer
+            - type: "null"
+    Fine:
+      type: object
+      required: [id, member_id, loan_id, amount_cents]
+      properties:
+        id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        loan_id:
+          type: string
+          format: uuid
+        amount_cents:
+          type: integer
+        paid_at:
+          anyOf:
+            - type: string
+              format: date-time
+            - type: "null"

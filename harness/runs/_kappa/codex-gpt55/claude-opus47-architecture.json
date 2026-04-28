@@ -1,0 +1,25 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "claude-opus47",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "{\"score\":2,\"criterion\":\"architecture\",\"rationale\":\"The submission has a recognizable backend layering and no cycles, but it misses several Clean enough requirements: business policy is duplicated outside policy, services talk directly to raw DB statements, the frontend is organized by technical role rather than feature, and there is no evidence of a shared frontend/backend type boundary. It is above Tangled because there are no god files and madge reports no cycles, but it does not reach 3 cleanly.\",\"evidence\":[\"`backend-tree.txt` shows nominal layers: `db/`, `http/`, `policy/`, `services/`, `errors.ts`, and `types.ts`.\",\"`madge.json` reports `\\\"circular\\\": []` and `\\\"orphans\\\": []`.\",\"`policy/index.ts` centralizes constants such as `MAX_ACTIVE_LOANS = 5`, `LOAN_PERIOD_DAYS = 14`, fine caps, and reservation notification hours.\",\"`loan-service.ts` duplicates the loan-limit value inline: `if (activeLoanCount + 1 === 5)`, instead of importing `MAX_ACTIVE_LOANS`.\",\"`loan-service.ts` imports `DB` from `../db/index.js` and calls raw `db.prepare(...)` throughout, including loan inserts, reservation status updates, and availability queries; there is no thin DB-access abstraction.\",\"Reservation transitions are not owned by one state-machine module: `loan-service.ts` directly updates `reservations` to `fulfilled` and queries `waiting`/`notified` states while also calling `promoteNextWaiting`.\",\"`frontend-tree.txt` shows a technical split (`api/`, `components/`, `pages/`) rather than feature-owned modules such as `checkout/`, `members/`, and `books/`.\",\"The tree shows separate `backend/src/types.ts` and `frontend/src/api/types.ts`, with no `shared/` workspace, generated client, or named shared types package in the evidence.\",\"`file-sizes.csv` has no god-file over 800 lines, but includes oversized test files such as `backend/src/services/services.unit.test.ts` at 604 lines and `backend/src/services/services.test.ts` at 486 lines.\"]}\n",
+  "parsed": {
+    "score": 2,
+    "criterion": "architecture",
+    "rationale": "The submission has a recognizable backend layering and no cycles, but it misses several Clean enough requirements: business policy is duplicated outside policy, services talk directly to raw DB statements, the frontend is organized by technical role rather than feature, and there is no evidence of a shared frontend/backend type boundary. It is above Tangled because there are no god files and madge reports no cycles, but it does not reach 3 cleanly.",
+    "evidence": [
+      "`backend-tree.txt` shows nominal layers: `db/`, `http/`, `policy/`, `services/`, `errors.ts`, and `types.ts`.",
+      "`madge.json` reports `\"circular\": []` and `\"orphans\": []`.",
+      "`policy/index.ts` centralizes constants such as `MAX_ACTIVE_LOANS = 5`, `LOAN_PERIOD_DAYS = 14`, fine caps, and reservation notification hours.",
+      "`loan-service.ts` duplicates the loan-limit value inline: `if (activeLoanCount + 1 === 5)`, instead of importing `MAX_ACTIVE_LOANS`.",
+      "`loan-service.ts` imports `DB` from `../db/index.js` and calls raw `db.prepare(...)` throughout, including loan inserts, reservation status updates, and availability queries; there is no thin DB-access abstraction.",
+      "Reservation transitions are not owned by one state-machine module: `loan-service.ts` directly updates `reservations` to `fulfilled` and queries `waiting`/`notified` states while also calling `promoteNextWaiting`.",
+      "`frontend-tree.txt` shows a technical split (`api/`, `components/`, `pages/`) rather than feature-owned modules such as `checkout/`, `members/`, and `books/`.",
+      "The tree shows separate `backend/src/types.ts` and `frontend/src/api/types.ts`, with no `shared/` workspace, generated client, or named shared types package in the evidence.",
+      "`file-sizes.csv` has no god-file over 800 lines, but includes oversized test files such as `backend/src/services/services.unit.test.ts` at 604 lines and `backend/src/services/services.test.ts` at 486 lines."
+    ]
+  },
+  "parse_failed": false
+}

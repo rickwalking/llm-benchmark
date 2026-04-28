@@ -1,0 +1,126 @@
+{
+  "run": "/home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-kimi-seed1",
+  "final_score": 47.5,
+  "per_criterion": {
+    "first_run_success": 1.0,
+    "functional_correctness": 0.0,
+    "mutation_score": 0.0,
+    "ui_ux": 0.5,
+    "api_design": 0.75,
+    "architecture": 0.75,
+    "gherkin": 0.5,
+    "security": 1.0
+  },
+  "objective_detail": {
+    "first_run_success": {
+      "score": 1.0,
+      "detail": {
+        "install": true,
+        "booted": true
+      }
+    },
+    "functional_correctness": {
+      "score": 0.0,
+      "detail": {
+        "reason": "no tests found"
+      }
+    },
+    "mutation_score": {
+      "score": 0.0,
+      "detail": {
+        "reason": "stryker errored before producing score"
+      }
+    },
+    "security": {
+      "score": 1.0,
+      "detail": {
+        "high": 0,
+        "critical": 0
+      }
+    },
+    "ui_ux": {
+      "score": 0.5,
+      "detail": {
+        "axe_serious": 0,
+        "axe_critical": 0,
+        "lighthouse_min_perf": 0.62
+      }
+    },
+    "api_design": {
+      "score": 1.0,
+      "detail": {
+        "openapi_valid": true,
+        "probe_non5xx_rate": 1.0
+      }
+    },
+    "architecture": {
+      "score": 1.0,
+      "detail": {
+        "cycles": 0,
+        "file_size_p95": 238
+      }
+    }
+  },
+  "judge_detail": {
+    "ui_ux": {
+      "score": 0.5,
+      "detail": {
+        "judge": "claude-code",
+        "passes": [
+          {
+            "file": "ui_ux-pass1.json",
+            "score": 3
+          }
+        ],
+        "median": 3,
+        "within_judge_stdev": 0.0,
+        "scaled": 0.5
+      }
+    },
+    "api_design": {
+      "score": 0.5,
+      "detail": {
+        "judge": "claude-code",
+        "passes": [
+          {
+            "file": "api_design-pass1.json",
+            "score": 3
+          }
+        ],
+        "median": 3,
+        "within_judge_stdev": 0.0,
+        "scaled": 0.5
+      }
+    },
+    "architecture": {
+      "score": 0.5,
+      "detail": {
+        "judge": "claude-code",
+        "passes": [
+          {
+            "file": "architecture-pass1.json",
+            "score": 3
+          }
+        ],
+        "median": 3,
+        "within_judge_stdev": 0.0,
+        "scaled": 0.5
+      }
+    },
+    "gherkin": {
+      "score": 0.5,
+      "detail": {
+        "judge": "claude-code",
+        "passes": [
+          {
+            "file": "gherkin-pass1.json",
+            "score": 3
+          }
+        ],
+        "median": 3,
+        "within_judge_stdev": 0.0,
+        "scaled": 0.5
+      }
+    }
+  }
+}

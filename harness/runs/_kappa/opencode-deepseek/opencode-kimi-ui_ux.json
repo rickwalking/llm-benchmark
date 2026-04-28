@@ -1,0 +1,13 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-kimi",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"score\": 1,\n  \"rationale\": \"Screenshots directory is empty; no screen captures, rendered HTML, or flow captures are present. Only Lighthouse summaries (perf 0.62\u20130.70, a11y 0.85\u20131.0) and a skipped axe test exist. Without any visual or structural evidence of the UI \u2014 no pages, no flows, no forms, no empty/error states \u2014 none of the rubric criteria (visual hierarchy, affordance clarity, feedback, form quality, consistency, microcopy, checkout flow) can be verified. The evidence does not demonstrate a usable interface.\"\n}\n```\n",
+  "parsed": {
+    "score": 1,
+    "rationale": "Screenshots directory is empty; no screen captures, rendered HTML, or flow captures are present. Only Lighthouse summaries (perf 0.62\u20130.70, a11y 0.85\u20131.0) and a skipped axe test exist. Without any visual or structural evidence of the UI \u2014 no pages, no flows, no forms, no empty/error states \u2014 none of the rubric criteria (visual hierarchy, affordance clarity, feedback, form quality, consistency, microcopy, checkout flow) can be verified. The evidence does not demonstrate a usable interface."
+  },
+  "parse_failed": false
+}

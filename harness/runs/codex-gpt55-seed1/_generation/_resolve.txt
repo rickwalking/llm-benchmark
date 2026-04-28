@@ -1,0 +1,11 @@
+stdin
+5400
+codex
+exec
+--dangerously-bypass-approvals-and-sandbox
+--skip-git-repo-check
+--cd
+/home/pmarins/projects/llm-benchmark-library/harness/runs/codex-gpt55-seed1/candidate
+-m
+gpt-5.5
+==END==

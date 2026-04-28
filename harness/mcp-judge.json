@@ -1,0 +1,9 @@
+{
+  "_comment": "MCP server config used by the judge invocation. Loaded via `claude --mcp-config`. Playwright MCP is the only server the judge needs; everything else (file reads, bash, grep) is built-in to Claude Code.",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--headless"]
+    }
+  }
+}

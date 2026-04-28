@@ -1,0 +1,25 @@
+src/
+├── api/
+│   ├── client.ts
+│   └── types.ts
+├── components/
+│   ├── EmptyState.tsx
+│   ├── ErrorBanner.tsx
+│   ├── Layout.tsx
+│   ├── Modal.tsx
+│   └── Spinner.tsx
+├── pages/
+│   ├── BookDetailPage.tsx
+│   ├── BooksPage.tsx
+│   ├── CheckoutPage.tsx
+│   ├── MemberDetailPage.tsx
+│   ├── MembersPage.tsx
+│   └── NotFoundPage.tsx
+├── styles/
+│   └── global.css
+├── utils/
+│   ├── format.test.ts
+│   └── format.ts
+├── App.tsx
+├── main.tsx
+└── test-setup.ts

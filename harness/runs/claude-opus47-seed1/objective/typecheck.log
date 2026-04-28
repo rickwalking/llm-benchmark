@@ -1,0 +1,12 @@
+
+> library-lending@1.0.0 typecheck
+> npm --workspace backend run typecheck && npm --workspace frontend run typecheck
+
+
+> backend@1.0.0 typecheck
+> tsc -p tsconfig.json --noEmit
+
+
+> frontend@1.0.0 typecheck
+> tsc -p tsconfig.json --noEmit
+

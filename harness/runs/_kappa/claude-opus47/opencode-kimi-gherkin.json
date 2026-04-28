@@ -1,0 +1,44 @@
+{
+  "vendor": "claude-opus47",
+  "model": "claude-opus-4-7",
+  "gen": "opencode-kimi",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 2,\n    \"alignment\": 4,\n    \"declarative\": 3,\n    \"atomic\": 4\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"AC IDs covered by scenarios: AC-1.1, AC-1.2, AC-1.4, AC-2.1-2.4, AC-3.1-3.5, AC-4.1-4.4, AC-5.1-5.5, AC-6.1-6.3 (24 of 29 \u2248 83%)\",\n      \"AC IDs missing: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4 \u2014 no scenarios reference these\",\n      \"step_definitions/steps.ts only defines steps for catalog.feature and add_entities.feature; lending/returns/reservations/fines features rely on steps like 'Given a member \\\"Alice\\\" with ID \\\"m1\\\" is active', 'When the librarian lends the book to the member', 'Then the loan is marked as returned', 'Given a member has an unpaid fine' \u2014 NONE of which are wired up. Per rubric note: 'unimplemented step definitions cap the score at 2'.\"\n    ],\n    \"alignment\": [\n      \"Every scenario carries an @AC tag (e.g., '@AC-3.2 Scenario: Reject loan when member has reached loan limit')\",\n      \"Scenario names are human-readable restatements of ACs: 'Reject loan when member has reached loan limit', 'Reject duplicate reservation', 'Return a book very late with fine cap'\",\n      \"Background blocks are used appropriately in each feature file (e.g., 'Given the library has books and members')\",\n      \"Bidirectional traceability incomplete: 5 ACs have no scenarios; AC-4.2 and AC-5.4 each tag two scenarios without using Scenario Outline\"\n    ],\n    \"declarative\": [\n      \"Good: 'When the librarian lends the book to the member / Then the system creates a loan / And sets the due date to 14 days from now / And decreases the available copies by 1'\",\n      \"Good: 'When the librarian records the return before the due date / Then the loan is marked as returned'\",\n      \"Bad \u2014 HTTP/protocol leakage throughout: 'Then the system returns a 409 error', 'Then the system returns a 404 error', 'Then the system returns a 403 error', 'Then the system returns a 402 error' \u2014 librarians don't think in HTTP status codes\",\n      \"Magic numbers used unnamed: '14 days from now', '$3.00', '$10.00 (the maximum cap)', '48 hours', '20 days ago' \u2014 no named constants for loan period, fine rate, max fine, notification window\"\n    ],\n    \"atomic\": [\n      \"Atomic: 'And sets the due date to 14 days from now', 'And decreases the available copies by 1', 'And the loan was due 6 days ago'\",\n      \"Mildly compound: 'And each book shows title, author, ISBN, total copies, and available copies' \u2014 one step asserts five fields\",\n      \"And/Then is used to chain separate steps (not as a comma): 'Then the loan is marked as returned / And the available copies increases by 1'\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n```\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 2,
+      "alignment": 4,
+      "declarative": 3,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "AC IDs covered by scenarios: AC-1.1, AC-1.2, AC-1.4, AC-2.1-2.4, AC-3.1-3.5, AC-4.1-4.4, AC-5.1-5.5, AC-6.1-6.3 (24 of 29 \u2248 83%)",
+        "AC IDs missing: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4 \u2014 no scenarios reference these",
+        "step_definitions/steps.ts only defines steps for catalog.feature and add_entities.feature; lending/returns/reservations/fines features rely on steps like 'Given a member \"Alice\" with ID \"m1\" is active', 'When the librarian lends the book to the member', 'Then the loan is marked as returned', 'Given a member has an unpaid fine' \u2014 NONE of which are wired up. Per rubric note: 'unimplemented step definitions cap the score at 2'."
+      ],
+      "alignment": [
+        "Every scenario carries an @AC tag (e.g., '@AC-3.2 Scenario: Reject loan when member has reached loan limit')",
+        "Scenario names are human-readable restatements of ACs: 'Reject loan when member has reached loan limit', 'Reject duplicate reservation', 'Return a book very late with fine cap'",
+        "Background blocks are used appropriately in each feature file (e.g., 'Given the library has books and members')",
+        "Bidirectional traceability incomplete: 5 ACs have no scenarios; AC-4.2 and AC-5.4 each tag two scenarios without using Scenario Outline"
+      ],
+      "declarative": [
+        "Good: 'When the librarian lends the book to the member / Then the system creates a loan / And sets the due date to 14 days from now / And decreases the available copies by 1'",
+        "Good: 'When the librarian records the return before the due date / Then the loan is marked as returned'",
+        "Bad \u2014 HTTP/protocol leakage throughout: 'Then the system returns a 409 error', 'Then the system returns a 404 error', 'Then the system returns a 403 error', 'Then the system returns a 402 error' \u2014 librarians don't think in HTTP status codes",
+        "Magic numbers used unnamed: '14 days from now', '$3.00', '$10.00 (the maximum cap)', '48 hours', '20 days ago' \u2014 no named constants for loan period, fine rate, max fine, notification window"
+      ],
+      "atomic": [
+        "Atomic: 'And sets the due date to 14 days from now', 'And decreases the available copies by 1', 'And the loan was due 6 days ago'",
+        "Mildly compound: 'And each book shows title, author, ISBN, total copies, and available copies' \u2014 one step asserts five fields",
+        "And/Then is used to chain separate steps (not as a comma): 'Then the loan is marked as returned / And the available copies increases by 1'"
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

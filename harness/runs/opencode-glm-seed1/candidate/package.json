@@ -1,0 +1,33 @@
+{
+  "name": "library-lending",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=backend\" \"npm run dev --workspace=frontend\"",
+    "build": "npm run build --workspace=backend && npm run build --workspace=frontend",
+    "test:unit": "npm run test:unit --workspace=backend && npm run test:unit --workspace=frontend",
+    "test:e2e": "npx playwright test --config=tests/e2e/playwright.config.ts",
+    "test:bdd": "NODE_OPTIONS='--import tsx' cucumber-js --config features/cucumber.mjs",
+    "test:all": "npm run test:unit && npm run test:bdd && npm run test:e2e",
+    "mutation": "stryker run",
+    "lint": "eslint backend/src frontend/src",
+    "typecheck": "npm run typecheck --workspace=backend && npm run typecheck --workspace=frontend"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^11.2.0",
+    "@playwright/test": "^1.52.0",
+    "@stryker-mutator/core": "^8.7.1",
+    "@stryker-mutator/vitest-runner": "^8.7.1",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
+    "concurrently": "^9.1.2",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react": "^7.37.5",
+    "madge": "^8.0.0",
+    "typescript": "^5.7.0"
+  }
+}

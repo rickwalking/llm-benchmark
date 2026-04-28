@@ -1,0 +1,14 @@
+{
+  "vendor": "claude-opus47",
+  "model": "claude-opus-4-7",
+  "gen": "opencode-deepseek",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "{\"criterion\": \"ui_ux\", \"score\": 2, \"rationale\": \"Evidence is severely limited: the screenshots directory at /home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-deepseek-seed1/evidence/ui-ux/screenshots/ is empty (no PNGs of empty/populated/error states, no checkout flow capture, no modal capture). axe-summary.json reports {\\\"skipped\\\": true, \\\"reason\\\": \\\"no axe spec in candidate\\\"}, and no rendered HTML excerpts are provided. The only substantive evidence is lighthouse-summary.json showing three routes load (/books, /checkout, /members) with accessibility ~0.96 and performance ~0.85 \u2014 which the rubric explicitly says is 'for context only'. Since the rubric instructs scoring only what is *there* in evidence, and none of the qualitative UI/UX artifacts (visual hierarchy, empty states, modal focus behavior, inline validation, step indicator, countdown, microcopy, danger affordances) can be observed, I cannot grant level 3 which requires verifying specific qualities. The Lighthouse data confirms flows render and pages are reachable (consistent with 'functional but rough'), and the 0.96 accessibility score weakly suggests labels exist, but nothing demonstrates competent visual hierarchy, async feedback, or error handling. Score capped at 2.\"}\n",
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 2,
+    "rationale": "Evidence is severely limited: the screenshots directory at /home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-deepseek-seed1/evidence/ui-ux/screenshots/ is empty (no PNGs of empty/populated/error states, no checkout flow capture, no modal capture). axe-summary.json reports {\"skipped\": true, \"reason\": \"no axe spec in candidate\"}, and no rendered HTML excerpts are provided. The only substantive evidence is lighthouse-summary.json showing three routes load (/books, /checkout, /members) with accessibility ~0.96 and performance ~0.85 \u2014 which the rubric explicitly says is 'for context only'. Since the rubric instructs scoring only what is *there* in evidence, and none of the qualitative UI/UX artifacts (visual hierarchy, empty states, modal focus behavior, inline validation, step indicator, countdown, microcopy, danger affordances) can be observed, I cannot grant level 3 which requires verifying specific qualities. The Lighthouse data confirms flows render and pages are reachable (consistent with 'functional but rough'), and the 0.96 accessibility score weakly suggests labels exist, but nothing demonstrates competent visual hierarchy, async feedback, or error handling. Score capped at 2."
+  },
+  "parse_failed": false
+}

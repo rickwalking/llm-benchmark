@@ -1,0 +1,23 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-deepseek",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "{\"score\":2,\"reason\":\"OpenAPI is valid and the API uses mostly REST-shaped plural resources with a consistent {\\\"error\\\":\\\"...\\\"} implementation error shape, but the contract does not reliably match the implementation. The probe shows actual 400 validation/domain responses for POST /api/books, POST /api/loans, and POST /api/reservations that are not documented in openapi.yaml. Validation errors return only the first message, not field-level error info. Error responses have no stable programmatic code field, and examples for negative acceptance cases are absent. The evidence directory also does not include the route registration file requested by the rubric, so endpoint registration completeness cannot be verified from the supplied evidence.\",\"evidence\":[\"openapi-validation.log: '/runs/opencode-deepseek-seed1/candidate/backend/openapi.yaml is valid'\",\"api-probe.json: POST /api/books returned 400 with body '{\\\"error\\\":\\\"ISBN must be 10 or 13 digits, hyphens allowed\\\"}', but openapi.yaml documents only 201 and 409 for /api/books POST.\",\"api-probe.json: POST /api/loans returned 400 with body '{\\\"error\\\":\\\"Invalid member ID\\\"}', but openapi.yaml documents only 201, 402, 403, and 409 for /api/loans POST.\",\"api-probe.json: POST /api/reservations returned 400 with body '{\\\"error\\\":\\\"Invalid member ID\\\"}', but openapi.yaml documents only 201 and 409 for /api/reservations POST.\",\"loan-handler.ts: validation failure is res.status(400).json({ error: parsed.error.issues[0].message }), which is consistent but not field-level.\",\"reservation-handler.ts: domain errors are mapped inline as res.status(err.statusCode).json({ error: err.message }).\",\"error-middleware.ts: DomainError subclasses carry only message and statusCode; no stable error code is exposed.\",\"openapi.yaml: components.schemas.Error contains only required field 'error' and no examples or code field.\"]}\n",
+  "parsed": {
+    "score": 2,
+    "reason": "OpenAPI is valid and the API uses mostly REST-shaped plural resources with a consistent {\"error\":\"...\"} implementation error shape, but the contract does not reliably match the implementation. The probe shows actual 400 validation/domain responses for POST /api/books, POST /api/loans, and POST /api/reservations that are not documented in openapi.yaml. Validation errors return only the first message, not field-level error info. Error responses have no stable programmatic code field, and examples for negative acceptance cases are absent. The evidence directory also does not include the route registration file requested by the rubric, so endpoint registration completeness cannot be verified from the supplied evidence.",
+    "evidence": [
+      "openapi-validation.log: '/runs/opencode-deepseek-seed1/candidate/backend/openapi.yaml is valid'",
+      "api-probe.json: POST /api/books returned 400 with body '{\"error\":\"ISBN must be 10 or 13 digits, hyphens allowed\"}', but openapi.yaml documents only 201 and 409 for /api/books POST.",
+      "api-probe.json: POST /api/loans returned 400 with body '{\"error\":\"Invalid member ID\"}', but openapi.yaml documents only 201, 402, 403, and 409 for /api/loans POST.",
+      "api-probe.json: POST /api/reservations returned 400 with body '{\"error\":\"Invalid member ID\"}', but openapi.yaml documents only 201 and 409 for /api/reservations POST.",
+      "loan-handler.ts: validation failure is res.status(400).json({ error: parsed.error.issues[0].message }), which is consistent but not field-level.",
+      "reservation-handler.ts: domain errors are mapped inline as res.status(err.statusCode).json({ error: err.message }).",
+      "error-middleware.ts: DomainError subclasses carry only message and statusCode; no stable error code is exposed.",
+      "openapi.yaml: components.schemas.Error contains only required field 'error' and no examples or code field."
+    ]
+  },
+  "parse_failed": false
+}

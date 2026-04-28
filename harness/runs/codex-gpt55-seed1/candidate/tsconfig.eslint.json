@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "types": ["node", "vitest", "@testing-library/jest-dom"]
+  },
+  "include": ["backend/**/*.ts", "frontend/**/*.ts", "frontend/**/*.tsx", "features/**/*.ts", "tests/**/*.ts"]
+}

@@ -1,0 +1,15 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "claude-opus47",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"api_design\",\n  \"score\": 3,\n  \"anchor\": \"Reasonable\",\n  \"justification\": \"OpenAPI is valid (swagger-cli passes), complete (all endpoints present), and matches the implementation. Status codes are correctly mapped via a single error class hierarchy and middleware (error-middleware.ts:45-51): NotFoundError\u2192404, ForbiddenError\u2192403, PaymentRequiredError\u2192402, ConflictError\u2192409, ValidationError\u2192400. The probe script confirms actual responses match the spec for 200, 201, 400, and 404 cases. URLs follow REST conventions (nouns, plural, hierarchical: /api/loans/{id}/return, /api/reservations/expire). Zod validation is in use, returning 400 with field-level details (probe lines 4-5, 9-10). Error shape is consistent: {\\\"error\\\": \\\"<message>\\\"} with optional {\\\"details\\\": [...]} field, documented in the Error schema. Does not reach score 4 because: (1) error responses lack a stable 'code' field for programmatic handling \u2014 only a human-readable 'error' string, (2) no examples are provided in the OpenAPI spec for any endpoint, and (3) the Error schema's 'details' field is typed as {} (the 'additionalProperties: true escape hatch'), violating score 5's tight-schema requirement.\"\n}\n```\n",
+  "parsed": {
+    "criterion": "api_design",
+    "score": 3,
+    "anchor": "Reasonable",
+    "justification": "OpenAPI is valid (swagger-cli passes), complete (all endpoints present), and matches the implementation. Status codes are correctly mapped via a single error class hierarchy and middleware (error-middleware.ts:45-51): NotFoundError\u2192404, ForbiddenError\u2192403, PaymentRequiredError\u2192402, ConflictError\u2192409, ValidationError\u2192400. The probe script confirms actual responses match the spec for 200, 201, 400, and 404 cases. URLs follow REST conventions (nouns, plural, hierarchical: /api/loans/{id}/return, /api/reservations/expire). Zod validation is in use, returning 400 with field-level details (probe lines 4-5, 9-10). Error shape is consistent: {\"error\": \"<message>\"} with optional {\"details\": [...]} field, documented in the Error schema. Does not reach score 4 because: (1) error responses lack a stable 'code' field for programmatic handling \u2014 only a human-readable 'error' string, (2) no examples are provided in the OpenAPI spec for any endpoint, and (3) the Error schema's 'details' field is typed as {} (the 'additionalProperties: true escape hatch'), violating score 5's tight-schema requirement."
+  },
+  "parse_failed": false
+}

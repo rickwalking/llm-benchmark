@@ -1,0 +1,42 @@
+Based on my analysis of the feature files, AC list, REQUIREMENTS.md, and bdd-report.json (all 194 step results passed, so step definitions are fully wired):
+
+**Coverage check:**
+- 24/29 ACs have scenarios (82.7%)
+- Missing: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4 (all UI-specific ACs)
+- All NEG ACs are covered
+
+**Tagging:** Every scenario has an `@AC-x.y` tag, but `@AC-1.1-ready` is not a real AC ID.
+
+**Phrasing:** Mixed declarative/technical — uses business language ("Alice Johnson borrows 'Dune'") but consistently leaks HTTP status codes ("response status is 201") and JSON keys ("queue_depth field", "unpaid_fines_cents of 350").
+
+**Atomicity:** Mostly atomic, but compound step found in `reservations.feature`: "When the book is returned and Bob Smith is notified".
+
+```json
+{
+  "criterion": "gherkin",
+  "sub_scores": {
+    "completeness": 3,
+    "alignment": 4,
+    "declarative": 3,
+    "atomic": 3
+  },
+  "evidence_quotes": {
+    "completeness": [
+      "AC IDs covered (24/29): @AC-1.1, @AC-1.2, @AC-1.4, @AC-2.1, @AC-2.2, @AC-2.3, @AC-2.4, @AC-3.1, @AC-3.2, @AC-3.3, @AC-3.4, @AC-3.5, @AC-4.1, @AC-4.2, @AC-4.3, @AC-4.4, @AC-5.1, @AC-5.2, @AC-5.3, @AC-5.4, @AC-5.5, @AC-6.1, @AC-6.2, @AC-6.3",
+      "AC IDs missing scenarios: AC-1.3 (UI /books page), AC-3.6 (UI checkout flow), AC-4.5 (UI member profile), AC-5.6 (UI book detail queue position), AC-6.4 (UI Pay button) — no Scenario Outline used for boundaries (e.g. AC-3.2 limit at 4/5/6 or AC-4.2 fine at 19/20 days late)"
+    ],
+    "alignment": [
+      "Every scenario in catalog.feature/lending.feature/manage.feature/returns.feature/reservations.feature/fines.feature has a single `@AC-x.y` tag (e.g. `@AC-3.2\\n  Scenario: Reject borrowing more than 5 books`); names like 'Reject duplicate ISBN', 'Cannot pay an already paid fine', 'Notified member can borrow while others cannot' restate the AC. Counter-evidence to score 5: `@AC-1.1-ready` is not a real AC ID, and 5 ACs are untraced (no bidirectional traceability)."
+    ],
+    "declarative": [
+      "Good (declarative): 'When Alice Johnson borrows \"Dune\"' / 'Given Alice Johnson has 5 active loans' / 'Then Bob Smith\\'s reservation status becomes \"notified\"'",
+      "Bad (technical leakage): 'Then the response status is 201' / 'And the book has a queue_depth field' / 'Then the response includes unpaid_fines_cents of 350' — HTTP status codes and JSON field names appear pervasively, blocking score ≥4"
+    ],
+    "atomic": [
+      "Compound step (reservations.feature:40, 49): 'When the book is returned and Bob Smith is notified' — two actions chained inside one When using 'and' as a comma; otherwise most steps are atomic (e.g. 'Given Alice Johnson has borrowed \"Dune\"' / 'And the loan is 3 days overdue')"
+    ]
+  },
+  "final_score": 3,
+  "confidence": "high"
+}
+```

@@ -1,0 +1,439 @@
+
+> mutation
+> npx stryker run
+
+[32m06:09:34 (2087) INFO ProjectReader[39m Found 6 of 145 file(s) to be mutated.
+[32m06:09:34 (2087) INFO Instrumenter[39m Instrumented 6 source file(s) with 268 mutant(s)
+[32m06:09:34 (2087) INFO ConcurrencyTokenProvider[39m Creating 15 test runner process(es).
+[32m06:09:35 (2087) INFO Sandbox[39m In place mode is enabled, Stryker will be overriding YOUR files. Find your backup at: .stryker-tmp/backup-NTlkHB
+[32m06:09:35 (2087) INFO BroadcastReporter[39m Detected that current console does not support the "progress" reporter, downgrading to "progress-append-only" reporter
+[32m06:09:35 (2087) INFO DryRunExecutor[39m Starting initial test run (vitest test runner with "perTest" coverage analysis). This may take a while.
+[32m06:09:36 (2087) INFO DryRunExecutor[39m Initial test run succeeded. Ran 67 tests in 0 seconds (net 76.41662799999949 ms, overhead 628.5833720000005 ms).
+Mutation testing 78% (elapsed: <1m, remaining: <1m) 157/268 tested (11 survived, 0 timed out)
+
+All tests
+  policy/index.test.ts
+    ~ computeFineCents returns 0 for on-time return (covered 6)
+    ~ computeFineCents returns 0 for early return (covered 6)
+    ~ computeFineCents returns 0 for exactly 0 days late (covered 6)
+    ✓ computeFineCents returns 50 cents for 1 day late (killed 8)
+    ~ computeFineCents returns 100 cents for 2 days late (covered 16)
+    ~ computeFineCents ceil: 1 hour late counts as 1 day (covered 16)
+    ~ computeFineCents returns 950 cents for 19 days late (cap - 1 day) (covered 16)
+    ~ computeFineCents caps at 1000 cents for exactly 20 days late (covered 16)
+    ~ computeFineCents caps at 1000 cents for 21 days late (over cap) (covered 16)
+    ~ computeFineCents caps at 1000 cents for 100 days late (covered 16)
+    ✓ canBorrow allows borrow with 0 active loans and no fines (killed 7)
+    ~ canBorrow allows borrow with 4 active loans (covered 15)
+    ✓ canBorrow allows borrow with exactly 5 active loans (at limit) (killed 5)
+    ~ canBorrow rejects with 6 active loans (covered 13)
+    ✓ canBorrow rejects suspended member (killed 4)
+    ~ canBorrow rejects suspended member even with 0 loans (covered 9)
+    ~ canBorrow allows borrow with $4.99 in unpaid fines (covered 15)
+    ✓ canBorrow allows borrow with exactly $5.00 in unpaid fines (at threshold) (killed 1)
+    ✓ canBorrow rejects borrow with $5.01 in unpaid fines (over threshold) (killed 4)
+    ~ canBorrow rejects with $10.00 in unpaid fines (covered 17)
+    ~ canBorrow rejects suspended takes priority over loan limit (covered 9)
+    ✓ nextReservationToNotify returns null for empty list (killed 4)
+    ✓ nextReservationToNotify returns null when no waiting reservations (killed 2)
+    ✓ nextReservationToNotify returns the oldest waiting reservation (killed 7)
+    ~ nextReservationToNotify ignores non-waiting statuses (covered 13)
+    ✘ constants are not mutated (covered 0)
+  services/index.test.ts
+    ✓ bookService lists books sorted by title case-insensitive (killed 3)
+    ~ bookService computes available_copies correctly (covered 3)
+    ✓ bookService AC-1.2: getBook returns queue depth (killed 1)
+    ✓ bookService AC-2.1: creates a book (killed 5)
+    ✓ bookService AC-2.2: rejects duplicate ISBN (killed 3)
+    ✓ bookService getBook returns null for non-existent id (killed 2)
+    ✓ memberService creates a member (killed 7)
+    ✓ memberService AC-2.4: rejects duplicate email (killed 3)
+    ✓ memberService AC-6.1: includes unpaid_fines_cents (killed 4)
+    ✓ memberService returns null for nonexistent member (killed 1)
+    ✓ loanService AC-3.1: creates an active loan (killed 15)
+    ✓ loanService AC-3.2: rejects 6th loan (killed 11)
+    ✓ loanService AC-3.3: rejects suspended member (killed 5)
+    ✓ loanService AC-3.4: rejects if unpaid fines > $5 (killed 6)
+    ✓ loanService AC-3.5: rejects when no copies available (killed 6)
+    ✓ loanService AC-4.1: marks loan returned (killed 8)
+    ✓ loanService AC-4.2: creates fine for late return (killed 9)
+    ✓ loanService AC-4.3: rejects returning already-returned loan (killed 2)
+    ✓ loanService AC-5.4: notified reservation fulfilled on borrow (killed 22)
+    ✓ loanService rejects if member already has active loan for book (killed 3)
+    ✓ loanService rejects borrowBook for non-existent member (killed 2)
+    ✓ loanService rejects borrowBook for non-existent book (killed 2)
+    ✓ loanService rejects returnBook for non-existent loan (killed 2)
+    ✓ loanService on-time return has fineCreated=false (killed 4)
+    ~ loanService AC-4.4: return notifies head waiting reservation via loanService (covered 96)
+    ✓ reservationService AC-5.1: creates a reservation (killed 2)
+    ✓ reservationService AC-5.2: rejects if member has active loan for book (killed 3)
+    ✓ reservationService AC-5.3: rejects duplicate reservation (killed 3)
+    ~ reservationService AC-4.4: return notifies head waiting reservation (covered 96)
+    ✓ reservationService AC-5.5: expireStaleReservations expires stale and notifies next (killed 8)
+    ✓ reservationService cancelReservation cancels a waiting reservation (killed 11)
+    ✓ reservationService cancelReservation rejects non-existent id (killed 2)
+    ✓ reservationService cancelReservation rejects already fulfilled reservation (killed 4)
+    ~ reservationService cancelReservation rejects already cancelled reservation (covered 29)
+    ✓ reservationService getBookQueuePosition returns correct position (killed 13)
+    ✓ reservationService getBookQueuePosition returns null for non-reserved member (killed 4)
+    ✓ reservationService getBookQueuePosition returns notification info for notified reservation (killed 8)
+    ✓ reservationService getBookQueuePosition returns expiresIn of 0 for expired notification (killed 1)
+    ✓ fineService AC-6.2: pays a fine (killed 6)
+    ✓ fineService AC-6.3: rejects paying already-paid fine (killed 2)
+    ✓ fineService rejects paying non-existent fine (killed 2)
+
+[NoCoverage] BlockStatement
+backend/src/policy/index.ts:20:22
+-     if (daysLate <= 0) {
+-       return 0;
+-     }
++     if (daysLate <= 0) {}
+
+[Survived] ConditionalExpression
+backend/src/policy/index.ts:13:7
+-     if (returnedAt <= dueAt) {
++     if (false) {
+Tests ran:
+    loanService AC-4.1: marks loan returned
+    loanService AC-4.2: creates fine for late return
+    loanService AC-4.3: rejects returning already-returned loan
+  and 14 more tests!
+
+
+[Survived] EqualityOperator
+backend/src/policy/index.ts:13:7
+-     if (returnedAt <= dueAt) {
++     if (returnedAt < dueAt) {
+Tests ran:
+    loanService AC-4.1: marks loan returned
+    loanService AC-4.2: creates fine for late return
+    loanService AC-4.3: rejects returning already-returned loan
+  and 14 more tests!
+
+
+[Survived] BlockStatement
+backend/src/policy/index.ts:13:28
+-     if (returnedAt <= dueAt) {
+-       return 0;
+-     }
++     if (returnedAt <= dueAt) {}
+Tests ran:
+    loanService AC-4.1: marks loan returned
+    loanService AC-4.3: rejects returning already-returned loan
+    loanService AC-5.4: notified reservation fulfilled on borrow
+  and 6 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/policy/index.ts:20:7
+-     if (daysLate <= 0) {
++     if (false) {
+Tests ran:
+    loanService AC-4.2: creates fine for late return
+    computeFineCents returns 50 cents for 1 day late
+    computeFineCents returns 100 cents for 2 days late
+  and 5 more tests!
+
+
+[Survived] EqualityOperator
+backend/src/policy/index.ts:20:7
+-     if (daysLate <= 0) {
++     if (daysLate < 0) {
+Tests ran:
+    loanService AC-4.2: creates fine for late return
+    computeFineCents returns 50 cents for 1 day late
+    computeFineCents returns 100 cents for 2 days late
+  and 5 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/services/loanService.ts:44:7
+-     if (!borrowCheck.allowed) {
++     if (true) {
+Tests ran:
+    loanService AC-3.1: creates an active loan
+    loanService AC-3.2: rejects 6th loan
+    loanService AC-3.3: rejects suspended member
+  and 12 more tests!
+
+
+[Survived] ConditionalExpression
+backend/src/services/loanService.ts:47:9
+-       if (borrowCheck.reason === 'Outstanding fines exceed limit') throw new PaymentRequiredError('Outstanding fines exceed limit');
++       if (true) throw new PaymentRequiredError('Outstanding fines exceed limit');
+Tests ran:
+    loanService AC-3.4: rejects if unpaid fines > $5
+
+
+[Survived] ArithmeticOperator
+backend/src/services/loanService.ts:75:49
+-     const dueAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 * 60 * 1000);
++     const dueAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 * 60 / 1000);
+Tests ran:
+    loanService AC-3.1: creates an active loan
+    loanService AC-3.2: rejects 6th loan
+    loanService AC-3.5: rejects when no copies available
+  and 10 more tests!
+
+
+[Survived] ArithmeticOperator
+backend/src/services/loanService.ts:75:49
+-     const dueAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 * 60 * 1000);
++     const dueAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 / 60 * 1000);
+Tests ran:
+    loanService AC-3.1: creates an active loan
+    loanService AC-3.2: rejects 6th loan
+    loanService AC-3.5: rejects when no copies available
+  and 10 more tests!
+
+
+[Survived] ArithmeticOperator
+backend/src/services/loanService.ts:75:49
+-     const dueAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 * 60 * 1000);
++     const dueAt = new Date(borrowedAt.getTime() + 14 * 24 / 60 * 60 * 1000);
+Tests ran:
+    loanService AC-3.1: creates an active loan
+    loanService AC-3.2: rejects 6th loan
+    loanService AC-3.5: rejects when no copies available
+  and 10 more tests!
+
+
+[Survived] ArithmeticOperator
+backend/src/services/loanService.ts:75:49
+-     const dueAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 * 60 * 1000);
++     const dueAt = new Date(borrowedAt.getTime() + 14 / 24 * 60 * 60 * 1000);
+Tests ran:
+    loanService AC-3.1: creates an active loan
+    loanService AC-3.2: rejects 6th loan
+    loanService AC-3.5: rejects when no copies available
+  and 10 more tests!
+
+
+[Survived] ArithmeticOperator
+backend/src/services/loanService.ts:141:34
+-         const expiresAt = new Date(now.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
++         const expiresAt = new Date(now.getTime() - RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
+Tests ran:
+    loanService AC-5.4: notified reservation fulfilled on borrow
+    loanService AC-4.4: return notifies head waiting reservation via loanService
+    reservationService AC-4.4: return notifies head waiting reservation
+
+
+[Survived] ArithmeticOperator
+backend/src/services/loanService.ts:141:50
+-         const expiresAt = new Date(now.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
++         const expiresAt = new Date(now.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 / 1000);
+Tests ran:
+    loanService AC-5.4: notified reservation fulfilled on borrow
+    loanService AC-4.4: return notifies head waiting reservation via loanService
+    reservationService AC-4.4: return notifies head waiting reservation
+
+
+[Survived] ArithmeticOperator
+backend/src/services/loanService.ts:141:50
+-         const expiresAt = new Date(now.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
++         const expiresAt = new Date(now.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 / 60 * 1000);
+Tests ran:
+    loanService AC-5.4: notified reservation fulfilled on borrow
+    loanService AC-4.4: return notifies head waiting reservation via loanService
+    reservationService AC-4.4: return notifies head waiting reservation
+
+
+[Survived] ArithmeticOperator
+backend/src/services/loanService.ts:141:50
+-         const expiresAt = new Date(now.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
++         const expiresAt = new Date(now.getTime() + RESERVATION_NOTIFICATION_HOURS / 60 * 60 * 1000);
+Tests ran:
+    loanService AC-5.4: notified reservation fulfilled on borrow
+    loanService AC-4.4: return notifies head waiting reservation via loanService
+    reservationService AC-4.4: return notifies head waiting reservation
+
+
+[NoCoverage] BlockStatement
+backend/src/services/memberService.ts:6:90
+-   export function listMembers(db: Database.Database): Omit<Member, 'unpaid_fines_cents'>[] {
+-     return db.prepare('SELECT id, name, email, member_since, status FROM members ORDER BY name COLLATE NOCASE ASC').all() as Omit<Member, 'unpaid_fines_cents'>[];
+-   }
++   export function listMembers(db: Database.Database): Omit<Member, 'unpaid_fines_cents'>[] {}
+
+[NoCoverage] BlockStatement
+backend/src/services/memberService.ts:55:4
+-   }> {
+-     return db.prepare(`
+-       SELECT l.id, b.title as book_title, b.author as book_author, b.isbn as book_isbn,
+-              l.borrowed_at, l.due_at, l.returned_at
+-       FROM loans l
+-       JOIN books b ON b.id = l.book_id
+-       WHERE l.member_id = ? AND l.returned_at IS NULL
+-       ORDER BY l.due_at ASC
+-     `).all(memberId) as Array<{
+-       id: string;
+-       book_title: string;
+-       book_author: string;
+-       book_isbn: string;
+-       borrowed_at: string;
+-       due_at: string;
+-       returned_at: string | null;
+-     }>;
+-   }
++   }> {}
+
+[NoCoverage] BlockStatement
+backend/src/services/memberService.ts:83:4
+-   }> {
+-     return db.prepare(`
+-       SELECT r.id, r.book_id, b.title as book_title, b.author as book_author,
+-              r.queued_at, r.status, r.notified_at, r.expires_at
+-       FROM reservations r
+-       JOIN books b ON b.id = r.book_id
+-       WHERE r.member_id = ? AND r.status IN ('waiting', 'notified')
+-       ORDER BY r.queued_at ASC
+-     `).all(memberId) as Array<{
+-       id: string;
+-       book_id: string;
+-       book_title: string;
+-       book_author: string;
+-       queued_at: string;
+-       status: string;
+-       notified_at: string | null;
+-       expires_at: string | null;
+-     }>;
+-   }
++   }> {}
+
+[NoCoverage] BlockStatement
+backend/src/services/memberService.ts:109:4
+-   }> {
+-     return db.prepare(`
+-       SELECT f.id, f.loan_id, b.title as book_title, f.amount_cents, f.paid_at
+-       FROM fines f
+-       JOIN loans l ON l.id = f.loan_id
+-       JOIN books b ON b.id = l.book_id
+-       WHERE f.member_id = ?
+-       ORDER BY f.paid_at IS NULL DESC, f.rowid ASC
+-     `).all(memberId) as Array<{
+-       id: string;
+-       loan_id: string;
+-       book_title: string;
+-       amount_cents: number;
+-       paid_at: string | null;
+-     }>;
+-   }
++   }> {}
+
+[Survived] StringLiteral
+backend/src/services/memberService.ts:31:54
+-     const memberSince = new Date().toISOString().split('T')[0];
++     const memberSince = new Date().toISOString().split("")[0];
+Tests ran:
+    memberService creates a member
+    memberService AC-2.4: rejects duplicate email
+
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:64:11
+-         if (next) {
++         if (true) {
+Tests ran:
+    reservationService AC-5.5: expireStaleReservations expires stale and notifies next
+
+
+[Survived] ArithmeticOperator
+backend/src/services/reservationService.ts:66:36
+-           const expiresAt = new Date(notifyTime.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
++           const expiresAt = new Date(notifyTime.getTime() - RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
+Tests ran:
+    reservationService AC-5.5: expireStaleReservations expires stale and notifies next
+
+
+[Survived] ArithmeticOperator
+backend/src/services/reservationService.ts:66:59
+-           const expiresAt = new Date(notifyTime.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
++           const expiresAt = new Date(notifyTime.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 / 1000);
+Tests ran:
+    reservationService AC-5.5: expireStaleReservations expires stale and notifies next
+
+
+[Survived] ArithmeticOperator
+backend/src/services/reservationService.ts:66:59
+-           const expiresAt = new Date(notifyTime.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
++           const expiresAt = new Date(notifyTime.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 / 60 * 1000);
+Tests ran:
+    reservationService AC-5.5: expireStaleReservations expires stale and notifies next
+
+
+[Survived] ArithmeticOperator
+backend/src/services/reservationService.ts:66:59
+-           const expiresAt = new Date(notifyTime.getTime() + RESERVATION_NOTIFICATION_HOURS * 60 * 60 * 1000);
++           const expiresAt = new Date(notifyTime.getTime() + RESERVATION_NOTIFICATION_HOURS / 60 * 60 * 1000);
+Tests ran:
+    reservationService AC-5.5: expireStaleReservations expires stale and notifies next
+
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:81:43
+-     if (reservation.status !== 'waiting' && reservation.status !== 'notified') {
++     if (reservation.status !== 'waiting' && true) {
+Tests ran:
+    reservationService cancelReservation rejects already fulfilled reservation
+    reservationService cancelReservation rejects already cancelled reservation
+
+
+[Survived] StringLiteral
+backend/src/services/reservationService.ts:81:66
+-     if (reservation.status !== 'waiting' && reservation.status !== 'notified') {
++     if (reservation.status !== 'waiting' && reservation.status !== "") {
+Tests ran:
+    reservationService cancelReservation rejects already fulfilled reservation
+    reservationService cancelReservation rejects already cancelled reservation
+
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:101:48
+-     const myReservation = reservations.find(r => r.member_id === memberId);
++     const myReservation = reservations.find(r => true);
+Tests ran:
+    reservationService getBookQueuePosition returns correct position
+    reservationService getBookQueuePosition returns notification info for notified reservation
+    reservationService getBookQueuePosition returns expiresIn of 0 for expired notification
+
+
+[Survived] LogicalOperator
+backend/src/services/reservationService.ts:107:7
+-     if (myReservation.status === 'notified' && myReservation.expires_at) {
++     if (myReservation.status === 'notified' || myReservation.expires_at) {
+Tests ran:
+    reservationService getBookQueuePosition returns correct position
+    reservationService getBookQueuePosition returns notification info for notified reservation
+    reservationService getBookQueuePosition returns expiresIn of 0 for expired notification
+
+
+[Survived] ConditionalExpression
+backend/src/services/reservationService.ts:107:7
+-     if (myReservation.status === 'notified' && myReservation.expires_at) {
++     if (true && myReservation.expires_at) {
+Tests ran:
+    reservationService getBookQueuePosition returns correct position
+    reservationService getBookQueuePosition returns notification info for notified reservation
+    reservationService getBookQueuePosition returns expiresIn of 0 for expired notification
+
+
+Ran 2.04 tests per mutant on average.
+------------------------|------------------|----------|-----------|------------|----------|----------|
+                        | % Mutation score |          |           |            |          |          |
+File                    |  total | covered | # killed | # timeout | # survived | # no cov | # errors |
+------------------------|--------|---------|----------|-----------|------------|----------|----------|
+All files               |  88.43 |   90.11 |      237 |         0 |         26 |        5 |        0 |
+ policy                 |  89.83 |   91.38 |       53 |         0 |          5 |        1 |        0 |
+  index.ts              |  89.83 |   91.38 |       53 |         0 |          5 |        1 |        0 |
+ services               |  88.04 |   89.76 |      184 |         0 |         21 |        4 |        0 |
+  bookService.ts        | 100.00 |  100.00 |       14 |         0 |          0 |        0 |        0 |
+  fineService.ts        | 100.00 |  100.00 |       10 |         0 |          0 |        0 |        0 |
+  loanService.ts        |  88.76 |   88.76 |       79 |         0 |         10 |        0 |        0 |
+  memberService.ts      |  75.00 |   93.75 |       15 |         0 |          1 |        4 |        0 |
+  reservationService.ts |  86.84 |   86.84 |       66 |         0 |         10 |        0 |        0 |
+------------------------|--------|---------|----------|-----------|------------|----------|----------|
+[32m06:09:51 (2087) INFO MutationTestReportHelper[39m Final mutation score of 88.43 is greater than or equal to break threshold 80
+[32m06:09:51 (2087) INFO HtmlReporter[39m Your report can be found at: file:///runs/opencode-deepseek-seed1/candidate/reports/mutation/mutation.html
+[32m06:09:51 (2087) INFO MutationTestExecutor[39m Done in 17 seconds.
+[32m06:09:51 (2087) INFO Sandbox[39m Resetting your original files from .stryker-tmp/backup-NTlkHB.

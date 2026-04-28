@@ -1,0 +1,23 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "codex-gpt55",
+  "criterion": "api_design",
+  "exit_code": 0,
+  "raw": "{\"score\":2,\"rationale\":\"The API is functional and the OpenAPI file validates, with generally consistent resource URLs and a single implementation error envelope, but it does not meet the level-3 contract bar because the OpenAPI does not faithfully document actual validation failures or several response bodies, and validation errors are generic rather than field-level. This is above broken because the routes exist, the spec is valid, and domain status codes like 402/403/409 are represented, but it fits the 'functional but messy' anchor due to contract mismatches.\",\"evidence\":[\"openapi-validation.log: `/runs/codex-gpt55-seed1/candidate/backend/openapi.yaml is valid`.\",\"routes.ts:49-53 validates bodies with zod but collapses all validation failures to `throw new BadRequestError(\\\"Invalid request\\\")`, so invalid bodies do not return field-level error info.\",\"routes.ts:163-169 consistently emits errors as `{ error: err.message }` for domain errors and `{ error: \\\"Internal server error\\\" }` for unexpected errors.\",\"api-probe.json shows actual invalid requests returning 400, for example `POST /api/books` -> `400 {\\\"error\\\":\\\"Invalid request\\\"}`, `POST /api/loans` -> `400 {\\\"error\\\":\\\"Invalid request\\\"}`, and `POST /api/reservations` -> `400 {\\\"error\\\":\\\"Invalid request\\\"}`.\",\"openapi.yaml documents `POST /api/books` with only `201` and `409`, `POST /api/loans` with `201`, `402`, `403`, and `409`, and `POST /api/reservations` with `201` and `409`; the actual 400 validation responses from the probe are missing from the contract.\",\"openapi.yaml:120-128 documents `POST /api/loans/{id}/return` with a 200 description but no response schema, while routes.ts:132-135 returns the structured result from `returnLoan(...)`.\",\"openapi.yaml:146-150 documents `POST /api/reservations/expire` with only a 200 description and no schema, while routes.ts:146-148 returns `{ expired, notified }`.\",\"error-middleware.ts:1-36 has a centralized DomainError hierarchy mapping 409/404/403/402/400, but there is no stable machine-readable error `code` field, keeping it below level 4.\"]}\n",
+  "parsed": {
+    "score": 2,
+    "rationale": "The API is functional and the OpenAPI file validates, with generally consistent resource URLs and a single implementation error envelope, but it does not meet the level-3 contract bar because the OpenAPI does not faithfully document actual validation failures or several response bodies, and validation errors are generic rather than field-level. This is above broken because the routes exist, the spec is valid, and domain status codes like 402/403/409 are represented, but it fits the 'functional but messy' anchor due to contract mismatches.",
+    "evidence": [
+      "openapi-validation.log: `/runs/codex-gpt55-seed1/candidate/backend/openapi.yaml is valid`.",
+      "routes.ts:49-53 validates bodies with zod but collapses all validation failures to `throw new BadRequestError(\"Invalid request\")`, so invalid bodies do not return field-level error info.",
+      "routes.ts:163-169 consistently emits errors as `{ error: err.message }` for domain errors and `{ error: \"Internal server error\" }` for unexpected errors.",
+      "api-probe.json shows actual invalid requests returning 400, for example `POST /api/books` -> `400 {\"error\":\"Invalid request\"}`, `POST /api/loans` -> `400 {\"error\":\"Invalid request\"}`, and `POST /api/reservations` -> `400 {\"error\":\"Invalid request\"}`.",
+      "openapi.yaml documents `POST /api/books` with only `201` and `409`, `POST /api/loans` with `201`, `402`, `403`, and `409`, and `POST /api/reservations` with `201` and `409`; the actual 400 validation responses from the probe are missing from the contract.",
+      "openapi.yaml:120-128 documents `POST /api/loans/{id}/return` with a 200 description but no response schema, while routes.ts:132-135 returns the structured result from `returnLoan(...)`.",
+      "openapi.yaml:146-150 documents `POST /api/reservations/expire` with only a 200 description and no schema, while routes.ts:146-148 returns `{ expired, notified }`.",
+      "error-middleware.ts:1-36 has a centralized DomainError hierarchy mapping 409/404/403/402/400, but there is no stable machine-readable error `code` field, keeping it below level 4."
+    ]
+  },
+  "parse_failed": false
+}

@@ -1,0 +1,39 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "opencode-kimi",
+  "criterion": "gherkin",
+  "exit_code": 0,
+  "raw": "```json\n{\n  \"criterion\": \"gherkin\",\n  \"sub_scores\": {\n    \"completeness\": 2,\n    \"alignment\": 4,\n    \"declarative\": 3,\n    \"atomic\": 4\n  },\n  \"evidence_quotes\": {\n    \"completeness\": [\n      \"AC IDs with scenarios: AC-1.1, AC-1.2, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-6.1, AC-6.2, AC-6.3 (24 of 29)\",\n      \"AC IDs missing scenarios: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4\",\n      \"Step definitions in steps.ts cover only catalog.feature and add_entities.feature. Lending, returns, reservations, and fines features have no custom step definitions (e.g. 'Given a member \\\"Alice\\\" with ID \\\"m1\\\" is active', 'When the librarian lends the book to the member', 'Then the system creates a loan' all missing). Completeness capped at 2 per rubric rule.\"\n    ],\n    \"alignment\": [\n      \"Every scenario carries an @AC-x.y tag (e.g. @AC-3.1 on 'Successfully lend a book to a member', @AC-4.3 on 'Reject return of already returned book', @AC-5.3 on 'Reject duplicate reservation')\",\n      \"Each scenario maps to exactly one AC. Scenario names are human-readable restatements: 'Reject loan when member has outstanding fines exceeding limit', 'Return creates notification for next reservation', 'Expire stale reservations'\"\n    ],\n    \"declarative\": [\n      \"Good declarative: 'When the librarian lends the book to the member' (lending.feature:13), 'Then the loan is marked as returned' (returns.feature:13), 'Then the oldest waiting reservation becomes notified' (returns.feature:42), 'Then the fine is marked as paid' (fines.feature:18)\",\n      \"Bad implementation-level: 'Then the system returns a 409 error' (add_entities.feature:19, lending.feature:22, returns.feature:35, reservations.feature:19 etc.), 'Then the system returns a 404 error' (catalog.feature:25), 'Then the system returns a 403 error' (lending.feature:29), 'Then the system returns a 402 error' (lending.feature:36)\"\n    ],\n    \"atomic\": [\n      \"Strictly one action per step: 'When the librarian lends the book to the member' then 'Then the system creates a loan' then 'And sets the due date to 14 days from now' then 'And decreases the available copies by 1' (lending.feature:13-16)\",\n      \"And used to chain separate steps, never as a comma inside one step\"\n    ]\n  },\n  \"final_score\": 3,\n  \"confidence\": \"high\"\n}\n```\n",
+  "parsed": {
+    "criterion": "gherkin",
+    "sub_scores": {
+      "completeness": 2,
+      "alignment": 4,
+      "declarative": 3,
+      "atomic": 4
+    },
+    "evidence_quotes": {
+      "completeness": [
+        "AC IDs with scenarios: AC-1.1, AC-1.2, AC-1.4, AC-2.1, AC-2.2, AC-2.3, AC-2.4, AC-3.1, AC-3.2, AC-3.3, AC-3.4, AC-3.5, AC-4.1, AC-4.2, AC-4.3, AC-4.4, AC-5.1, AC-5.2, AC-5.3, AC-5.4, AC-5.5, AC-6.1, AC-6.2, AC-6.3 (24 of 29)",
+        "AC IDs missing scenarios: AC-1.3, AC-3.6, AC-4.5, AC-5.6, AC-6.4",
+        "Step definitions in steps.ts cover only catalog.feature and add_entities.feature. Lending, returns, reservations, and fines features have no custom step definitions (e.g. 'Given a member \"Alice\" with ID \"m1\" is active', 'When the librarian lends the book to the member', 'Then the system creates a loan' all missing). Completeness capped at 2 per rubric rule."
+      ],
+      "alignment": [
+        "Every scenario carries an @AC-x.y tag (e.g. @AC-3.1 on 'Successfully lend a book to a member', @AC-4.3 on 'Reject return of already returned book', @AC-5.3 on 'Reject duplicate reservation')",
+        "Each scenario maps to exactly one AC. Scenario names are human-readable restatements: 'Reject loan when member has outstanding fines exceeding limit', 'Return creates notification for next reservation', 'Expire stale reservations'"
+      ],
+      "declarative": [
+        "Good declarative: 'When the librarian lends the book to the member' (lending.feature:13), 'Then the loan is marked as returned' (returns.feature:13), 'Then the oldest waiting reservation becomes notified' (returns.feature:42), 'Then the fine is marked as paid' (fines.feature:18)",
+        "Bad implementation-level: 'Then the system returns a 409 error' (add_entities.feature:19, lending.feature:22, returns.feature:35, reservations.feature:19 etc.), 'Then the system returns a 404 error' (catalog.feature:25), 'Then the system returns a 403 error' (lending.feature:29), 'Then the system returns a 402 error' (lending.feature:36)"
+      ],
+      "atomic": [
+        "Strictly one action per step: 'When the librarian lends the book to the member' then 'Then the system creates a loan' then 'And sets the due date to 14 days from now' then 'And decreases the available copies by 1' (lending.feature:13-16)",
+        "And used to chain separate steps, never as a comma inside one step"
+      ]
+    },
+    "final_score": 3,
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

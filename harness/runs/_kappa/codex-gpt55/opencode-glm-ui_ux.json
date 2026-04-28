@@ -1,0 +1,19 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-glm",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "{\"criterion\":\"ui_ux\",\"score\":1,\"rationale\":\"The evidence directory does not contain the UI/UX evidence required to evaluate the app experience: no screenshots for empty/populated/error states, no checkout-flow capture, no modal interaction capture, and no rendered HTML for catalog or member profile. The only files present are objective summaries, which the rubric says are context only. With no visible UI evidence, the candidate cannot earn credit for hierarchy, scannability, form quality, empty/error states, async feedback, modal behavior, checkout flow clarity, or polished librarian-specific microcopy.\",\"evidence\":[\"axe-summary.json: {\\\"skipped\\\": true, \\\"reason\\\": \\\"no axe spec in candidate\\\"}\",\"lighthouse-summary.json lists only three URL summaries: /books performance 0.76 accessibility 0.92; /checkout performance 0.86 accessibility 0.95; /members performance 0.8 accessibility 0.95\",\"Missing from evidence directory: screenshots, rendered HTML, checkout flow capture, and modal interaction capture\"]}\n",
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 1,
+    "rationale": "The evidence directory does not contain the UI/UX evidence required to evaluate the app experience: no screenshots for empty/populated/error states, no checkout-flow capture, no modal interaction capture, and no rendered HTML for catalog or member profile. The only files present are objective summaries, which the rubric says are context only. With no visible UI evidence, the candidate cannot earn credit for hierarchy, scannability, form quality, empty/error states, async feedback, modal behavior, checkout flow clarity, or polished librarian-specific microcopy.",
+    "evidence": [
+      "axe-summary.json: {\"skipped\": true, \"reason\": \"no axe spec in candidate\"}",
+      "lighthouse-summary.json lists only three URL summaries: /books performance 0.76 accessibility 0.92; /checkout performance 0.86 accessibility 0.95; /members performance 0.8 accessibility 0.95",
+      "Missing from evidence directory: screenshots, rendered HTML, checkout flow capture, and modal interaction capture"
+    ]
+  },
+  "parse_failed": false
+}

@@ -1,0 +1,523 @@
+openapi: "3.1.0"
+info:
+  title: Library Lending API
+  version: "1.0.0"
+  description: REST API for a library lending system
+servers:
+  - url: http://localhost:3001
+    description: Development server
+paths:
+  /api/books:
+    get:
+      summary: List all books
+      operationId: listBooks
+      tags: [Books]
+      responses:
+        "200":
+          description: List of books sorted by title
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Book"
+    post:
+      summary: Create a new book
+      operationId: createBook
+      tags: [Books]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBookInput"
+      responses:
+        "201":
+          description: Book created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Book"
+        "409":
+          description: ISBN already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/books/{id}:
+    get:
+      summary: Get a single book
+      operationId: getBook
+      tags: [Books]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: member_id
+          in: query
+          required: false
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Book details with queue depth
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BookDetail"
+        "404":
+          description: Book not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/members:
+    get:
+      summary: List all members
+      operationId: listMembers
+      tags: [Members]
+      responses:
+        "200":
+          description: List of members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Member"
+    post:
+      summary: Create a new member
+      operationId: createMember
+      tags: [Members]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMemberInput"
+      responses:
+        "201":
+          description: Member created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Member"
+        "409":
+          description: Email already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/members/{id}:
+    get:
+      summary: Get a member with details
+      operationId: getMember
+      tags: [Members]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Member profile with loans, reservations, fines
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemberDetail"
+        "404":
+          description: Member not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/loans:
+    post:
+      summary: Borrow a book
+      operationId: createLoan
+      tags: [Loans]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateLoanInput"
+      responses:
+        "201":
+          description: Loan created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Loan"
+        "402":
+          description: Outstanding fines exceed limit
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Member is suspended
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Loan limit reached, no copies available, or duplicate loan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/loans/{id}/return:
+    post:
+      summary: Return a book
+      operationId: returnBook
+      tags: [Loans]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Loan returned with fine info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReturnResult"
+        "409":
+          description: Loan already returned
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/reservations:
+    post:
+      summary: Reserve a book
+      operationId: createReservation
+      tags: [Reservations]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReservationInput"
+      responses:
+        "201":
+          description: Reservation created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+        "409":
+          description: Already on loan or duplicate reservation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/reservations/expire:
+    post:
+      summary: Expire stale reservations
+      operationId: expireReservations
+      tags: [Reservations]
+      responses:
+        "200":
+          description: Number of reservations expired
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  expired_count:
+                    type: integer
+  /api/reservations/{id}/cancel:
+    post:
+      summary: Cancel a reservation
+      operationId: cancelReservation
+      tags: [Reservations]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Reservation cancelled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reservation"
+        "409":
+          description: Reservation not found or cannot be cancelled
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/fines/{id}/pay:
+    post:
+      summary: Pay a fine
+      operationId: payFine
+      tags: [Fines]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Fine paid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Fine"
+        "409":
+          description: Fine already paid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+    Book:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        author:
+          type: string
+        isbn:
+          type: string
+        total_copies:
+          type: integer
+        available_copies:
+          type: integer
+      required: [id, title, author, isbn, total_copies, available_copies]
+    BookDetail:
+      allOf:
+        - $ref: "#/components/schemas/Book"
+        - type: object
+          properties:
+            queue_depth:
+              type: integer
+            queue_position:
+              nullable: true
+              type: object
+              properties:
+                position:
+                  nullable: true
+                  type: integer
+                hasNotification:
+                  type: boolean
+                expiresIn:
+                  nullable: true
+                  type: number
+    CreateBookInput:
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        isbn:
+          type: string
+        total_copies:
+          type: integer
+      required: [title, author, isbn, total_copies]
+    Member:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+        member_since:
+          type: string
+        status:
+          type: string
+          enum: [active, suspended]
+      required: [id, name, email, member_since, status]
+    MemberDetail:
+      allOf:
+        - $ref: "#/components/schemas/Member"
+        - type: object
+          properties:
+            unpaid_fines_cents:
+              type: integer
+            active_loans:
+              type: array
+              items:
+                $ref: "#/components/schemas/MemberLoan"
+            reservations:
+              type: array
+              items:
+                $ref: "#/components/schemas/MemberReservation"
+            fines:
+              type: array
+              items:
+                $ref: "#/components/schemas/Fine"
+    CreateMemberInput:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      required: [name, email]
+    MemberLoan:
+      type: object
+      properties:
+        id:
+          type: string
+        book_title:
+          type: string
+        book_author:
+          type: string
+        book_isbn:
+          type: string
+        borrowed_at:
+          type: string
+        due_at:
+          type: string
+        returned_at:
+          type: string
+          nullable: true
+      required: [id, book_title, book_author, book_isbn, borrowed_at, due_at]
+    MemberReservation:
+      type: object
+      properties:
+        id:
+          type: string
+        book_id:
+          type: string
+        book_title:
+          type: string
+        book_author:
+          type: string
+        queued_at:
+          type: string
+        status:
+          type: string
+        notified_at:
+          type: string
+          nullable: true
+        expires_at:
+          type: string
+          nullable: true
+      required: [id, book_id, book_title, book_author, queued_at, status]
+    Loan:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        book_id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        borrowed_at:
+          type: string
+        due_at:
+          type: string
+        returned_at:
+          type: string
+          nullable: true
+      required: [id, book_id, member_id, borrowed_at, due_at]
+    CreateLoanInput:
+      type: object
+      properties:
+        member_id:
+          type: string
+          format: uuid
+        book_id:
+          type: string
+          format: uuid
+      required: [member_id, book_id]
+    ReturnResult:
+      type: object
+      properties:
+        loan:
+          $ref: "#/components/schemas/Loan"
+        fineCreated:
+          nullable: true
+          type: boolean
+      required: [loan]
+    Reservation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        book_id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        queued_at:
+          type: string
+        status:
+          type: string
+          enum: [waiting, notified, expired, fulfilled, cancelled]
+        notified_at:
+          type: string
+          nullable: true
+        expires_at:
+          type: string
+          nullable: true
+      required: [id, book_id, member_id, queued_at, status]
+    CreateReservationInput:
+      type: object
+      properties:
+        member_id:
+          type: string
+          format: uuid
+        book_id:
+          type: string
+          format: uuid
+      required: [member_id, book_id]
+    Fine:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        member_id:
+          type: string
+          format: uuid
+        loan_id:
+          type: string
+          format: uuid
+        book_title:
+          type: string
+        amount_cents:
+          type: integer
+        paid_at:
+          type: string
+          nullable: true
+      required: [id, member_id, loan_id, amount_cents]

@@ -1,0 +1,9 @@
+node_modules
+backend/data/library.db
+backend/data/library.db-shm
+backend/data/library.db-wal
+dist/
+.stryker-tmp/
+coverage/
+playwright-report/
+test-results/

@@ -1,0 +1,22 @@
+I have enough source-level evidence (the running frontend is unresponsive, but the lighthouse run earlier confirmed it does render with high accessibility). I'll score based on the source code, CSS, and lighthouse summary.
+
+{
+  "criterion": "ui_ux",
+  "score": 3,
+  "anchor_match": "Competent",
+  "evidence_quotes": [
+    "frontend/src/components/Modal.tsx:26-54 — `if (e.key === 'Escape') { e.preventDefault(); onClose(); }` plus Tab cycle logic and `previouslyFocused?.focus?.();` in cleanup (focus trap + ESC + focus restore + overlay-click close at line 63-65).",
+    "frontend/src/pages/BooksPage.tsx:39-49 — `<EmptyState title=\"The catalog is empty\" description=\"Add your first book to get started.\" action={<button … >Add a book</button>} />` (empty state with CTA).",
+    "frontend/src/pages/CheckoutPage.tsx:115-127 — `<ol className=\"steps\" aria-label=\"Checkout progress\">` with `steps__item--active` / `steps__item--done`, plus `<button … onClick={back} disabled={step === 1}>Back</button>` (line 236) and a 'Confirm' summary step.",
+    "frontend/src/components/Spinner.tsx:1-5 — `<div role=\"status\" aria-live=\"polite\" …>{label}</div>` used as `<Spinner label=\"Loading catalog…\" />`, `\"Preparing checkout…\"`, `\"Loading member…\"` across pages.",
+    "frontend/src/utils/format.ts:32-41 — `countdownTo` returns `HH:MM:SS`, paired with `setInterval(() => setNow(new Date()), 1000)` in MemberDetailPage.tsx:30-33 and BookDetailPage.tsx:46-49 (live countdown).",
+    "frontend/src/pages/CheckoutPage.tsx:75-78,212-214 — `willBeFifth = memberDetail.active_loans.length === 4 ? 'This will be the member's 5th and final loan.' : null` rendered as a warning banner at the confirm step.",
+    "frontend/src/styles/global.css:166-172 — `.btn--danger { background-color: var(--color-danger); }` is defined but never applied: ConfirmReturnModal/ConfirmPayModal use `<button … className=\"btn\" …>Confirm return</button>` / `Confirm payment` (MemberDetailPage.tsx:215, 266).",
+    "frontend/src/pages/BooksPage.tsx:51-66 — catalog renders `<ul className=\"book-grid\">` with no sort/filter control; the toolbar only contains the page heading and an `Add book` button.",
+    "frontend/src/pages/MemberDetailPage.tsx:46-52,68-72 — Suspended/Overdue/Notified are conveyed via `<span className=\"badge badge--unavailable\">Suspended</span>` and `<span className=\"badge badge--overdue\">Overdue</span>` — color + text only, no icon.",
+    "frontend/src/pages/BooksPage.tsx:146-184 — every input has `<label htmlFor=…>` paired with `<input id=…>` (Title, Author, ISBN, Total copies); however errors come from `err instanceof HttpError ? err.message : 'Could not create book'` (no client-side specific validation messages like 'ISBN must be 10 or 13 digits').",
+    "evidence/ui-ux/lighthouse-summary.json — accessibility 0.98–1.00 across /books, /checkout, /members (confirms semantic structure renders cleanly)."
+  ],
+  "anchor_rejected_above": "Level 4 (Polished) requires ALL of: color+icon emphasis for overdue/notified/unpaid (the app uses color-only badges, no icons), distinct 'danger' treatment for destructive confirms (`.btn--danger` exists in CSS but the Return and Pay confirm buttons use the plain `.btn` primary style), AND at least one catalog secondary affordance like sort or filter (BooksPage has none — only an Add-book button). The live HH:MM:SS countdown and 5th-loan warning are level-4-flavored, but three of the five level-4 markers are absent, so the app cannot be 4.",
+  "confidence": "medium"
+}

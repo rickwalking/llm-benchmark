@@ -1,0 +1,13 @@
+node_modules
+backend/data/library.db
+backend/data/library.db-journal
+backend/data/library.db-shm
+backend/data/library.db-wal
+backend/data/test*.db
+dist/
+.stryker-tmp/
+reports/
+playwright-report/
+test-results/
+*.log
+.DS_Store

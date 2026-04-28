@@ -1,0 +1,10 @@
+{
+  "vendor": "opencode-deepseek",
+  "model": "opencode-go/deepseek-v4-pro",
+  "gen": "codex-gpt55",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "",
+  "parsed": null,
+  "parse_failed": true
+}

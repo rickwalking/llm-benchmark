@@ -1,0 +1,18 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "codex-gpt55",
+  "criterion": "ui_ux",
+  "exit_code": 0,
+  "raw": "{\"criterion\":\"ui_ux\",\"score\":1,\"justification\":\"The submitted evidence directory does not include the required UI/UX evidence needed to verify page states, checkout flow, modal behavior, rendered catalog/member HTML, form quality, empty/error states, async feedback, or visual hierarchy. The only files present are objective summaries: `axe-summary.json` contains `{\\\"skipped\\\": true, \\\"reason\\\": \\\"no axe spec in candidate\\\"}`, and `lighthouse-summary.json` only lists performance/accessibility values for `/books`, `/checkout`, and `/members`. Since the judge receives no screenshots, flow capture, modal capture, or representative HTML, there is no demonstrated usable librarian UI to score above the unusable anchor.\",\"evidence\":[\"`/home/pmarins/projects/llm-benchmark-library/harness/runs/codex-gpt55-seed1/evidence/ui-ux/axe-summary.json`: `skipped: true`, `reason: no axe spec in candidate`\",\"`/home/pmarins/projects/llm-benchmark-library/harness/runs/codex-gpt55-seed1/evidence/ui-ux/lighthouse-summary.json`: only contains Lighthouse summaries for `http://localhost:5173/books`, `/checkout`, and `/members`; no UI screenshots or HTML artifacts were present\"]}\n",
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 1,
+    "justification": "The submitted evidence directory does not include the required UI/UX evidence needed to verify page states, checkout flow, modal behavior, rendered catalog/member HTML, form quality, empty/error states, async feedback, or visual hierarchy. The only files present are objective summaries: `axe-summary.json` contains `{\"skipped\": true, \"reason\": \"no axe spec in candidate\"}`, and `lighthouse-summary.json` only lists performance/accessibility values for `/books`, `/checkout`, and `/members`. Since the judge receives no screenshots, flow capture, modal capture, or representative HTML, there is no demonstrated usable librarian UI to score above the unusable anchor.",
+    "evidence": [
+      "`/home/pmarins/projects/llm-benchmark-library/harness/runs/codex-gpt55-seed1/evidence/ui-ux/axe-summary.json`: `skipped: true`, `reason: no axe spec in candidate`",
+      "`/home/pmarins/projects/llm-benchmark-library/harness/runs/codex-gpt55-seed1/evidence/ui-ux/lighthouse-summary.json`: only contains Lighthouse summaries for `http://localhost:5173/books`, `/checkout`, and `/members`; no UI screenshots or HTML artifacts were present"
+    ]
+  },
+  "parse_failed": false
+}

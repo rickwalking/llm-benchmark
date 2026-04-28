@@ -1,0 +1,9 @@
+
+> library-lending@1.0.0 test:bdd
+> NODE_OPTIONS='--import tsx' cucumber-js --config features/cucumber.mjs --format json:/runs/opencode-glm-seed1/objective/bdd.json
+
+........................................................................................................................................................................................................
+
+30 scenarios (30 passed)
+170 steps (170 passed)
+0m00.387s (executing steps: 0m00.163s)

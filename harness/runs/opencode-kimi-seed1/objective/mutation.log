@@ -1,0 +1,21 @@
+
+> library-lending@1.0.0 mutation
+> stryker run tests/stryker.conf.json
+
+[32m12:59:14 (1940) INFO ProjectReader[39m Found 6 of 68 file(s) to be mutated.
+[32m12:59:14 (1940) INFO Instrumenter[39m Instrumented 6 source file(s) with 300 mutant(s)
+[32m12:59:14 (1940) INFO ConcurrencyTokenProvider[39m Creating 8 checker process(es) and 7 test runner process(es).
+[91m12:59:15 (1940) ERROR Stryker[39m Unexpected error occurred while running Stryker StrykerError: Error: Could not inject [class CheckerWorker]. Cause: Cannot find Checker plugin "typescript". In fact, no Checker plugins were loaded. Did you forget to install it?
+Error: Could not inject [class CheckerWorker]. Cause: Cannot find Checker plugin "typescript". In fact, no Checker plugins were loaded. Did you forget to install it?
+    at InjectionError.create (file:///runs/opencode-kimi-seed1/candidate/node_modules/typed-inject/dist/src/errors.js:53:20)
+    at ClassProvider.injectClass (file:///runs/opencode-kimi-seed1/candidate/node_modules/typed-inject/dist/src/InjectorImpl.js:43:34)
+    at ChildProcessProxyWorker.handleInit (file:///runs/opencode-kimi-seed1/candidate/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy-worker.js:75:41)
+    at ChildProcess.<anonymous> (file:///runs/opencode-kimi-seed1/candidate/node_modules/@stryker-mutator/core/dist/src/child-proxy/child-process-proxy.js:130:39)
+    at ChildProcess.emit (node:events:519:28)
+    at emit (node:internal/child_process:949:14)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  innerError: undefined
+}
+[32m12:59:15 (1940) INFO Stryker[39m This might be a known problem with a solution documented in our troubleshooting guide.
+[32m12:59:15 (1940) INFO Stryker[39m You can find it at https://stryker-mutator.io/docs/stryker-js/troubleshooting/
+[32m12:59:15 (1940) INFO Stryker[39m Still having trouble figuring out what went wrong? Try `npx stryker run --fileLogLevel trace --logLevel debug` to get some more info.

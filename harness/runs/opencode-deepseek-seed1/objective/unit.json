@@ -1,0 +1,28 @@
+
+> test:unit
+> npm run test:unit -w backend && npm run test:unit -w frontend --reporter=json
+
+
+> backend@1.0.0 test:unit
+> vitest run --config vitest.config.ts
+
+
+ RUN  v3.2.4 /runs/opencode-deepseek-seed1/candidate/backend
+
+ ✓ src/policy/index.test.ts (26 tests) 5ms
+ ✓ src/services/index.test.ts (41 tests) 60ms
+
+ Test Files  2 passed (2)
+      Tests  67 passed (67)
+   Start at  06:08:10
+   Duration  549ms (transform 146ms, setup 0ms, collect 226ms, tests 65ms, environment 0ms, prepare 233ms)
+
+
+> frontend@1.0.0 test:unit
+> vitest run
+
+
+ RUN  v3.2.4 /runs/opencode-deepseek-seed1/candidate/frontend
+
+No test files found, exiting with code 0
+

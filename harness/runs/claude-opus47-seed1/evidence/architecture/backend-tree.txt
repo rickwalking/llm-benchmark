@@ -1,0 +1,26 @@
+src/
+├── db/
+│   ├── index.ts
+│   ├── migrate.ts
+│   └── seed.ts
+├── http/
+│   ├── middleware.ts
+│   ├── routes.ts
+│   └── schemas.ts
+├── policy/
+│   ├── index.ts
+│   └── policy.test.ts
+├── services/
+│   ├── bookService.ts
+│   ├── fineService.ts
+│   ├── loanService.ts
+│   ├── memberService.ts
+│   ├── reservationService.ts
+│   ├── services.test.ts
+│   └── services.unit.test.ts
+├── test-utils/
+│   └── factory.ts
+├── app.ts
+├── errors.ts
+├── server.ts
+└── types.ts

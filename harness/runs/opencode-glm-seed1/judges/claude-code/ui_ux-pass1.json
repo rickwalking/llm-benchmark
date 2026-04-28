@@ -1,0 +1,24 @@
+{
+  "criterion": "ui_ux",
+  "pass": 1,
+  "judge": "claude-code",
+  "exit_code": 0,
+  "parsed": {
+    "criterion": "ui_ux",
+    "score": 3,
+    "anchor_match": "Competent",
+    "evidence_quotes": [
+      "global.css: '.steps' / '.step.active' / '.step.completed' \u2014 Checkout.tsx renders <div className={`step${step >= 1 ? ' active' : ''}${step > 1 ? ' completed' : ''}`}>1. Select Member</div> ... 2. Select Book ... 3. Confirm, with Back buttons ('<button className=\"btn\" onClick={() => setStep(2)}>Back</button>') and a confirm step before handleSubmit",
+      "BookList.tsx:86-90: 'No books in the catalog yet.' / 'Click \"Add Book\" to add the first one.' inside .empty-state \u2014 empty state explains the page and points to primary action",
+      "Modal.tsx:13-18 + 26-28: ESC handler ('if (e.key === \"Escape\") onCancel();') and overlay click close ('if (e.target === overlayRef.current) onCancel();'); useEffect autofocuses '[data-autofocus]' but no focus trap and no focus return to trigger",
+      "global.css: '.form-group label { display: block; ... font-weight: 500 }' and BookList.tsx forms use '<label htmlFor=\"book-title\">Title</label><input id=\"book-title\" name=\"title\" required />' \u2014 every input has a real label",
+      "Checkout.tsx:149-158: specific inline messages 'Member is suspended.', 'Outstanding fines exceed $5.00 limit.', 'Loan limit reached (5 active loans maximum).' \u2014 not generic",
+      "Layout.tsx: <nav> with brand + Books / Members / Checkout NavLinks; consistent header on every page; global.css sets a single primary green token (--color-primary: #1a5632) and one type scale (h1 1.75rem, h2 1.35rem)",
+      "BookDetail.tsx:63-66: '<span className=\"badge badge-danger\">All copies on loan{book.reservation_queue_depth > 0 && ` \u2014 ${book.reservation_queue_depth} waiting`}</span>' \u2014 one polished microcopy moment",
+      "Checkout.tsx:155: '{maxLoans && <div className=\"alert alert-warning\">This is the member&apos;s 5th active loan.</div>}' \u2014 surfaces non-obvious info at confirm step"
+    ],
+    "anchor_rejected_above": "Level 4 ('Polished') requires multiple specific upgrades on top of level 3, and most are missing: (a) Reservation countdown is rendered as a raw timestamp \u2014 MemberDetail.tsx:164 'Notification expires {new Date(res.expires_at).toLocaleString()}' \u2014 not a live HH:MM:SS countdown; no setInterval/countdown logic exists in the frontend. (b) No secondary affordance (sort/filter/search) on the catalog \u2014 BookList.tsx contains only a 'highlight' query param and an Add Book toggle, no filter/sort UI. (c) Confirm-destructive actions do not use a distinct danger treatment \u2014 ConfirmReturnModal.tsx:16 uses '<button className=\"btn btn-primary\" data-autofocus onClick={onConfirm}>Confirm Return</button>' (same primary green as non-destructive confirms). (d) Overdue/notified/unpaid states are emphasized only via colored badges, no icons (e.g., MemberDetail.tsx:124 just '<span className=\"badge badge-danger\">Overdue</span>'). One polished microcopy line and one 5th-loan warning are present, but the bulk of level-4 anchors are not met, so the project sits at competent.",
+    "confidence": "high"
+  },
+  "parse_failed": false
+}

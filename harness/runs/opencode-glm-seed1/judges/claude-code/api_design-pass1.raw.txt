@@ -1,0 +1,17 @@
+{
+  "criterion": "api_design",
+  "score": 3,
+  "anchor_match": "Reasonable",
+  "evidence_quotes": [
+    "/runs/opencode-glm-seed1/candidate/backend/openapi.yaml is valid",
+    "{\"method\":\"POST\",\"path\":\"/api/reservations/expire\",\"status\":200,\"body\":\"{\\\"expired\\\":0}\"}",
+    "{\"method\":\"GET\",\"path\":\"/api/books/00000000-0000-0000-0000-000000000000\",\"status\":404,\"body\":\"{\\\"error\\\":\\\"Book not found\\\"}\"}",
+    "router.post('/api/loans', (req: Request, res: Response) => {\n    const parsed = createLoanSchema.safeParse(req.body);\n    if (!parsed.success) {\n      res.status(400).json({ error: parsed.error.issues });",
+    "if (err instanceof ConflictError) {\n        res.status(409).json({ error: err.message });\n        return;\n      }\n      if (err instanceof ForbiddenError) {\n        res.status(403).json({ error: err.message });\n        return;\n      }\n      if (err instanceof PaymentRequiredError) {\n        res.status(402).json({ error: err.message });",
+    "Error:\n      type: object\n      properties:\n        error:\n          type: string",
+    "/api/loans/{id}/return:\n    post:\n      ...\n      responses:\n        '200':\n          description: Loan returned\n        '409':\n          description: Loan already returned",
+    "router.post('/api/loans/:id/return', ...) { ... if (err instanceof Error && err.message === 'Loan not found') { res.status(404).json({ error: err.message });"
+  ],
+  "anchor_rejected_above": "Anchor 4 (Well-designed) does not apply: error responses contain only a human message — no stable `code` field for programmatic handling (handlers do `res.status(409).json({ error: err.message })`); the OpenAPI provides no examples for negative ACs; domain-error→HTTP mapping is duplicated in each handler via instanceof checks rather than centralized in a single middleware; and response schemas have mismatches with implementation (Error schema declares `error: string` but validation errors actually return `error: array of zod issues`; POST endpoints like /api/books, /api/members, /api/loans, /api/reservations omit the 400 response in the spec; POST /api/loans/{id}/return omits 404 in the spec despite the handler returning it).",
+  "confidence": "high"
+}

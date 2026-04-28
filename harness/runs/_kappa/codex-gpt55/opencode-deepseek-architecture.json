@@ -1,0 +1,60 @@
+{
+  "vendor": "codex-gpt55",
+  "model": "gpt-5.5",
+  "gen": "opencode-deepseek",
+  "criterion": "architecture",
+  "exit_code": 0,
+  "raw": "{\n  \"score\": 2,\n  \"justification\": \"The project has a recognizable backend layering and no dependency cycles, but it misses the clean-enough bar because the layers are leaky and policy is duplicated outside policy/. The service layer talks directly to better-sqlite3 with inline SQL, the HTTP handler imports the DB module directly, one policy constant is re-hardcoded in the service, and the frontend is organized by technical role rather than feature with no visible shared frontend/backend type boundary.\",\n  \"evidence\": [\n    {\n      \"path\": \"madge.json\",\n      \"quote\": \"\\\"circular\\\": []\",\n      \"impact\": \"No cycles, so the score is not capped by the circular-dependency rule.\"\n    },\n    {\n      \"path\": \"backend-tree.txt\",\n      \"quote\": \"src/ ... policy/ ... routes/ ... services/ ... db.ts ... errors.ts ... types.ts ... validators.ts\",\n      \"impact\": \"There is a nominal backend separation into policy, routes, services, db, errors, and validators.\"\n    },\n    {\n      \"path\": \"loan-handler.ts:2\",\n      \"quote\": \"import { getDb } from '../db.js';\",\n      \"impact\": \"The HTTP layer imports the DB layer directly instead of depending only on services.\"\n    },\n    {\n      \"path\": \"loan-service.ts:12-35\",\n      \"quote\": \"export function borrowBook(db: Database.Database, input: BorrowInput): Loan { ... db.prepare('SELECT id, status FROM members WHERE id = ?') ... db.prepare(`SELECT b.* ...`)\",\n      \"impact\": \"Services depend on raw better-sqlite3 and embed SQL directly, rather than using a thin DB-access abstraction.\"\n    },\n    {\n      \"path\": \"policy/index.ts:1-6\",\n      \"quote\": \"export const LOAN_PERIOD_DAYS = 14;\",\n      \"impact\": \"The loan-period rule is defined in policy/ as required.\"\n    },\n    {\n      \"path\": \"loan-service.ts:75\",\n      \"quote\": \"const dueAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 * 60 * 1000);\",\n      \"impact\": \"The same loan-period value is duplicated inline instead of importing LOAN_PERIOD_DAYS, matching the rubric's 'layered but leaky' case.\"\n    },\n    {\n      \"path\": \"frontend-tree.txt\",\n      \"quote\": \"components/ ... pages/ ... api.ts ... App.tsx ... context.tsx\",\n      \"impact\": \"The frontend has a pages/components/api split, but not feature-owned directories such as checkout/, members/, and books/.\"\n    },\n    {\n      \"path\": \"frontend-routes.tsx:4-8\",\n      \"quote\": \"import BooksPage from './pages/BooksPage'; ... import CheckoutPage from './pages/CheckoutPage';\",\n      \"impact\": \"Routes point to top-level page modules rather than feature modules, making the checkout flow less discoverable from the tree.\"\n    },\n    {\n      \"path\": \"file-sizes.csv\",\n      \"quote\": \"backend/src/services/index.test.ts,493; frontend/src/MemberProfilePage.tsx,251; frontend/src/pages/CheckoutPage.tsx,237\",\n      \"impact\": \"No god files are present, and production files are mostly modest, but the structure is not disciplined enough for scores 4-5.\"\n    }\n  ]\n}\n",
+  "parsed": {
+    "score": 2,
+    "justification": "The project has a recognizable backend layering and no dependency cycles, but it misses the clean-enough bar because the layers are leaky and policy is duplicated outside policy/. The service layer talks directly to better-sqlite3 with inline SQL, the HTTP handler imports the DB module directly, one policy constant is re-hardcoded in the service, and the frontend is organized by technical role rather than feature with no visible shared frontend/backend type boundary.",
+    "evidence": [
+      {
+        "path": "madge.json",
+        "quote": "\"circular\": []",
+        "impact": "No cycles, so the score is not capped by the circular-dependency rule."
+      },
+      {
+        "path": "backend-tree.txt",
+        "quote": "src/ ... policy/ ... routes/ ... services/ ... db.ts ... errors.ts ... types.ts ... validators.ts",
+        "impact": "There is a nominal backend separation into policy, routes, services, db, errors, and validators."
+      },
+      {
+        "path": "loan-handler.ts:2",
+        "quote": "import { getDb } from '../db.js';",
+        "impact": "The HTTP layer imports the DB layer directly instead of depending only on services."
+      },
+      {
+        "path": "loan-service.ts:12-35",
+        "quote": "export function borrowBook(db: Database.Database, input: BorrowInput): Loan { ... db.prepare('SELECT id, status FROM members WHERE id = ?') ... db.prepare(`SELECT b.* ...`)",
+        "impact": "Services depend on raw better-sqlite3 and embed SQL directly, rather than using a thin DB-access abstraction."
+      },
+      {
+        "path": "policy/index.ts:1-6",
+        "quote": "export const LOAN_PERIOD_DAYS = 14;",
+        "impact": "The loan-period rule is defined in policy/ as required."
+      },
+      {
+        "path": "loan-service.ts:75",
+        "quote": "const dueAt = new Date(borrowedAt.getTime() + 14 * 24 * 60 * 60 * 1000);",
+        "impact": "The same loan-period value is duplicated inline instead of importing LOAN_PERIOD_DAYS, matching the rubric's 'layered but leaky' case."
+      },
+      {
+        "path": "frontend-tree.txt",
+        "quote": "components/ ... pages/ ... api.ts ... App.tsx ... context.tsx",
+        "impact": "The frontend has a pages/components/api split, but not feature-owned directories such as checkout/, members/, and books/."
+      },
+      {
+        "path": "frontend-routes.tsx:4-8",
+        "quote": "import BooksPage from './pages/BooksPage'; ... import CheckoutPage from './pages/CheckoutPage';",
+        "impact": "Routes point to top-level page modules rather than feature modules, making the checkout flow less discoverable from the tree."
+      },
+      {
+        "path": "file-sizes.csv",
+        "quote": "backend/src/services/index.test.ts,493; frontend/src/MemberProfilePage.tsx,251; frontend/src/pages/CheckoutPage.tsx,237",
+        "impact": "No god files are present, and production files are mostly modest, but the structure is not disciplined enough for scores 4-5."
+      }
+    ]
+  },
+  "parse_failed": false
+}

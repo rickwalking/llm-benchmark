@@ -1,0 +1,6 @@
+node_modules/
+dist/
+backend/data/library.db
+.stryker-tmp/
+.DS_Store
+*.log

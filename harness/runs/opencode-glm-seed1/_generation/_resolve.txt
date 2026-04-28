@@ -1,0 +1,10 @@
+arg
+5400
+opencode
+run
+--dangerously-skip-permissions
+--dir
+/home/pmarins/projects/llm-benchmark-library/harness/runs/opencode-glm-seed1/candidate
+-m
+opencode-go/glm-5.1
+==END==
